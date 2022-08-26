@@ -1,0 +1,54 @@
+---
+title: "School Absences"
+format: 
+  html: 
+    toc: true
+    warning: false
+    code-fold: true
+    code-summary: "Show the Code"
+---
+
+# Regression Results
+
+## Regression Discontinuity
+::: panel-tabset
+## Log Absences
+[Discontinuity in school absences around the alert threshold](02_GenData/07_images/MainRD.png)
+:::
+
+
+
+::: panel-tabset
+## Main results
+
+```{r}
+# Load the results
+tab = read_rds("02_GenData/06_RegResults/01_rdd/NtaBase.rds")
+# Include the set of fixed effects and controls
+fe = rbind(`Weekday FEs` = c(rep("", 1), rep("Yes", 2)), 
+           `Month FEs`  = c(rep("", 1), rep("Yes", 2)), 
+           `School Period FEs`  = c(rep("", 1), rep("Yes", 2)), 
+           `Year FEs`  = c(rep("", 1), rep("Yes", 2)), 
+            `Weather Controls` = c(rep("", 2), rep("Yes", 1))) %>%
+  as.data.frame(.) %>% setNames(., names(tab))
+# Add the data with the control variables
+tab = rbind(tab, fe)
+# Create the regression table
+kbl(tab, align = "c") %>%
+  kable_classic() %>% kable_styling(bootstrap_option = c("hover")) %>%
+  pack_rows("Fitted-Statistics", 3, 5) %>% pack_rows("Controls", 6, 10) %>% 
+  footnote(general = "Effects of air quality health advisories on school absences in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., an coefficient of two is equivalent to a two percent increase in absences. Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## Boro Split
+```{r}
+# Load the results
+tab = read_rds("02_GenData/06_RegResults/01_rdd/BoroSplit.rds")
+# Create the regression table
+kbl(tab, align = "c") %>%
+  kable_classic() %>% kable_styling(bootstrap_option = c("hover")) %>%
+  pack_rows("Fitted-Statistics", 3, 5)  %>% 
+  footnote(general = "Effects of air quality health advisories on school absences across all five boroughs in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of air quality health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., a coefficient of two is equivalent to a two percent increase in school absences. All regressions control for weather covariates alongside weewday, month, year, and School Period fixed effects.Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", general_title = "Notes:", footnote_as_chunk = T)
+```
+:::
+

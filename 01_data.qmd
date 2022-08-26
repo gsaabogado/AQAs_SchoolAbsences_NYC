@@ -1,0 +1,367 @@
+---
+title: "SchoolAbsences"
+author: "Dr. Luis Sarmiento"
+format: 
+  html: 
+    toc: true
+    warning: false
+    code-fold: true
+    code-summary: "Show the Code"
+---
+
+## Data Sets {{< iconify bxs:data >}}
+
+This section presents an overall description of the data sets I use to analyse the effect of New York City (NYC) Air Quality Health Advisories (AQHAs) in school absences.
+
+All the data I use to generate these files can be accessed through the [dropbox repository](https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0)
+
+### Data on School Absences {{< iconify emojione:school >}}
+
+The following code-chunk only loads into the R-environment the data-files of school absences, location, and demographics I use throughout the study.
+
+```{r}
+#| cache: false
+# Set the path of the R-studio project
+file = "~/Dropbox (Personal)/DIW/NYC school absenses/"
+# Load the data set
+RawAbsent = read_rds(paste0(file, "02_GenData/RawAbsences.rds"))
+location = read_rds(paste0(file,"02_GenData/01_schools/location.rds"))
+dem = read_rds(paste0(file,"02_GenData/SchoolDemographics.rds"))
+prof = read_rds(paste0(file,"02_GenData/proficiency.rds"))
+```
+
+We obtain data on school absences from the NYC open data-portal website. @tbl-RawAbsent shows the structure of the data. There are `r comma(nrow(RawAbsent))` observations in the panel with `r comma(length(unique(RawAbsent$id)))` unique school identifiers. The data set spans between `r min(month(RawAbsent$date, label = T))` `r min(year(RawAbsent$date))` and `r max(month(RawAbsent$date, label = T))` `r max(year(RawAbsent$date))`.
+
+The data contains the id of the school and the date of observation alongside the total number of enrolled, present, absent, and released students. Additionally, it also includes a categorical variable indicating if an abnormal event affected school absences on that date.
+
+```{r}
+#| label: tbl-RawAbsent
+#| tbl-cap: Structure of the raw file on school absences in NYC
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(select(RawAbsent, id:released, DayType), 3)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>%
+  footnote(general = "id = School id, enrolled = Number of enrolled students in that period, present = Number of present students on that date, absent, Number of Absent Students, released = Number of released students, DateType = Catogorical variable indicating abnormal events, it can contain one of sevent values; Normal Day, Administered Reagents Exam for Highschools, Highschool Holidays, Chancellors Conference Day, Weather Event, and June Clerical Half Day.", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+Next, I obtain data on the location of each school in NYC. The location data-file (@tbl-SchoolsLocation) contains the school type and id, its longitude and latitude, and its tract, neighbourhood, and borough. There are eight school types: `r unique(location$SchoolType)`
+
+```{r}
+#| label: tbl-SchoolsLocation
+#| tbl-cap: Data on the spatial location of schools in NYC
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(location, 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") |> 
+  footnote(general = "lon = Longitude, lat = Latitude, tract = US Census Tract, nta = neighborhood, boro = borough, SchholType = type of school", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+@tbl-SchoolsDemographics shows socio demographic data for each school obtained from the NYS Department of Education. It contains the school id, year of observations, number of students, and the share of female, male, Asian, Hispanic, Black and White students. Additional variables include the share of students with disabilities, learning English, qualifying for free or reduced price lunch, eligible for Human Resources Administration benefits (poverty), or facing economic hardship (eni).
+
+```{r}
+#| label: tbl-SchoolsDemographics
+#| tbl-cap: Demographic data for NYC schools
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(dem, 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "id refers to School ID and, students to the number of enrolled students in that school and year combinations. Each of the other columns contain the percentage of students within each category, e.g., female refers to the share of females students in the school. The poverty column refers to the share of students qualifying for free or reduced price lunch or eligible for Human Resources Administration benefits. The eni column refers to the share of students facing economic hardship.", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+Finally, we obtain data on students' mathematical and writing proficiency. Table @tbl-SchoolsProf contains the school id, the year of observation (only available from 2014), share of students passing the English Language Art (ELA) and Mathematics (math) tests and the share of fourth year and sixth year graduates.
+
+```{r}
+#| label: tbl-SchoolsProf
+#| tbl-cap: Proficiency data for NYC schools
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(prof, 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "id refers to School ID and. Each of the other columns contain the percentage of students within each category, e.g., ela refers to the share of students passing the English Learning Art test. The math column refers to the share of students passing the Mathematics test. And the Graduates4th and 6th columns refer to the share of graduates in each year respectively.", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+### Data on the forecasts of the air quality index
+
+The following code-chunks load the data related to the air quality alerts' measures and forecasts
+
+```{r}
+# Load the AQI data sets
+RawAqi = read_rds(paste0(file, "02_GenData/02_aqi/RawAqi.rds"))
+Full = read_rds(paste0(file, "02_GenData/02_aqi/RawAqiFull.rds"))
+AqiForecast = read_rds(paste0(file, "02_GenData/02_aqi/AqiForecast.rds"))
+```
+
+The data on the forecasts of the air quality index (AQI) come from the New York State Department of Environmental Conservation (NYSDEC).[^1] The data-file contains the issue date, forecast date, forecast period, and forecasted value of ozone (o3), fine particulate matter (pm25), and the air quality index (AQI). The issue date is the date the NYSDEC estimated the forecast and the forecast period the difference between the issue and forecast dates. it can take five different values; `r unique(RawAqi$ForecastPeriod)`.
+
+[^1]: The data is not publicly available. Instead, we sent an email to NYSDEC asking them to provide the forecasted values under the freedom of information act and they were kind enough to provide the entirety of forecasted dates between 2008 and 2018
+
+::: callout-important
+It is relevant to distinguish between the issue and forecast dates. The issue date is the date that the NYSDEC performs the forecast and the forecast date the date of the forecast. For instance, the NYSDEC can forecast an AQI value of 105 for the 1st of may on the 29th of april. In this example, the 29th of April is the issue date and the 1st of may the forecast date. It is worth noting that forecast can have different issue dates. For instance, there can be three distinct forecasts for the first of January.
+:::
+
+```{r}
+#| label: tbl-RawAqi
+#| tbl-cap: Raw data on the Air Quality Index
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(RawAqi, 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "IssueDate is the date of issue of the forecast, ForecastDate is the forecasted date. ForecastPeriod is the difference between the issue and forecast dates. o3 is the forecasted AQI value of atmospheric ozone. pm25 is the forecasted AQI value of fine particulate matter. aqi is the forecasted AQI value", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+Next, we include a set of indicator variables to understand the relationship between the forecasts and the air quality alerts. The ultimate goal is to assign a single AQI forecast to each date between 2008 and 2018.
+
+In @tbl-RawFullb, I essentially keep the same structure of @tbl-RawAqi with the slight difference that I change the period on the forecast period by a numeric variable equivalent to the difference between the issue and forecast dates.
+
+Next, in @tbl-ForecastIndicators, I construct a series of dummy and categorical variables to understand the nature of each forecast. The column **SingleForecast** indicates situations with only one issued forecast for that particular date exists. For example, if there were two forecasts for January 1st, one on December 30th and the other on the 31st, the value of this column would be equal to zero. The **ForecastType** is a categorical variable that indicates the structure of issued forecasts for that particular date, e.g., Forecast (0, -2) means that there was a forecast issued at $t = 0$ and $t = -2$. The **SameDay** variable is equal to one if the issue and forecast dates occur on the same day. The same logic holds for **NextDay**, **TwoDays**, **ThreeDays**, and **FourDays**. For instance, a value of 1 in the **FourDays** column occurs when the issue date is four days before the forecast.
+
+::: panel-tabset
+## Raw Variables
+
+```{r}
+#| label: tbl-RawFullb
+#| tbl-cap: Raw data on the Air Quality Index
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(select(Full, IssueDate:aqi), 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "IssueDate is the date of issue of the forecas Forecast date is the date t.of the alert. ForecastPeriod is the difference between the issue and forecast dates. o3 is the forecasted AQI value of atmospheric ozone. pm25 is the forecasted AQI value of fine particulate matter. aqi is the forecasted AQI value to emit the alert", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## Indicators on the type of forecast
+
+```{r}
+#| label: tbl-ForecastIndicators
+#| tbl-cap: Raw data on the Air Quality Index (Forecast Indicators)
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(select(Full, IssueDate:ForecastDate, aqi, SingleForecast, ForecastType, SameDay:FourDays), 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "IssueDate is the date of issue of the forecas Forecast date is the date t.of the alert. ForecastPeriod is the difference between the issue and forecast dates. o3 is the forecasted AQI value of atmospheric ozone. pm25 is the forecasted AQI value of fine particulate matter. aqi is the forecasted AQI value to emit the alert", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## Indicators on the type of alert
+
+```{r}
+#| label: tbl-AlertIndicators
+#| tbl-cap: Raw data on the Air Quality Index (Alert Indicators)
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(select(Full, IssueDate:ForecastDate, aqi, alert, FullAlert, SingleAlert:TwoDaysSingleAlert), 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "IssueDate is the date of issue of the forecas Forecast date is the date t.of the alert. ForecastPeriod is the difference between the issue and forecast dates. o3 is the forecasted AQI value of atmospheric ozone. pm25 is the forecasted AQI value of fine particulate matter. aqi is the forecasted AQI value to emit the alert", general_title = "Notes:", footnote_as_chunk = T)
+```
+:::
+
+Next, @tbl-AlertIndicators includes a set of variables related to the emission of an air quality alert (AQA). The EPA and local environmental authorities emit AQAs when the value of the AQI is higher than one hundred units. With this in mind, the **alert** column is an indicator variable equal to one if the AQI forecast exceeds one hundred. The **FullAlert** column would equal one if all forecasts on that date predicted an AQA. **SingleAlert** is equal to one if there is only one forecast, and this forecast is higher than one-hundred units, **OnlySameDayAlert** is equal to one when there is only one same-day forecast, and NextAndSameDayAlert is equal to one if there were two issues for the same forecast -- one on the date of the forecast and the other one day before.
+
+@fig-TypeAll and @fig-TypeAlerts show the share of observations with specific combinations of issued forecasts. For the full sample 93% of forecasts were issued at $t \in (0, -1)$, $\$t \in (0, -3)$, $t \in (-1)$, and $t \in (-2)$. For the sub-sample of days with an air quality alert, 89% of the forecast are issued at $t \in (0, -1)$, \$t \in (0, -1, -2, -3) \$, \$t \in (-1) \$, and $t \in (0, -3)$.
+
+::: panel-tabset
+## Full Sample
+
+```{r}
+#| label: fig-TypeAll
+#| fig-cap: Forecast type across the full sample of forecasted AQIs
+#| fig-cap-location: top
+#| echo: true
+# Create the plot data
+plot = Full %>% group_by(ForecastType) %>% summarise(count = n()) %>% ungroup() %>% 
+  mutate(share = (count/sum(count))*100)
+# Ggplot
+ggplot(plot) + geom_bar(aes(y = reorder(ForecastType, -share), x = share), stat = "identity", fill = "DarkBlue") + theme_economist()  %+replace% 
+  theme(legend.title = element_blank()) + 
+  labs(x = "Percentage share of observations", y = "")
+```
+
+## Alerts
+
+```{r}
+#| label: fig-TypeAlerts
+#| fig-cap: Forecast type for the dates with an AQA
+#| fig-cap-location: top
+#| echo: true
+# Create the plot data
+plot = Full %>% filter(alert == 1) %>% group_by(ForecastType) %>% 
+  summarise(count = n()) %>% ungroup() %>% 
+  mutate(share = (count/sum(count))*100)
+# Ggplot
+ggplot(plot) + geom_bar(aes(y = reorder(ForecastType, -share), x = share), stat = "identity", fill = "DarkBlue") + theme_economist()  %+replace% 
+  theme(legend.title = element_blank()) + 
+  labs(x = "Percentage share of observations", y = "")
+```
+:::
+
+This combination of different forecasts raises one clear issue; if we want to assign one single value per date, which one should we choose? For this, use the following algorithm:
+
+::: incremental
+-   For the days without an alert, we select the AQI forecast closest to $t$. For instance, if the AQI value for January 1st has one forecast on December 31st and another on December 30th, we select the 31st as the value of the forecasted AQI.
+-   For days when there is an alert, and all forecasts imply an AQI value higher than 100 units, we choose the forecast closest to $t$
+-   When there is a discrepancy between two forecasts regarding the existence of an AQA, we choose the highest. For instance, the forecast at $t = 0$ implies an AQI value of 93 and the one at $t = 1$ a value of 101. In this situation, we will assign the value of 101.
+:::
+
+Using this algorithm, we reach a final data set of forested AQI values between January 2008. @tbl-AqiForecast shows the first rows of this final data-file. In it ***date*** is the date of the forecast. ***ForecastType*** is the type of forecast as previously defined. ***pm25, o3, and aqi*** are the forecasted values of fine particulate matter, ozone, and the air quality index. ***Alert*** is an indicator variable equal to one when the AQI is larger than 100. Next, there is a set of indicator variables on the structure of the forecast, i.e., was it a single alert? did all the forecasts pointed into the emission of an alert? etc.
+
+```{r}
+#| label: tbl-AqiForecast
+#| tbl-cap: Final data set on the forecast of the AQI
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(filter(AqiForecast, alert == 1), 5)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "IssueDate is the date of issue of the forecas Forecast date is the date t.of the alert. ForecastPeriod is the difference between the issue and forecast dates. o3 is the forecasted AQI value of atmospheric ozone. pm25 is the forecasted AQI value of fine particulate matter. aqi is the forecasted AQI value to emit the alert", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+\`\`\`
+
+### Data on the air quality index
+
+```{r}
+# Load the AQI data sets
+aqi = read_rds(paste0(file, "02_GenData/02_aqi/RealAqi.rds"))
+
+```
+
+We obtain data on measured AQI values from the Environmental Protection Agency (EPA). The EPA determines the AQI in all American counties with pollution measuring stations. At each point in time, the AQI for county $i$ at time $t$ is the maximum AQI across all stations and measured contaminants in that day. Table @tbl-AqiReal shows the structure of the AQI data. It contains the date of the observation and the AQI values for the entire city ***(RealAqi)*** and each city borough.
+
+```{r}
+#| label: tbl-AqiReal
+#| tbl-cap: Values of the AQI in NYC
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(aqi, 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "This table contains a sample of the AQI data from the EPA. The data contains an observation for each date between the first of January 2009 and the first of October 2019. Each column refers to the AQI value in the respective borough. The RealAqi column is the maximum AQI value across all boroughs in the city", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+### Demographic covariates
+Here, I present all other demographic and health covariates I use to explore if there are heterogeneous treatment effects on the impact of the AQHAs on school absences. Here, I load the main data files.
+
+```{r}
+econ = read_rds(paste0(file, "02_GenData/03_dem/econ.rds"))
+dem = read_rds(paste0(file,"02_GenData/03_dem/dem.rds"))
+soc = read_rds(paste0(file,"02_GenData/03_dem/soc.rds"))
+hosp = read_rds(paste0(file,"02_GenData/03_dem/AsthmaHosp.rds"))
+er = read_rds(paste0(file,"02_GenData/03_dem/AsthmaEr.rds"))
+```
+
+We collect different economic, demographic, and health covariates at the neighbourhood level from two main sources; for socio-demographic variables, we use public data from the American Community Survey between 2012-2016. For the health data, we use information on children' asthma-related hospitalization and ER admissions from the New York State Department of Health.
+
+::: panel-tabset
+## Economic
+
+```{r}
+kbl(head(econ, 5)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "nta = Name of the neighborhood, ntacode = Code of the neighborhood, 
+            boro = Name of the borough, FemaleLF = Share of working age women at work, 
+            MeanIncome = Average income, MedianIncome = Median Income" , general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## Demographic
+
+```{r}
+kbl(head(dem, 5)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "nta = Name of the neighborhood, ntacode = Code of the neighborhood, 
+            boro = Name of the borough, ShareHisp = Share of hispanic persons, 
+            ShareWhite = Share of white persons, ShareBlack = Share of black persons", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## Social
+
+```{r}
+kbl(head(soc, 5)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "nta = Name of the neighborhood, ntacode = Code of the neighborhood, 
+            boro = Name of the borough, SingleParents = Share of single-parent households, 
+            GrandParentsAid = Share of families with help from grand parents, 
+            LessThanHighschool = Share of persons that did not complete highschool, 
+            Bachelor = Share of persons with a bachelors degree, 
+            EnglishOnly = Share of persons that only communicate in english", 
+            general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## Hospitalizations
+
+```{r}
+kbl(head(hosp, 5)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "nta = Name of the neighborhood, ntacode = Code of the neighborhood, 
+            HospChildren = Number of children going to the hospital because of asthma, 
+            HospChildRate = Rate of children going to the hospital because of asthma (per 10,000), 
+            SmallSampleIndicator = Indicator variable equal to one if the sample is too small", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## ER Admissions
+
+```{r}
+kbl(head(er, 5)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "nta = Name of the neighborhood, ntacode = Code of the neighborhood, 
+            ErAdmissions = Number of children going to the ER because of asthma, 
+            HospChildRate = Rate of children going to the ER because of asthma (per 10,000), 
+            SmallSampleIndicator = Indicator variable equal to one if the sample is too small", general_title = "Notes:", footnote_as_chunk = T)
+```
+:::
+
+### Weather data
+
+```{r}
+weather = read_rds(paste0(file, "02_GenData/03_weather/NycGsod.rds"))
+```
+
+We obtain weather data for the city of New York from the Global Surface Summary of the Day data provided by the US National Centres for Environmental Information (NCEI). Table @tbl-WeatherData shows the structure of the weather data. For each date between January 2006 and December 2018 we have daily average, minimum, and maximum temperature, alongside atmospheric preasure, wind speed, precipitation, and relative humidity.
+
+```{r}
+#| label: tbl-WeatherData
+#| tbl-cap: Weather data for New York City
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(head(weather, 2)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% 
+   footnote(general = "tmp = Average temperature, MinTmp = Minimum temperature, MaxTmp = Maximum temperature, dew = Dew point, atm = Atmospheric Preassure, wsp = Wind speed, rain = Precipitation, rh = Relative humidity. All temperatures in celsius and precipitation in milimiters", general_title = "Notes:", footnote_as_chunk = T)
+```
