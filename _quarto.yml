@@ -14,7 +14,7 @@ website:
       - section: "Basics"
         contents:
         - about.qmd
-        - 01_data.html
+        - 01_data.qmd
 
 format:
   html:
