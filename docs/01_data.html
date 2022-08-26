@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr.&nbsp;Luis Sarmiento">
 
-<title>SchoolAbsences</title>
+<title>Air Quality Alerts and School Absenteeism in New York City - SchoolAbsences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,31 +82,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<script src="01_data_files/libs/clipboard/clipboard.min.js"></script>
-<script src="01_data_files/libs/quarto-html/quarto.js"></script>
-<script src="01_data_files/libs/quarto-html/popper.min.js"></script>
-<script src="01_data_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="01_data_files/libs/quarto-html/anchor.min.js"></script>
-<link href="01_data_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="01_data_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="01_data_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="01_data_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="01_data_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="01_data_files/libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
 
-<script src="01_data_files/libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="01_data_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="nav-fixed">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Air Quality Alerts and School Absenteeism in New York City</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.qmd">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">About</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#data-sets-iconify-bxsdata" id="toc-data-sets-iconify-bxsdata" class="nav-link active" data-scroll-target="#data-sets-iconify-bxsdata">Data Sets <iconify-icon inline="" icon="fluent-emoji:bxs:data"></iconify-icon></a>
@@ -119,7 +172,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -490,7 +544,7 @@ Important
 <p>In <a href="#tbl-RawFullb">Table&nbsp;6</a>, I essentially keep the same structure of <a href="#tbl-RawAqi">Table&nbsp;5</a> with the slight difference that I change the period on the forecast period by a numeric variable equivalent to the difference between the issue and forecast dates.</p>
 <p>Next, in <a href="#tbl-ForecastIndicators">Table&nbsp;7</a>, I construct a series of dummy and categorical variables to understand the nature of each forecast. The column <strong>SingleForecast</strong> indicates situations with only one issued forecast for that particular date exists. For example, if there were two forecasts for January 1st, one on December 30th and the other on the 31st, the value of this column would be equal to zero. The <strong>ForecastType</strong> is a categorical variable that indicates the structure of issued forecasts for that particular date, e.g., Forecast (0, -2) means that there was a forecast issued at <span class="math inline">\(t = 0\)</span> and <span class="math inline">\(t = -2\)</span>. The <strong>SameDay</strong> variable is equal to one if the issue and forecast dates occur on the same day. The same logic holds for <strong>NextDay</strong>, <strong>TwoDays</strong>, <strong>ThreeDays</strong>, and <strong>FourDays</strong>. For instance, a value of 1 in the <strong>FourDays</strong> column occurs when the issue date is four days before the forecast.</p>
 <div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Raw Variables</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Indicators on the type of forecast</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Indicators on the type of alert</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Raw Variables</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Indicators on the type of forecast</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Indicators on the type of alert</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell tbl-cap-location-top">
@@ -671,7 +725,7 @@ Important
 <p>Next, <a href="#tbl-AlertIndicators">Table&nbsp;8</a> includes a set of variables related to the emission of an air quality alert (AQA). The EPA and local environmental authorities emit AQAs when the value of the AQI is higher than one hundred units. With this in mind, the <strong>alert</strong> column is an indicator variable equal to one if the AQI forecast exceeds one hundred. The <strong>FullAlert</strong> column would equal one if all forecasts on that date predicted an AQA. <strong>SingleAlert</strong> is equal to one if there is only one forecast, and this forecast is higher than one-hundred units, <strong>OnlySameDayAlert</strong> is equal to one when there is only one same-day forecast, and NextAndSameDayAlert is equal to one if there were two issues for the same forecast – one on the date of the forecast and the other one day before.</p>
 <p><a href="#fig-TypeAll">Figure&nbsp;1</a> and <a href="#fig-TypeAlerts">Figure&nbsp;2</a> show the share of observations with specific combinations of issued forecasts. For the full sample 93% of forecasts were issued at <span class="math inline">\(t \in (0, -1)\)</span>, <span class="math inline">\(\$t \in (0, -3)\)</span>, <span class="math inline">\(t \in (-1)\)</span>, and <span class="math inline">\(t \in (-2)\)</span>. For the sub-sample of days with an air quality alert, 89% of the forecast are issued at <span class="math inline">\(t \in (0, -1)\)</span>, $t (0, -1, -2, -3) $, $t (-1) $, and <span class="math inline">\(t \in (0, -3)\)</span>.</p>
 <div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Full Sample</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Alerts</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Full Sample</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Alerts</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell fig-cap-location-top">
@@ -912,7 +966,7 @@ Important
 </div>
 <p>We collect different economic, demographic, and health covariates at the neighbourhood level from two main sources; for socio-demographic variables, we use public data from the American Community Survey between 2012-2016. For the health data, we use information on children’ asthma-related hospitalization and ER admissions from the New York State Department of Health.</p>
 <div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Economic</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Demographic</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">Social</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" role="tab" aria-controls="tabset-3-4" aria-selected="false" href="">Hospitalizations</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-5" role="tab" aria-controls="tabset-3-5" aria-selected="false" href="">ER Admissions</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Economic</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Demographic</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Social</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" role="tab" aria-controls="tabset-3-4" aria-selected="false">Hospitalizations</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-5" role="tab" aria-controls="tabset-3-5" aria-selected="false">ER Admissions</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="cell">
@@ -1372,6 +1426,8 @@ Important
 </div>
 </div>
 </div>
+
+
 </section>
 </section>
 
@@ -1381,8 +1437,7 @@ Important
 <ol>
 <li id="fn1" role="doc-endnote"><p>The data is not publicly available. Instead, we sent an email to NYSDEC asking them to provide the forecasted values under the freedom of information act and they were kind enough to provide the entirety of forecasted dates between 2008 and 2018<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section></div></main>
-<!-- /main column -->
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

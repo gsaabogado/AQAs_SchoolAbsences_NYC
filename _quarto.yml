@@ -3,7 +3,7 @@ project:
   output-dir: docs
   render:
     - about.qmd
-    - data.qmd
+    - 01_data.qmd
 
 website:
   title: "Air Quality Alerts and School Absenteeism in New York City"
