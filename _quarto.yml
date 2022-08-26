@@ -7,11 +7,14 @@ project:
 
 website:
   title: "Air Quality Alerts and School Absenteeism in New York City"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Basics"
+        contents:
+        - about.qmd
+        - 01_data.html
 
 format:
   html:
