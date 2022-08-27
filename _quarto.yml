@@ -11,7 +11,7 @@ website:
     style: "docked"
     search: true
     contents:
-      - section: "Basics"
+      - section: "Sections"
         contents:
         - about.qmd
         - 01_data.qmd
@@ -20,6 +20,7 @@ format:
   html:
     theme: cosmo
     fontsize: 1.1em
+    backgroundcolor: "#FEF2CD"
     css: styles.css
     toc: true
 

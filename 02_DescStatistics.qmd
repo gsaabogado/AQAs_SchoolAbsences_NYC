@@ -31,8 +31,7 @@ NtaAbsent = left_join(absent |> filter(DayType == "NormalDay"), location) |>  gr
 # Load the shapefile of city boroughs
 BoroShp = st_read(paste0(file, "01_RawData/04_shp/02_bgh"), quiet = T)%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
 # Load the shapefile on city neighborhoods
-NtaShp = st_read(paste0(file, "01_RawData/04_shp/03_ngh"), quiet = T)
-%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
+NtaShp = st_read(paste0(file, "01_RawData/04_shp/03_ngh"), quiet = T)%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
 ```
 
 The following set of maps describe the spatial distribution of schools, income, race, and asthma-related hospitalizations in NYC.
