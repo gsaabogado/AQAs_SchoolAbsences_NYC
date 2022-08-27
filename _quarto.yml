@@ -21,7 +21,7 @@ format:
      - cosmo
      - custom.scss
     fontsize: 1.1em
-    backgroundcolor: "#EBEDFA"
+    backgroundcolor: "white"
     linkcolor: "#F97A1F"
     monobackgroundcolor: "#E1DFD0"
 
