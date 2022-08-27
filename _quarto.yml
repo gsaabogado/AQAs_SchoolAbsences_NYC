@@ -3,6 +3,7 @@ project:
   output-dir: docs
   render:
     - about.qmd
+    - 01_data.qmd
 
 website:
   title: "Air Quality Alerts and School Absenteeism in New York City"
@@ -17,13 +18,11 @@ website:
 
 format:
   html:
-    theme: 
-     - cosmo
-     - custom.scss
-    fontsize: 1.1em
+    theme: cosmo
     backgroundcolor: "white"
     linkcolor: "#F97A1F"
     monobackgroundcolor: "#E1DFD0"
+
 
 
 
