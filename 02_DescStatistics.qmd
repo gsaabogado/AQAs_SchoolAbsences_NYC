@@ -25,14 +25,13 @@ asthma = read_rds(paste0(file, "02_GenData/03_dem/AsthmaHosp.rds"))
 # Load the location of all schools
 location = read_rds(paste0(file, "02_GenData/01_schools/location.rds"))
 # Load the data set on absenteeism
-absent = read_rds(paste0(file"02_GenData/RawAbsences.rds"))
+absent = read_rds(paste0(file, "02_GenData/RawAbsences.rds"))
 NtaAbsent = left_join(absent |> filter(DayType == "NormalDay"), location) |>  group_by(nta, date) |> 
   summarise_at(vars(enrolled, absent, released), sum, na.rm = T)
 # Load the shapefile of city boroughs
-BoroShp = st_read(paste0(file, "01_RawData/04_shp/02_bgh", quiet = T))
-%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
+BoroShp = st_read(paste0(file, "01_RawData/04_shp/02_bgh"), quiet = T)%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
 # Load the shapefile on city neighborhoods
-NtaShp = st_read(paste0(file, "01_RawData/04_shp/03_ngh", quiet = T))
+NtaShp = st_read(paste0(file, "01_RawData/04_shp/03_ngh"), quiet = T)
 %>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
 ```
 
@@ -383,8 +382,8 @@ tmap_style("classic"); tm_graticules(labels.inside.frame = T, labels.show = F) +
 #### Load the data on the AQI
 
 ```{r}
-aqif = read_rds("02_GenData/02_aqi/AqiForecast.rds")
-aqi = read_rds("02_GenData/02_aqi/RealAqi.rds")
+aqif = read_rds(paste0(file, "02_GenData/02_aqi/AqiForecast.rds"))
+aqi = read_rds(paste0(file, "02_GenData/02_aqi/RealAqi.rds"))
 ```
 
 @tbl-DescAqi contains descriptive statistics on the real and forecasted AQI. The average forecast is slightly smaller (with a minor standard deviation) than the real AQI. The average reported AQI is 54.36, slightly above the EPA threshold between good and moderate air quality. Moreover, the maximum value of the forecasted AQI (151) is also smaller than the maximum of the Real AQI, implying that the difference between both measures could go beyond average values and standard deviations.

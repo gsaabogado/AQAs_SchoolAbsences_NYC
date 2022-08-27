@@ -18,7 +18,8 @@ website:
 
 format:
   html:
-    theme: united
+    theme: cosmo
+    fontsize: 1.1em
     css: styles.css
     toc: true
 
