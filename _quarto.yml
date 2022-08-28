@@ -18,11 +18,9 @@ website:
 
 format:
   html:
-    theme: cosmo
-    backgroundcolor: "white"
-    mainfont: "Georgia, serif"
-    linkcolor: "#F97A1F"
-    monobackgroundcolor: "#E1DFD0"
+    theme: 
+     -cosmo
+     -custom.scss
 
 
 
