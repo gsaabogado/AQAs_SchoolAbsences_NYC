@@ -7,6 +7,21 @@ author: "Luis Sarmiento"
 
 # Introduction
 
+This research report contains three primary sections to accompany my study on air quality alerts and school absences:
+
+1. ***Data Sets*** Includes a description of all the data files I use throughout the study. It is divided into five sub-sections
+
+::: {.incremental}
+- Data on School Absences
+- Data on the forecast of the air quality index
+- Data on the air quality index
+- Demographic covariates
+- Weather data
+:::
+
+2. ***Descriptive Statistics*** contains descriptive statitistics on school absences in New york City. The forecast of the Air Quality Index the Department Of Environmental Conservation uses for emitting Air Quality Health Advisories. And the Environmental Protection Agency reports of the measured air quality index. I also divide this section in four sub-sections.
+
+
 All the raw files needed to run the code are in the [dropbox repository](https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0)
 
 If you want to replicate the study:
