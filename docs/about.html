@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Luis Sarmiento">
-<meta name="description" content="This web-site contains all the data and R-code necessaries to replicate the results of the study: Air Quality Alerts and School Absences: Evidence from New York City.">
+<meta name="description" content="This website contains all the data and R-code necessary to replicate the results of the study: Air Quality Alerts and School Absences: Evidence from New York City.">
 
 <title>Air Quality Alerts and School Absenteeism in New York City - About</title>
 <style>
@@ -153,7 +153,7 @@ ul.task-list{list-style: none;}
 
 <div>
   <div class="description">
-    <p>This web-site contains all the data and R-code necessaries to replicate the results of the study: Air Quality Alerts and School Absences: Evidence from New York City.</p>
+    <p>This website contains all the data and R-code necessary to replicate the results of the study: Air Quality Alerts and School Absences: Evidence from New York City.</p>
   </div>
 </div>
 
@@ -173,26 +173,33 @@ ul.task-list{list-style: none;}
 
 </header>
 
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>All the raw files needed to run the code are in the <a href="https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0">dropbox repository</a></p>
 <p>If you want to replicate the study:</p>
-<div class="nonincremental">
-<ul>
-<li>Download all files in the Dropbox Repository (Consider space constraints in your computer)</li>
-<li>The Dropbox files are structured as follows:</li>
-</ul>
-<div class="nonincremental">
-<ul>
-<li>01_RawData – Includes the raw data-files as obtained from the New York State Department of Education, the New York State Department of Environmental Conservation, The Environmental Protection Agency, and the Census Buro.</li>
-<li>02_GenData – Contains the data-files I use for the analysis.</li>
-<li>03_scripts – Here, I include all the R-scripts I use to transform the raw data into a useful format, perform descriptive statistics, and run my empirical specifications</li>
-<li>AQAs_School_Absences_NYC – This folder contains the Quarto files necessary to replicate this web-site</li>
-</ul>
-</div>
-</div>
+<p>Download all files in the <a href="https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0">dropbox repository</a> while considering the space constraints in your computer.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The files in the repository have a folder-like structure with the following key sections:</p>
+<ol type="1">
+<li><p><strong>01_RawData</strong> – Includes the raw data files obtained from the New York State Department of Education, the New York State Department of Environmental Conservation, The Environmental Protection Agency, and the Census Buro.</p></li>
+<li><p><strong>02_GenData</strong> – Contains the data files I use for the analysis.</p></li>
+<li><p><strong>03_scripts</strong> – Here, I include all the R-scripts I use to transform the raw data into a useful format, perform descriptive statistics, and run my empirical specifications</p></li>
+<li><p><strong>AQAs_School_Absences_NYC</strong> – This folder contains the Quarto files necessary to replicate this website</p></li>
+</ol>
+</section>
+<section id="raw-data-files" class="level1">
+<h1>Raw data files</h1>
+<p>As previously mentioned, the folder 01_RawData folder contains all the raw files I obtained to estimate the effect of air quality health advisories on school absences.</p>
+<p>01_schools includes all files related to school absences and school characteristics in New York City. 02_AQI has the data on the air quality index forecast from the NYSDEC and the AQI measures from the EPA. 03_weather contains several data files of weather covariates. 04_shp is a repository of shape (or spatial) files. And 05_dem includes data on neighborhood-level socio-demographic characteristics from the US Census Buro.</p>
 
 
+</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>I recommend downloading the files to an external hard drive to avoid memory issues<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
