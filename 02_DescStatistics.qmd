@@ -1,5 +1,5 @@
 ---
-title: "SchoolAbsences"
+title: "Descriptive Statistics"
 format: 
   html: 
     toc: true
@@ -7,12 +7,9 @@ format:
     code-fold: true
     code-summary: "Show the Code"
 ---
+# School Absences and Demographics
 
-## Descriptive Statistics
-
-### School Absences and Demographics
-
-#### Load the necessary data
+## Load the necessary data
 
 ```{r}
 #| warning: false
@@ -25,7 +22,7 @@ asthma = read_rds(paste0(file, "02_GenData/03_dem/AsthmaHosp.rds"))
 # Load the location of all schools
 location = read_rds(paste0(file, "02_GenData/01_schools/location.rds"))
 # Load the data set on absenteeism
-absent = read_rds(paste0(file, "02_GenData/RawAbsences.rds"))
+absent = read_rds(paste0(file, "02_GenData/RawAbsences.rds")) |> ungroup()
 NtaAbsent = left_join(absent |> filter(DayType == "NormalDay"), location) |>  group_by(nta, date) |> 
   summarise_at(vars(enrolled, absent, released), sum, na.rm = T)
 # Load the shapefile of city boroughs
@@ -134,7 +131,7 @@ tmap_style("classic"); tm_graticules(labels.inside.frame = T, labels.show = F) +
 #| tbl-cap-location: top
 #| echo: true
 # Show the data set
-sumtable(select(absent, absent, released, enrolled), 
+sumtable(select(ungroup(absent), absent, released, enrolled), 
          digits = 2, fixed.digits = T, 
          summ = c("mean(x)", "median(x)", "sd(x)", "min(x)", 
                   "max(x)", "notNA(x)","countNA(x)"), 
@@ -173,7 +170,7 @@ absent |>  filter(DayType == "NormalDay") |>
 #| echo: true
 
 #  Create the plot
-plot = absent |>  filter(DayType == "NormalDay") |> filter(absent < quantile(absent, 0.99, na.rm = T)) |> group_by(date) |> 
+plot = absent |> ungroup() |>  filter(DayType == "NormalDay") |> filter(absent < quantile(absent, 0.99, na.rm = T)) |> group_by(date) |> 
   summarise(absent = mean(absent, na.rm = T))
 # Construct the ggplot
 ggplot(plot) + 

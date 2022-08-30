@@ -1,5 +1,22 @@
 ---
 title: "About"
+description: |
+  This web-site contains all the data and R-code necessaries to replicate the results of the study: Air Quality Alerts and School Absences: Evidence from New York City.
+author: "Luis Sarmiento"
 ---
 
-About this site
+All the raw files needed to run the code are in the [dropbox repository](https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0)
+
+If you want to replicate the study:
+
+::: {.nonincremental}
+- Download all files in the Dropbox Repository (Consider space constraints in your computer)
+- The Dropbox files are structured as follows:
+
+::: nonincremental
+- 01_RawData -- Includes the raw data-files as obtained from the New York State Department of Education, the New York State Department of Environmental Conservation, The Environmental Protection Agency, and the Census Buro. 
+- 02_GenData -- Contains the data-files I use for the analysis. 
+- 03_scripts -- Here, I include all the R-scripts I use to transform the raw data into a useful format, perform descriptive statistics, and run my empirical specifications
+- AQAs_School_Absences_NYC -- This folder contains the Quarto files necessary to replicate this web-site
+:::
+:::

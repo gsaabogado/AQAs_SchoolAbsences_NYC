@@ -1,6 +1,10 @@
 ---
-title: "SchoolAbsences"
-author: "Dr. Luis Sarmiento"
+title: "Data Sets"
+description: |
+  This blog-post descrives all the data files I use for analysing
+  the effect of air quality health advisories in New York City on 
+  school absences.
+author: "Luis Sarmiento"
 format: 
   html: 
     toc: true
