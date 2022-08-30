@@ -9,13 +9,11 @@ format:
     code-summary: "Show the Code"
 ---
 
-## Data Sets {{< iconify bxs:data >}}
-
-This section presents an overall description of the data sets I use to analyze the effect of New York City (NYC) Air Quality Health Advisories (AQHAs) on school absences.
+This page presents an overall description of the data sets I use to analyze the effect of New York City Air Quality Health Advisories on school absences.
 
 Researchers can access the data I use to generate these files in the [dropbox repository](https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0)
 
-### Data on School Absences {{< iconify emojione:school >}}
+## Data on School Absences {{< iconify emojione:school >}}
 
 The following code-chunk only loads into the R-environment the data files of school absences, schools' locations, and neighborhood-level demographics I use throughout the study.
 
@@ -92,7 +90,7 @@ kbl(head(prof, 2)) %>%
    footnote(general = "id refers to School ID and. Each of the other columns contains the percentage of students within each category; e.g., ela refers to the share of students passing the English Learning Art test. The math column refers to the share of students passing the Mathematics test. And the Graduates4th and 6th columns refer to the share of graduates in each year respectively.", general_title = "Notes:",  footnote_as_chunk = T)
 ```
 
-### Data on the forecasts of the air quality index
+## Data on the forecasts of the air quality index
 
 The following code-chunks load the data related to the air quality alerts' measures and forecasts.
 
@@ -241,7 +239,7 @@ kbl(head(filter(AqiForecast, alert == 1), 5)) %>%
 
 \`\`\`
 
-### Data on the air quality index
+## Data on the air quality index
 
 ```{r}
 # Load the AQI data sets
@@ -264,7 +262,7 @@ kbl(head(aqi, 2)) %>%
    footnote(general = "This table contains a sample of the AQI data from the EPA. The data contains an observation for each date between January 1st, 2009, and October 1st, 2019. Each column refers to the AQI value in the respective borough. The RealAqi column is the maximum AQI value across all boroughs in the city", general_title = "Notes:", footnote_as_chunk = T)
 ```
 
-### Demographic covariates
+## Demographic covariates
 Here, I present all other demographic and health covariates I use to explore if there are heterogeneous treatment effects on the impact of the AQHAs on school absences. Here, I load the main data files.
 
 ```{r}
@@ -345,7 +343,7 @@ kbl(head(er, 5)) %>%
 ```
 :::
 
-### Weather data
+## Weather data
 
 ```{r}
 weather = read_rds(paste0(file, "02_GenData/03_weather/NycGsod.rds"))
