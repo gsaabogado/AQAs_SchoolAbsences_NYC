@@ -211,13 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#school-absences-and-demographics" id="toc-school-absences-and-demographics" class="nav-link active" data-scroll-target="#school-absences-and-demographics">School Absences and Demographics</a>
-  <ul class="collapse">
-  <li><a href="#load-the-necessary-data" id="toc-load-the-necessary-data" class="nav-link" data-scroll-target="#load-the-necessary-data">Load the necessary data</a>
-  <ul class="collapse">
+  <li><a href="#school-absences-and-demographics" id="toc-school-absences-and-demographics" class="nav-link active" data-scroll-target="#school-absences-and-demographics">School Absences and Demographics</a></li>
   <li><a href="#descriptives-on-the-aqi-forecast" id="toc-descriptives-on-the-aqi-forecast" class="nav-link" data-scroll-target="#descriptives-on-the-aqi-forecast">Descriptives on the AQI forecast</a></li>
-  </ul></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -242,8 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="school-absences-and-demographics" class="level1">
 <h1>School Absences and Demographics</h1>
-<section id="load-the-necessary-data" class="level2">
-<h2 class="anchored" data-anchor-id="load-the-necessary-data">Load the necessary data</h2>
+<p>This code-chunk loads all the files I need in the subsequent analysis</p>
 <div class="cell">
 <details>
 <summary>Show the Code</summary>
@@ -265,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>NtaShp <span class="ot">=</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(file, <span class="st">"01_RawData/04_shp/03_ngh"</span>), <span class="at">quiet =</span> T)<span class="sc">%&gt;%</span> <span class="fu">st_transform</span>(., <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span> <span class="fu">st_simplify</span>(., <span class="at">preserveTopology =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The following maps describe the spatial distribution of schools, income, race, and asthma-related hospitalizations in NYC.</p>
+<p><a href="#fig-SchoolsMap">Figure&nbsp;1</a> in the first tab shows the location of all schools by type. Schools spread around the city, with significant clusters in South Bronx, North Manhattan, and Brooklyn. For Staten Island and Queens, the distance between schools is more prominent than for the Bronx or Manhattan. The data set contains 856 elementary schools, 495 high schools, 379 junior high schools, 267 kindergarten to eighth-grade schools (K8), 145 secondaries, 109 kindergarten to twelfth-grade schools (K12), 2 early childhood, and two ungraded.</p>
 <div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Schools in NYC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Income</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Share of whites</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Asthma Hosp. Rate</a></li></ul>
 <div class="tab-content">
@@ -379,7 +373,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p><a href="#fig-SchoolsMap">Figure&nbsp;1</a> shows the location of all schools by type. Schools spread around the city, with significant clusters in South Bronx, North Manhattan, and Brooklyn. For Staten Island and Queens, the distance between schools is more prominent than for the Bronx or Manhattan. The data set contains 856 elementary schools, 495 high schools, 379 junior high schools, 267 kindergarten to eighth-grade schools (K8), 145 secondaries, 109 kindergarten to twelfth-grade schools (K12), 2 early childhood, and two ungraded.</p>
 <p><a href="#fig-IncomeMap">Figure&nbsp;2</a> portrays the median neighborhood income in 2016, according to the American Community Survey. As expected, we can find the city’s wealthier areas in Manhattan, Staten Island, and West Brooklyn, with more impoverished South Bronx and East Brooklyn regions. In <a href="#fig-WhiteShare">Figure&nbsp;3</a>, the strong correlation between income and the share of white persons in each neighborhood is evident, with higher percentages of white persons in Manhattan and Staten Island and lower shares in the Bronx, Queens, and Brooklyn. Finally, <a href="#fig-AsthmaMap">Figure&nbsp;4</a> contains the share of children’s hospitalization per 10,000 kids across all city areas. Again, there is a strong relationship between asthma hospitalizations and income, with higher hospitalization rates in the Bronx and North-Central Brooklyn and lower in Staten Island and Manhattan</p>
 <p><a href="#tbl-DescAbsent">Table&nbsp;1</a> contains descriptive statistics on absent, released, and enrolled students. In total, we have 3,339,158 observations across 1,854 schools. There are 56 average daily absences per school in the city of New York. This is equivalent to around 9.04% of enrolled students. The absences have a median of 39 and a standard deviation of 75. Concerning released students, 2 (0.40%) students are released from school on an average day. Additionally, and in line with an over-dispersed Poisson distribution, releases have a median of 0 and a standard deviation of 27 pupils per day.</p>
 <div class="cell tbl-cap-location-top">
@@ -778,10 +771,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<section id="descriptives-on-the-aqi-forecast" class="level3">
-<h3 class="anchored" data-anchor-id="descriptives-on-the-aqi-forecast">Descriptives on the AQI forecast</h3>
-<section id="load-the-data-on-the-aqi" class="level4">
-<h4 class="anchored" data-anchor-id="load-the-data-on-the-aqi">Load the data on the AQI</h4>
+</section>
+<section id="descriptives-on-the-aqi-forecast" class="level1">
+<h1>Descriptives on the AQI forecast</h1>
 <div class="cell">
 <details>
 <summary>Show the Code</summary>
@@ -1002,21 +994,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Mean daily difference of the AQI and its forecast between 2008 and 2018</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap-location: top</span></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot </span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data for the plot</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> hydroTSM<span class="sc">::</span><span class="fu">time2season</span>(date, <span class="at">out.fmt =</span> <span class="st">"seasons"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> <span class="fu">str_to_title</span>(season)) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., aqi) <span class="sc">|&gt;</span> </span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> aqi<span class="sc">-</span>RealAqi)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span>diff, <span class="at">fill =</span> season), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Air Quality Index (Forecast)"</span>, <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> </span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Spring"</span> <span class="ot">=</span> <span class="st">"#F97A1F"</span>, <span class="st">"Summer"</span> <span class="ot">=</span> <span class="st">"#C91D42"</span>, </span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Winter"</span> <span class="ot">=</span> <span class="st">"#475ED1"</span>, <span class="st">"Autumn"</span>  <span class="ot">=</span> <span class="st">"#B3B3B3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data for the plot</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> hydroTSM<span class="sc">::</span><span class="fu">time2season</span>(date, <span class="at">out.fmt =</span> <span class="st">"seasons"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> <span class="fu">str_to_title</span>(season)) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., aqi) <span class="sc">|&gt;</span> </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> aqi<span class="sc">-</span>RealAqi)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span>diff, <span class="at">fill =</span> season), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Air Quality Index (Forecast)"</span>, <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> </span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Spring"</span> <span class="ot">=</span> <span class="st">"#F97A1F"</span>, <span class="st">"Summer"</span> <span class="ot">=</span> <span class="st">"#C91D42"</span>, </span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Winter"</span> <span class="ot">=</span> <span class="st">"#475ED1"</span>, <span class="st">"Autumn"</span>  <span class="ot">=</span> <span class="st">"#B3B3B3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="02_DescStatistics_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
@@ -1177,9 +1166,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Next, in <a href="#fig-AqiDiffMonthly">Figure&nbsp;20</a>, I portray the average monthly value of the AQI measure and its forecasts. It is interesting to see that the difference between the accurate measure and the forecast of the AQI is lower during the summer months of June to August and higher at the start of the year between January and April. <a href="#fig-AqiDiffYearly">Figure&nbsp;21</a> portrays a similar picture with yearly average differences. Notably, the ability of the NYSDEC to predict the AQI increased between 2008 and 2017. With a mean difference in 2008 of close to four units and for 2018 of less than 0.5. In figure <a href="#fig-AqiDiffWeekday">Figure&nbsp;22</a>, we add differences by day of the week where, although the value of the objective AQI measure is consistently higher than its forecast, I cannot distinguish any pattern in the average weekday difference of both time series. Finally, <a href="#fig-AqiDensityRealForecast">Figure&nbsp;23</a> contains the density distributions of the real and forecasted AQIs. Two things stand out. First, the AQI forecast has more density around its median and a smaller tail; second, there is a clear difference in the bunching of the AQI around 100 units.</p>
 
 
-</section>
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

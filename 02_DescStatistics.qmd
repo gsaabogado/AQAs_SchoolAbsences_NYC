@@ -7,9 +7,10 @@ format:
     code-fold: true
     code-summary: "Show the Code"
 ---
+
 # School Absences and Demographics
 
-## Load the necessary data
+This code-chunk loads all the files I need in the subsequent analysis
 
 ```{r}
 #| warning: false
@@ -31,7 +32,7 @@ BoroShp = st_read(paste0(file, "01_RawData/04_shp/02_bgh"), quiet = T)%>% st_tra
 NtaShp = st_read(paste0(file, "01_RawData/04_shp/03_ngh"), quiet = T)%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
 ```
 
-The following maps describe the spatial distribution of schools, income, race, and asthma-related hospitalizations in NYC.
+@fig-SchoolsMap in the first tab shows the location of all schools by type. Schools spread around the city, with significant clusters in South Bronx, North Manhattan, and Brooklyn. For Staten Island and Queens, the distance between schools is more prominent than for the Bronx or Manhattan. The data set contains `r comma(nrow(filter(location, SchoolType == "Elementary")))` elementary schools, `r comma(nrow(filter(location, SchoolType == "High school")))` high schools, `r comma(nrow(filter(location, SchoolType == "Junior High")))` junior high schools, `r comma(nrow(filter(location, SchoolType == "K-8")))` kindergarten to eighth-grade schools (K8), `r comma(nrow(filter(location, SchoolType == "Secondary School")))` secondaries, `r comma(nrow(filter(location, SchoolType == "K-12 all grades")))` kindergarten to twelfth-grade schools (K12), `r comma(nrow(filter(location, SchoolType == "Ungraded")))` early childhood, and two ungraded.
 
 ::: panel-tabset
 ## Schools in NYC
@@ -118,8 +119,6 @@ tmap_style("classic"); tm_graticules(labels.inside.frame = T, labels.show = F) +
   tm_scale_bar(width = 0.2, position = c("right", "bottom"), text.size = 1)
 ```
 :::
-
-@fig-SchoolsMap shows the location of all schools by type. Schools spread around the city, with significant clusters in South Bronx, North Manhattan, and Brooklyn. For Staten Island and Queens, the distance between schools is more prominent than for the Bronx or Manhattan. The data set contains `r comma(nrow(filter(location, SchoolType == "Elementary")))` elementary schools, `r comma(nrow(filter(location, SchoolType == "High school")))` high schools, `r comma(nrow(filter(location, SchoolType == "Junior High")))` junior high schools, `r comma(nrow(filter(location, SchoolType == "K-8")))` kindergarten to eighth-grade schools (K8), `r comma(nrow(filter(location, SchoolType == "Secondary School")))` secondaries, `r comma(nrow(filter(location, SchoolType == "K-12 all grades")))` kindergarten to twelfth-grade schools (K12), `r comma(nrow(filter(location, SchoolType == "Ungraded")))` early childhood, and two ungraded.
 
 @fig-IncomeMap portrays the median neighborhood income in 2016, according to the American Community Survey. As expected, we can find the city's wealthier areas in Manhattan, Staten Island, and West Brooklyn, with more impoverished South Bronx and East Brooklyn regions. In @fig-WhiteShare, the strong correlation between income and the share of white persons in each neighborhood is evident, with higher percentages of white persons in Manhattan and Staten Island and lower shares in the Bronx, Queens, and Brooklyn. Finally, @fig-AsthmaMap contains the share of children's hospitalization per 10,000 kids across all city areas. Again, there is a strong relationship between asthma hospitalizations and income, with higher hospitalization rates in the Bronx and North-Central Brooklyn and lower in Staten Island and Manhattan
 
@@ -255,9 +254,7 @@ Throughout the study, we aggregate the school-level data into neighborhood avera
 
 @tbl-DescAbsentNta contains descriptive statistics on school absences at the neighborhood level. The NTA data contains `r comma(nrow(NtaAbsent))` observations across `r comma(length(unique(NtaAbsent$ntacode)))` neighbourhoods. On average, there are `r comma(mean(NtaAbsent$absent, na.rm = T))` absences per day, equivalent to around `r percent((mean(NtaAbsent$absent, na.rm = T)/mean(NtaAbsent$enrolled, na.rm = T)), accuracy = 0.01)` of enrolled students. The absences have a median of `r comma(median(NtaAbsent$absent, na.rm = T))` and a standard deviation of `r comma(sd(NtaAbsent$absent, na.rm = T))`. Concerning released students, `r comma(mean(NtaAbsent$released, na.rm = T))` (`r percent((mean(NtaAbsent$released, na.rm = T)/mean(NtaAbsent$enrolled, na.rm = T)), accuracy = 0.01)`) students are released from school on an average day.
 
-The next set of figures contains different descriptive statistics of school absences at the neighborhood level. First, @fig-NtaDensity has the density function of the log of absent daily students per neighborhood. Next, the map in @fig-EnrollmentMap includes the average number of students enrolled per NTA. 
-@fig-AbsencesMap refers to the average share of annual absences, i.e., absences/enrollment. Finally, @fig-ReleasedMap presents an analogous map for the percentage of releases.
-
+The next set of figures contains different descriptive statistics of school absences at the neighborhood level. First, @fig-NtaDensity has the density function of the log of absent daily students per neighborhood. Next, the map in @fig-EnrollmentMap includes the average number of students enrolled per NTA. @fig-AbsencesMap refers to the average share of annual absences, i.e., absences/enrollment. Finally, @fig-ReleasedMap presents an analogous map for the percentage of releases.
 
 ```{r}
 #| label: tbl-DescAbsentNta
@@ -373,9 +370,7 @@ tmap_style("classic"); tm_graticules(labels.inside.frame = T, labels.show = F) +
 ```
 :::
 
-### Descriptives on the AQI forecast
-
-#### Load the data on the AQI
+# Descriptives on the AQI forecast
 
 ```{r}
 aqif = read_rds(paste0(file, "02_GenData/02_aqi/AqiForecast.rds"))
@@ -401,8 +396,6 @@ sumtable(select(ungroup(tab) ,aqi, RealAqi),
 ```
 
 @fig-AqiForecastTs shows the average daily value of the AQI forecast within our sample period. Although there is no clear evidence of a long-term trend in the value of the AQI, seasonality does appear quite relevant for the time series. Summer (and to a lesser degree winter) forecasts of the AQI are consistently higher than for the other seasons. Furthermore, the probability of forecasts higher than 100 units is also higher during the summer. For instance, out of 131 alerts, one hundred and five occurred during the summer, fourteen in the spring, eight in Autumn, and only four throughout the winter.
-
-
 
 ::: panel-tabset
 ## Time Series
@@ -517,8 +510,6 @@ Finally, @fig-AqiForecastDensity contains the density function of the AQI foreca
 
 The following figures compare the forecasted and real AQIs. @fig-AqiDifferenceTs contains the time series of average mean daily differences between the predicted and actual AQIs. There appear to be relevant differences between both time series, with a maximum difference of 56 and a minimum of -92 AQI units. These differences aggregate to an average difference between both variables of -3.9 with a standard deviation of 15.17 units. @fig-AqiDifferenceDensity further includes the density plot of the difference between the real and forecasted AQIs.
 
-
-
 ::: panel-tabset
 ## Daily Differences
 
@@ -528,14 +519,11 @@ The following figures compare the forecasted and real AQIs. @fig-AqiDifferenceTs
 #| fig-cap: Mean daily difference of the AQI and its forecast between 2008 and 2018
 #| fig-cap-location: top
 #| echo: true
-# Construct the data for the plot 
 # Create the data for the plot
 plot = filter(aqif, date < "2018-12-31") |>  
   mutate(season = hydroTSM::time2season(date, out.fmt = "seasons")) |> 
   mutate(season = str_to_title(season)) %>% left_join(., aqi) |> 
   mutate(diff = aqi-RealAqi)
-
-
 
 ggplot(plot) + geom_bar(aes(x = date, y =diff, fill = season), stat = "identity", alpha = 0.5) +
   labs(y = "Air Quality Index (Forecast)", x = "") +
