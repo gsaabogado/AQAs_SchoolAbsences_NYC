@@ -1,5 +1,5 @@
 ---
-title: "School Absences"
+title: "Results"
 format: 
   html: 
     toc: true
@@ -11,19 +11,23 @@ format:
 # Regression Results
 
 ## Regression Discontinuity
+
 ::: panel-tabset
-## Log Absences
-[Discontinuity in school absences around the alert threshold](02_GenData/07_images/MainRD.png)
+## Raw absences
+
+[Discontinuity in school absences around the alert threshold](RegResults/01_images/RawRdPlot.png) 
+
+## Absences with controls 
+
+[Discontinuity in school absences around the alert threshold](RegResults/01_images/CovRdPlot.png)
 :::
-
-
 
 ::: panel-tabset
 ## Main results
 
 ```{r}
 # Load the results
-tab = read_rds("02_GenData/06_RegResults/01_rdd/NtaBase.rds")
+tab = read_rds("RegResults/02_results/NtaBase.rds")
 # Include the set of fixed effects and controls
 fe = rbind(`Weekday FEs` = c(rep("", 1), rep("Yes", 2)), 
            `Month FEs`  = c(rep("", 1), rep("Yes", 2)), 
@@ -41,6 +45,7 @@ kbl(tab, align = "c") %>%
 ```
 
 ## Boro Split
+
 ```{r}
 # Load the results
 tab = read_rds("02_GenData/06_RegResults/01_rdd/BoroSplit.rds")
@@ -51,4 +56,3 @@ kbl(tab, align = "c") %>%
   footnote(general = "Effects of air quality health advisories on school absences across all five boroughs in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of air quality health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., a coefficient of two is equivalent to a two percent increase in school absences. All regressions control for weather covariates alongside weewday, month, year, and School Period fixed effects.Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", general_title = "Notes:", footnote_as_chunk = T)
 ```
 :::
-
