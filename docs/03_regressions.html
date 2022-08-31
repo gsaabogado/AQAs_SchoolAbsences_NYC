@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>School Absences</title>
+<title>Air Quality Alerts and School Absenteeism in New York City - Results</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,29 +81,139 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<script src="03_regressions_files/libs/clipboard/clipboard.min.js"></script>
-<script src="03_regressions_files/libs/quarto-html/quarto.js"></script>
-<script src="03_regressions_files/libs/quarto-html/popper.min.js"></script>
-<script src="03_regressions_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="03_regressions_files/libs/quarto-html/anchor.min.js"></script>
-<link href="03_regressions_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="03_regressions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="03_regressions_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="03_regressions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="03_regressions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
 
-<script src="03_regressions_files/libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="03_regressions_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 </head>
 
-<body>
+<body class="nav-sidebar docked nav-fixed">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Air Quality Alerts and School Absenteeism in New York City</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./about.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/gsaabogado"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/gsaabogado"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://luissarmiento.net/">Personal Site</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Results</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Sections</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_data.html" class="sidebar-item-text sidebar-link">Data Sets</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_DescStatistics.html" class="sidebar-item-text sidebar-link">Descriptive Statistics</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_regressions.html" class="sidebar-item-text sidebar-link active">Results</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#regression-results" id="toc-regression-results" class="nav-link active" data-scroll-target="#regression-results">Regression Results</a>
@@ -112,12 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">School Absences</h1>
+<h1 class="title d-none d-lg-block">Results</h1>
 </div>
 
 
@@ -136,41 +247,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="regression-discontinuity" class="level2">
 <h2 class="anchored" data-anchor-id="regression-discontinuity">Regression Discontinuity</h2>
 <div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Log Absences</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Raw absences</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Absences with controls</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="02_GenData/07_images/MainRD.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">“Discontinuity in school absences around the alert threshold”</figcaption><p></p>
+<p><img src="RegResults/01_images/RawRdPlot.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Discontinuity in school absences around the alert threshold</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="RegResults/01_images/CovRdPlot.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Discontinuity in school absences around the alert threshold</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 <div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Main results</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Boro Split</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Main results</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
 <details>
 <summary>Show the Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the results</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="st">"02_GenData/06_RegResults/01_rdd/NtaBase.rds"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="st">"RegResults/02_results/NtaBase.rds"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Include the set of fixed effects and controls</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fe <span class="ot">=</span> <span class="fu">rbind</span>(<span class="st">`</span><span class="at">Weekday FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Month FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">School Period FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Year FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Weather Controls</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">2</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(.) <span class="sc">%&gt;%</span> <span class="fu">setNames</span>(., <span class="fu">names</span>(tab))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the data with the control variables</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">rbind</span>(tab, fe)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regression table</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(tab, <span class="at">align =</span> <span class="st">"c"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"Fitted-Statistics"</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">pack_rows</span>(<span class="st">"Controls"</span>, <span class="dv">6</span>, <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"Effects of air quality health advisories on school absences in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., an coefficient of two is equivalent to a two percent increase in absences. Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fe <span class="ot">=</span> <span class="fu">rbind</span>(<span class="st">`</span><span class="at">Weekday FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)), </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Month FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)), </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">School Period FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)), </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Year FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Weather Controls</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">2</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">AQI Measurements</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">3</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(.) <span class="sc">%&gt;%</span> <span class="fu">setNames</span>(., <span class="fu">names</span>(tab))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the data with the control variables</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">rbind</span>(tab, fe)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regression table</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(tab, <span class="at">align =</span> <span class="st">"c"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"Fitted-Statistics"</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">pack_rows</span>(<span class="st">"Controls"</span>, <span class="dv">6</span>, <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"Effects of air quality health advisories on school absences in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., an coefficient of two is equivalent to a two percent increase in absences. Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
@@ -181,6 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    <th style="text-align:center;"> (1) </th>
    <th style="text-align:center;"> (2) </th>
    <th style="text-align:center;"> (3) </th>
+   <th style="text-align:center;"> (4) </th>
   </tr>
  </thead>
 <tbody>
@@ -188,19 +309,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    <td style="text-align:left;"> Estimate </td>
    <td style="text-align:center;"> 9.29 ** </td>
    <td style="text-align:center;"> 7.72 ** </td>
+   <td style="text-align:center;"> 14.37 *** </td>
    <td style="text-align:center;"> 17.08 *** </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (4.60) </td>
    <td style="text-align:center;"> (3.85) </td>
+   <td style="text-align:center;"> (3.50) </td>
    <td style="text-align:center;"> (3.49) </td>
   </tr>
-  <tr grouplength="3"><td colspan="4" style="border-bottom: 0;"><strong>Fitted-Statistics</strong></td></tr>
+  <tr grouplength="3"><td colspan="5" style="border-bottom: 0;"><strong>Fitted-Statistics</strong></td></tr>
 <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> N.obs </td>
    <td style="text-align:center;"> 8416 </td>
    <td style="text-align:center;"> 10492 </td>
+   <td style="text-align:center;"> 10868 </td>
    <td style="text-align:center;"> 10868 </td>
   </tr>
   <tr>
@@ -208,17 +332,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    <td style="text-align:center;"> 10 </td>
    <td style="text-align:center;"> 13 </td>
    <td style="text-align:center;"> 16 </td>
+   <td style="text-align:center;"> 16 </td>
   </tr>
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> B.C. Bandwidth </td>
    <td style="text-align:center;"> 16 </td>
    <td style="text-align:center;"> 20 </td>
    <td style="text-align:center;"> 23 </td>
+   <td style="text-align:center;"> 23 </td>
   </tr>
-  <tr grouplength="5"><td colspan="4" style="border-bottom: 0;"><strong>Controls</strong></td></tr>
+  <tr grouplength="5"><td colspan="5" style="border-bottom: 0;"><strong>Controls</strong></td></tr>
 <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weekday FEs </td>
    <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
    <td style="text-align:center;"> Yes </td>
    <td style="text-align:center;"> Yes </td>
   </tr>
@@ -227,10 +354,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> Yes </td>
    <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
   </tr>
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> School Period FEs </td>
    <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
    <td style="text-align:center;"> Yes </td>
    <td style="text-align:center;"> Yes </td>
   </tr>
@@ -239,9 +368,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> Yes </td>
    <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
   </tr>
   <tr>
    <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weather Controls </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AQI Measurements </td>
+   <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> Yes </td>
@@ -254,88 +392,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="cell">
-<details>
-<summary>Show the Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the results</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="st">"02_GenData/06_RegResults/01_rdd/BoroSplit.rds"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regression table</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(tab, <span class="at">align =</span> <span class="st">"c"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"Fitted-Statistics"</span>, <span class="dv">3</span>, <span class="dv">5</span>)  <span class="sc">%&gt;%</span> </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"Effects of air quality health advisories on school absences across all five boroughs in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of air quality health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., a coefficient of two is equivalent to a two percent increase in school absences. All regressions control for weather covariates alongside weewday, month, year, and School Period fixed effects.Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
+</div>
+</div>
 
-<table class=" lightable-classic table table-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:center;"> Bronx </th>
-   <th style="text-align:center;"> Brooklyn </th>
-   <th style="text-align:center;"> Manhattan </th>
-   <th style="text-align:center;"> Queens </th>
-   <th style="text-align:center;"> Staten Island </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Estimate </td>
-   <td style="text-align:center;"> 20.89 *** </td>
-   <td style="text-align:center;"> 19.73 *** </td>
-   <td style="text-align:center;"> 43.49 *** </td>
-   <td style="text-align:center;"> 13.02 ** </td>
-   <td style="text-align:center;"> 5.14 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;"> (6.75) </td>
-   <td style="text-align:center;"> (6.20) </td>
-   <td style="text-align:center;"> (8.70) </td>
-   <td style="text-align:center;"> (6.20) </td>
-   <td style="text-align:center;"> (11.65) </td>
-  </tr>
-  <tr grouplength="3"><td colspan="6" style="border-bottom: 0;"><strong>Fitted-Statistics</strong></td></tr>
-<tr>
-   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> N.obs </td>
-   <td style="text-align:center;"> 2509 </td>
-   <td style="text-align:center;"> 3557 </td>
-   <td style="text-align:center;"> 1916 </td>
-   <td style="text-align:center;"> 3898 </td>
-   <td style="text-align:center;"> 1268 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Bandwidth </td>
-   <td style="text-align:center;"> 17 </td>
-   <td style="text-align:center;"> 16 </td>
-   <td style="text-align:center;"> 17 </td>
-   <td style="text-align:center;"> 17 </td>
-   <td style="text-align:center;"> 17 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> B.C. Bandwidth </td>
-   <td style="text-align:center;"> 25 </td>
-   <td style="text-align:center;"> 24 </td>
-   <td style="text-align:center;"> 25 </td>
-   <td style="text-align:center;"> 26 </td>
-   <td style="text-align:center;"> 26 </td>
-  </tr>
-</tbody>
-<tfoot><tr><td style="padding: 0; " colspan="100%">
-<span style="font-style: italic;">Notes:</span> <sup></sup> Effects of air quality health advisories on school absences across all five boroughs in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of air quality health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., a coefficient of two is equivalent to a two percent increase in school absences. All regressions control for weather covariates alongside weewday, month, year, and School Period fixed effects.Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1</td></tr></tfoot>
-</table>
 
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
