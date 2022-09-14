@@ -185,9 +185,9 @@ ul.task-list{list-style: none;}
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This research report contains three primary sections to accompany my study on air quality alerts and school absences:</p>
+<p>The website contains four primary sections to accompany the study:</p>
 <ol type="1">
-<li><strong><em>Data Sets</em></strong> Includes a description of all the data files I use throughout the study. It is divided into five sub-sections</li>
+<li><strong><em>Data Sets</em></strong> Includes a description of all the data files. It is divided into five sub-sections</li>
 </ol>
 <div class="incremental">
 <ul class="incremental">
@@ -199,8 +199,26 @@ ul.task-list{list-style: none;}
 </ul>
 </div>
 <ol start="2" type="1">
-<li><strong><em>Descriptive Statistics</em></strong> contains descriptive statitistics on school absences in New york City. The forecast of the Air Quality Index the Department Of Environmental Conservation uses for emitting Air Quality Health Advisories. And the Environmental Protection Agency reports of the measured air quality index. I also divide this section in four sub-sections.</li>
+<li><p><strong><em>Descriptive Statistics</em></strong> contains descriptive statistics on school absences and the forecasts of the air quality index in New York City. It is divided into two subsections; <strong>School Absences and Demographics</strong> and <strong>Descriptives on the AQI Forecast</strong>.</p></li>
+<li><p><strong><em>Methodology</em></strong> includes a rough description of the methodology I use to estimate the effect of NYC air quality health advisories on school absences. It is divided into two main sections; <strong>Regression Discontinuity</strong> and <strong>Synthetic DiD</strong>.</p></li>
+<li><p><strong><em>Results</em></strong> presents and discusses the main results of the research project.</p></li>
 </ol>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider that all sections contain the R-code necessary to replicate the figures, tables, and overall results of the study. Regarding the construction of the data-sets, we share the link to the dropbox repository alongside instructions to load the raw data files and transform them into the pannel data we use to estimate the effect with regression discontinuity and difference-in-difference designs.</p>
+</div>
+</div>
+</section>
+<section id="replication" class="level1">
+<h1>Replication</h1>
 <p>All the raw files needed to run the code are in the <a href="https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0">dropbox repository</a></p>
 <p>If you want to replicate the study:</p>
 <p>Download all files in the <a href="https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0">dropbox repository</a> while considering the space constraints in your computer.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The files in the repository have a folder-like structure with the following key sections:</p>
