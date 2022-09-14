@@ -20,7 +20,7 @@ The following code-chunk only loads into the R-environment the data files of sch
 ```{r}
 #| cache: false
 # Set the path of the R-studio project
-file = "~/Dropbox (Personal)/DIW/NYC school absenses/"
+file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
 # Load the data set
 RawAbsent = read_rds(paste0(file, "02_GenData/RawAbsences.rds"))
 location = read_rds(paste0(file,"02_GenData/01_schools/location.rds"))

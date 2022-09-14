@@ -5,7 +5,8 @@ project:
     - about.qmd
     - 01_data.qmd
     - 02_DescStatistics.qmd
-    - 03_regressions.qmd
+    - 03_methods.qmd
+    - 04_regressions.qmd
 
 website:
   title: "Air Quality Alerts and School Absenteeism in New York City"
@@ -31,7 +32,8 @@ website:
         - about.qmd
         - 01_data.qmd
         - 02_DescStatistics.qmd
-        - 03_regressions.qmd
+        - 03_methods.qmd
+        - 04_regressions.qmd
         
 
 format:

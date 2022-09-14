@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Luis Sarmiento">
-<meta name="description" content="This website contains all the data and R-code necessary to replicate the results of the study: Air Quality Alerts and School Absences: Evidence from New York City.">
 
-<title>Air Quality Alerts and School Absenteeism in New York City - About</title>
+<title>Air Quality Alerts and School Absenteeism in New York City - Methodology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,10 +53,11 @@ ul.task-list{list-style: none;}
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -95,7 +94,7 @@ ul.task-list{list-style: none;}
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">About</h1>
+      <h1 class="quarto-secondary-nav-title">Methodology</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -123,7 +122,7 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link active">About</a>
+  <a href="./about.html" class="sidebar-item-text sidebar-link">About</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -138,7 +137,7 @@ ul.task-list{list-style: none;}
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_methods.html" class="sidebar-item-text sidebar-link">Methodology</a>
+  <a href="./03_methods.html" class="sidebar-item-text sidebar-link active">Methodology</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -152,30 +151,27 @@ ul.task-list{list-style: none;}
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#regression-discontinuity" id="toc-regression-discontinuity" class="nav-link active" data-scroll-target="#regression-discontinuity">Regression Discontinuity</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">About</h1>
+<h1 class="title d-none d-lg-block">Methodology</h1>
 </div>
 
-<div>
-  <div class="description">
-    <p>This website contains all the data and R-code necessary to replicate the results of the study: Air Quality Alerts and School Absences: Evidence from New York City.</p>
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Luis Sarmiento </p>
-          </div>
-  </div>
     
     
   </div>
@@ -183,49 +179,42 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>This research report contains three primary sections to accompany my study on air quality alerts and school absences:</p>
-<ol type="1">
-<li><strong><em>Data Sets</em></strong> Includes a description of all the data files I use throughout the study. It is divided into five sub-sections</li>
-</ol>
-<div class="incremental">
-<ul class="incremental">
-<li>Data on School Absences</li>
-<li>Data on the forecast of the air quality index</li>
-<li>Data on the air quality index</li>
-<li>Demographic covariates</li>
-<li>Weather data</li>
-</ul>
+<section id="regression-discontinuity" class="level1">
+<h1>Regression Discontinuity</h1>
+<p>First, I infer causality with a regression discontinuity design (RD). The RD exploits the quasi-random allocation of air quality alerts around the emission threshold to infer causality. The central assumption is that days with forecasted AQI values very close to the alert at either side of the emission threshold only differ because of the alert and not because of concomitant factors like weather or air pollution. Under this assumption, the difference in the expected value of school absences on days just below and above the emission threshold is the local average treatment effect on the treated around the discontinuity.</p>
+<p>The following panel shows the data-driven sharp discontinuity RD plot of school absences as a function of the AQI. The left panel contains a natural linear fit to the left and right sides of the discontinuity. In contrast, the right panel adjusts the polynomial fit with weekday, school year, month, and school period fixed effects alongside weather covariates in the form of average, minimum, and maximum temperature, precipitation, wind speed, and relative humidity. The graphical representation of the discontinuity suggests a jump in school absences after the alert.</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="RegResults/01_images/RawRdPlot.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Discontinuity in school absences around the alert threshold</figcaption><p></p>
+</figure>
 </div>
-<ol start="2" type="1">
-<li><strong><em>Descriptive Statistics</em></strong> contains descriptive statitistics on school absences in New york City. The forecast of the Air Quality Index the Department Of Environmental Conservation uses for emitting Air Quality Health Advisories. And the Environmental Protection Agency reports of the measured air quality index. I also divide this section in four sub-sections.</li>
-</ol>
-<p>All the raw files needed to run the code are in the <a href="https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0">dropbox repository</a></p>
-<p>If you want to replicate the study:</p>
-<p>Download all files in the <a href="https://www.dropbox.com/sh/1jyjs84sef7t1nt/AABtbantKPm4OyICNEIklpXLa?dl=0">dropbox repository</a> while considering the space constraints in your computer.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The files in the repository have a folder-like structure with the following key sections:</p>
-<ol type="1">
-<li><p><strong>01_RawData</strong> – Includes the raw data files obtained from the New York State Department of Education, the New York State Department of Environmental Conservation, The Environmental Protection Agency, and the Census Buro.</p></li>
-<li><p><strong>02_GenData</strong> – Contains the data files I use for the analysis.</p></li>
-<li><p><strong>03_scripts</strong> – Here, I include all the R-scripts I use to transform the raw data into a useful format, perform descriptive statistics, and run my empirical specifications</p></li>
-<li><p><strong>AQAs_School_Absences_NYC</strong> – This folder contains the Quarto files necessary to replicate this website</p></li>
-</ol>
-</section>
-<section id="raw-data-files" class="level1">
-<h1>Raw data files</h1>
-<p>As previously mentioned, the folder 01_RawData folder contains all the raw files I obtained to estimate the effect of air quality health advisories on school absences.</p>
-<p>01_schools includes all files related to school absences and school characteristics in New York City. 02_AQI has the data on the air quality index forecast from the NYSDEC and the AQI measures from the EPA. 03_weather contains several data files of weather covariates. 04_shp is a repository of shape (or spatial) files. And 05_dem includes data on neighborhood-level socio-demographic characteristics from the US Census Buro.</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="RegResults/01_images/CovRdPlot.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Discontinuity in school absences around the alert threshold (Covariate Adjusted)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>A central assumption of the RD is that no discontinuous unobservables affect both the score and dependant variables. Unfortunately, in the case of air quality alerts in New York, this is not the case. For instance, if both the likelihood of an alert and school absences are consistently higher on Mondays, we may capture the Monday instead of the alert’s effect. To control for the discontinuous impact of this kind of temporal covariates, I run three additional specifications to the raw RD. The first one adds weekday, month, school year, school period, and holiday fixed effects, while the second one further includes average, minimum, and maximum temperature, precipitation, wind speed, and relative humidity as weather covariates. Equation RD specifies the functional form of the preferred model.</p>
+<p><span class="math display">\[
+Absent_{nt}  =  \beta D_{t}(AQI_{t} \geq 101) + \tilde{\mu}^- f(AQI_t)+ \tilde{\mu}^+ f(AQI{_t}\times D_{nt}) +  W'_{nt} \Delta + \Omega_{t} + \epsilon_{t}
+\]</span></p>
+<p>In it, <span class="math inline">\(Absent_{nt}\)</span> is the log of absent students at neighborhood <span class="math inline">\(n\)</span> on day <span class="math inline">\(t\)</span>, <span class="math inline">\(AQI_{t}\)</span> is the AQI forecast at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(D_{t}\)</span> the treatment indicator equal to one when the AQI is higher than one hundred units. <span class="math inline">\(f(AQI_{t}\times D_{nt})\)</span> is a linear fit before (<span class="math inline">\(\tilde{\mu}_{-}\)</span>) and after (<span class="math inline">\(\tilde{\mu}_{+}\)</span>) the discontinuity; I use a linear fit because it performs better and has more accurate boundary properties than higher-order polynomials . <span class="math inline">\(W'_{nt}\)</span> and <span class="math inline">\(\Omega_{t}\)</span> are matrices of weather controls and time fixed-effects. The estimate of interest, <span class="math inline">\(\beta\)</span>, captures the of the alert on school absences around the emission threshold. finally, the bandwidth around the discontinuity comes from the data-driven plug-in rules based on mean squared error expansions proposed by .</p>
+<p>The RD strategy is suitable to assess the effect of the alert as parents, schools, or neighborhoods cannot manipulate the AQI or the emission of the alert. Furthermore, there is perfect compliance between the alert’s emission and the running variable as every time the AQI forecast surpasses one hundred units, the probability of the alert jumps from zero to one. Still, there remains the possibility that New Yorkers conditional expectation of an alert would rely on the raw AQI independent of the forecast. Thus, similar to , I provide robust estimates for a fuzzy regression discontinuity design, which exploits the discontinuity in the probability of assignment to treatment to infer causality.</p>
+<p>Besides the fuzzy RD, I perform three robustness exercises in case the fixed effects are not flexible enough to reduce the bias from correlated temporal covariates. First, I run the RD for a matched data set of treatment and control units. I match both groups with propensity score matching based on weather covariates, the weekday, and the month of the observation. Second, I estimate a two-stage RD with the residuals of a Poisson pseudo-maximum likelihood estimator panel model of school absences as a function of selected weather covariates and fixed effects. Third, I estimate a two-stage least-squares (2sls) Poisson MLE with the difference between the actual and forecasted AQI in linear and quadratic form as instruments for the alert</p>
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1" role="doc-endnote"><p>I recommend downloading the files to an external hard drive to avoid memory issues<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

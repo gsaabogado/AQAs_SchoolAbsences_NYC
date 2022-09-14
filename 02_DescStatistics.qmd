@@ -15,7 +15,7 @@ This code-chunk loads all the files I need in the subsequent analysis
 ```{r}
 #| warning: false
 # Set the path of the R-studio project
-file = "~/Dropbox (Personal)/DIW/NYC school absenses/"
+file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
 # Load the economic covariates at the Nta level
 econ = read_rds(paste0(file, "02_GenData/03_dem/econ.rds"))
 dem = read_rds(paste0(file, "02_GenData/03_dem/dem.rds"))

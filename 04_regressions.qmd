@@ -11,12 +11,8 @@ format:
 # Regression Results
 
 ## Regression Discontinuity
+Table 
 
-::: {layout-ncol=2}
-![Discontinuity in school absences around the alert threshold](RegResults/01_images/RawRdPlot.png) 
-
-![Discontinuity in school absences around the alert threshold](RegResults/01_images/CovRdPlot.png)
-:::
 
 ::: panel-tabset
 ## Main results
