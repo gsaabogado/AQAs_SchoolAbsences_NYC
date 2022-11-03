@@ -2,11 +2,11 @@ project:
   type: website
   output-dir: docs
   render:
-    - about.qmd
-    - 01_data.qmd
-    - 02_DescStatistics.qmd
-    - 03_methods.qmd
-    - 04_regressions.qmd
+    - 01_about.qmd
+    - 02_data.qmd
+    - 03_descriptives.qmd
+    - 04_methods.qmd
+    - 05_regressions.qmd
 
 website:
   title: "Air Quality Alerts and School Absenteeism in New York City"
@@ -16,30 +16,29 @@ website:
     collapse: true
     right:
       - text: Home
-        href: about.qmd 
+        href: 01_about.qmd 
       - icon: github
         href: https://github.com/gsaabogado
       - icon: twitter
         href: https://twitter.com/gsaabogado
       - text: Personal Site
-        href: https://luissarmiento.net/
+        href: https://luissarmiento.com/
   sidebar:
     style: "docked"
     search: true
     contents:
       - section: "Sections"
         contents:
-        - about.qmd
-        - 01_data.qmd
-        - 02_DescStatistics.qmd
-        - 03_methods.qmd
-        - 04_regressions.qmd
+        - 01_about.qmd
+        - 02_data.qmd
+        - 03_descriptives.qmd
+        - 04_methods.qmd
+        - 05_regressions.qmd
         
 
 format:
   html:
-    theme: 
-     -custom.scss
+    theme: flatly
 
 
 

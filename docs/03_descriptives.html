@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.237">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Air Quality Alerts and School Absenteeism in New York City -  Descriptives</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Air Quality Alerts and School Absenteeism in New York City</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./01_about.html" aria-current="page">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/gsaabogado"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/gsaabogado"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://luissarmiento.com/">
+ <span class="menu-text">Personal Site</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><i class="fa-solid fa-ranking-star" aria-label="ranking-star"></i> Descriptives</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Sections</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_about.html" class="sidebar-item-text sidebar-link"><iconify-icon inline="" icon="carbon:table-of-contents"></iconify-icon> About</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_data.html" class="sidebar-item-text sidebar-link"><iconify-icon inline="" icon="bxs:data"></iconify-icon> Data Sets</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_descriptives.html" class="sidebar-item-text sidebar-link active"><i class="fa-solid fa-ranking-star" aria-label="ranking-star"></i> Descriptives</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_methods.html" class="sidebar-item-text sidebar-link"><iconify-icon inline="" icon="simple-icons:thealgorithms"></iconify-icon> Methodology</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_regressions.html" class="sidebar-item-text sidebar-link"><iconify-icon inline="" icon="fluent-mdl2:poll-results"></iconify-icon> Results</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#iconify-emojione-monotone-school-schools" id="toc-iconify-emojione-monotone-school-schools" class="nav-link active" data-scroll-target="#iconify-emojione-monotone-school-schools"><iconify-icon inline="" icon="emojione-monotone:school"></iconify-icon> Schools</a></li>
+  <li><a href="#fa-smog-air-quality-index" id="toc-fa-smog-air-quality-index" class="nav-link" data-scroll-target="#fa-smog-air-quality-index"><i class="fa-solid fa-smog" aria-label="smog"></i> Air Quality Index</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><i class="fa-solid fa-ranking-star" aria-label="ranking-star"></i> Descriptives</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="iconify-emojione-monotone-school-schools" class="level1">
+<h1><iconify-icon inline="" icon="emojione-monotone:school"></iconify-icon> Schools</h1>
+<div class="cell" data-eco="false">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the economic covariates at the Nta level</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>econ <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"02_GenData/03_dem/econ.rds"</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dem <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"02_GenData/03_dem/dem.rds"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>asthma <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"02_GenData/03_dem/AsthmaHosp.rds"</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the location of all schools</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>location <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"02_GenData/01_schools/location.rds"</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data set on absenteeism</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>absent <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"02_GenData/RawAbsences.rds"</span>)) <span class="sc">|&gt;</span> <span class="fu">ungroup</span>()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>NtaAbsent <span class="ot">=</span> <span class="fu">left_join</span>(absent <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(DayType <span class="sc">==</span> <span class="st">"NormalDay"</span>), location) <span class="sc">|&gt;</span>  <span class="fu">group_by</span>(nta, date) <span class="sc">|&gt;</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(enrolled, absent, released), sum, <span class="at">na.rm =</span> T)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the shapefile of city boroughs</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>BoroShp <span class="ot">=</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(file, <span class="st">"01_RawData/04_shp/02_bgh"</span>), <span class="at">quiet =</span> T)<span class="sc">%&gt;%</span> <span class="fu">st_transform</span>(., <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span> <span class="fu">st_simplify</span>(., <span class="at">preserveTopology =</span> T)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the shapefile on city neighborhoods</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>NtaShp <span class="ot">=</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(file, <span class="st">"01_RawData/04_shp/03_ngh"</span>), <span class="at">quiet =</span> T)<span class="sc">%&gt;%</span> <span class="fu">st_transform</span>(., <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span> <span class="fu">st_simplify</span>(., <span class="at">preserveTopology =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><a href="#fig-SchoolsMap">Figure&nbsp;1</a> in the first tab shows the location of all schools by type. Schools spread around the city, with significant clusters in South Bronx, North Manhattan, and Brooklyn. Staten Island and Queen’s distance between schools is larger than for the Bronx or Manhattan. The data set contains 856 elementary schools, 495 high schools, 379 junior high schools, 267 kindergarten to eighth-grade schools (K8), 145 secondaries, 109 kindergarten to twelfth-grade schools (K12), 2 early childhood, and two ungraded. <a href="#fig-IncomeMap">Figure&nbsp;2</a> portrays the median neighborhood income in 2016 (according to the American Community Survey). The city’s wealthier areas are in Manhattan, Staten Island, and West Brooklyn, with more impoverished regions in South Bronx and East Brooklyn. <a href="#fig-WhiteShare">Figure&nbsp;3</a> portrays the share of white persons in each neighborhood. The strong correlation between income and the share of whites is evident, with higher percentages of white persons in Manhattan and Staten Island and lower shares in the Bronx, Queens, and Brooklyn. <a href="#fig-AsthmaMap">Figure&nbsp;4</a> contains the share of children’s hospitalization per 10,000 across all city areas. Again, there is a strong relationship between asthma hospitalizations and income, with higher hospitalization rates in the Bronx and North-Central Brooklyn and lower in Staten Island and Manhattan.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Schools in NYC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Income</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Share of whites</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Asthma Hosp. Rate</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplify the shapefile</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>BoroShp  <span class="ot">=</span> <span class="fu">st_transform</span>(BoroShp, <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_simplify</span>(., <span class="at">preserveTopology =</span> T)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform the locations data frame into a spatial object</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>location <span class="ot">=</span> <span class="fu">st_as_sf</span>(location, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"lon"</span>, <span class="st">"lat"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the map of schools in New York</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_style</span>(<span class="st">"classic"</span>); <span class="fu">tm_graticules</span>(<span class="at">labels.inside.frame =</span> T, <span class="at">labels.show =</span> F) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(BoroShp) <span class="sc">+</span> <span class="fu">tm_polygons</span>()  <span class="sc">+</span> <span class="fu">tm_shape</span>(location) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">size =</span> <span class="fl">0.025</span>, <span class="at">col =</span> <span class="st">"SchoolType"</span>, <span class="at">palette =</span> <span class="st">"Dark2"</span>, <span class="at">title =</span> <span class="st">"Type of School"</span>) <span class="sc">+</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"rose"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>), <span class="at">text.size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-SchoolsMap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-SchoolsMap-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Schools over New York City</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplify the shapefile</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plot  <span class="ot">=</span> <span class="fu">left_join</span>(NtaShp, econ <span class="sc">|&gt;</span>  <span class="fu">mutate</span>(<span class="at">MedianIncome =</span> MedianIncome<span class="sc">/</span><span class="dv">1000</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the map of schools in New York</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_style</span>(<span class="st">"classic"</span>); <span class="fu">tm_graticules</span>(<span class="at">labels.inside.frame =</span> T, <span class="at">labels.show =</span> F) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(plot) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"MedianIncome"</span>, <span class="at">style =</span> <span class="st">"quantile"</span>, <span class="at">n =</span> <span class="dv">10</span>, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"Median Income (Ths.)"</span>,  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdBu"</span>, <span class="at">colorNA =</span> <span class="st">"black"</span>, <span class="at">textNA =</span> <span class="st">"No Data"</span>)  <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"rose"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>), <span class="at">text.size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-IncomeMap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-IncomeMap-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Average Income across NYC neighborhoods</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplify the shapefile</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plot  <span class="ot">=</span> <span class="fu">left_join</span>(NtaShp, dem)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the map of schools in New York</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_style</span>(<span class="st">"classic"</span>); <span class="fu">tm_graticules</span>(<span class="at">labels.inside.frame =</span> T, <span class="at">labels.show =</span> F) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(plot) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"ShareWhite"</span>, <span class="at">style =</span> <span class="st">"quantile"</span>, <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="fu">str_wrap</span>(<span class="st">"Share of Persons Identifying as White"</span>, <span class="at">width =</span> <span class="dv">25</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdBu"</span>, <span class="at">colorNA =</span> <span class="st">"black"</span>, <span class="at">textNA =</span> <span class="st">"No Data"</span>)  <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"rose"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>), <span class="at">text.size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-WhiteShare" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-WhiteShare-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Share of white persons per neighborhood</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplify the shapefile</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plot  <span class="ot">=</span> <span class="fu">left_join</span>(NtaShp, asthma)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the map of schools in New York</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_style</span>(<span class="st">"classic"</span>); <span class="fu">tm_graticules</span>(<span class="at">labels.inside.frame =</span> T, <span class="at">labels.show =</span> F) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(plot) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"HospChildrenRate"</span>, <span class="at">style =</span> <span class="st">"quantile"</span>, <span class="at">n =</span> <span class="dv">10</span>,  </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="fu">str_wrap</span>(<span class="st">"Children Hospitalization Rate (Cases per 10,000 Kids)"</span>, <span class="at">width =</span> <span class="dv">30</span>),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdBu"</span>, <span class="at">colorNA =</span> <span class="st">"black"</span>, <span class="at">textNA =</span> <span class="st">"No Data"</span>)  <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"rose"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>), <span class="at">text.size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-AsthmaMap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AsthmaMap-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Children hospitalization rate per neighborhood</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><a href="#tbl-DescAbsent">Table&nbsp;1</a> contains descriptive statistics on absent, released, and enrolled students. There are 3,339,158 observations across 1,854 schools. On average, there are 56 daily absences per school in the city of New York. This is equivalent to around 9.04% of enrolled students. The absences have a median of 39 and a standard deviation of 75. Concerning released students, 2 (0.40%) students are released from school on an average day. Additionally, and in line with an over-dispersed Poisson distribution, releases have a median of 0 and a standard deviation of 27 pupils per day.</p>
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the data set</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sumtable</span>(<span class="fu">select</span>(<span class="fu">ungroup</span>(absent), absent, released, enrolled), </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">fixed.digits =</span> T, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">summ =</span> <span class="fu">c</span>(<span class="st">"mean(x)"</span>, <span class="st">"median(x)"</span>, <span class="st">"sd(x)"</span>, <span class="st">"min(x)"</span>, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"max(x)"</span>, <span class="st">"notNA(x)"</span>,<span class="st">"countNA(x)"</span>), </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">summ.names =</span> <span class="fu">c</span>(<span class="st">"Mean"</span>, <span class="st">"Median"</span>, <span class="st">"SD"</span>, <span class="st">"Min"</span>, <span class="st">"Max"</span>, <span class="st">"N"</span>, <span class="st">"NAs"</span>), </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Absent Students"</span>, <span class="st">"Released Students"</span>, <span class="st">"Enrolled Students"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-DescAbsent" class="anchored">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Table&nbsp;1:  Descriptive Statistics on School Absences </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:left;"> Mean </th>
+   <th style="text-align:left;"> Median </th>
+   <th style="text-align:left;"> SD </th>
+   <th style="text-align:left;"> Min </th>
+   <th style="text-align:left;"> Max </th>
+   <th style="text-align:left;"> N </th>
+   <th style="text-align:left;"> NAs </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Absent Students </td>
+   <td style="text-align:left;"> 56.34 </td>
+   <td style="text-align:left;"> 39 </td>
+   <td style="text-align:left;"> 74.74 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 3511 </td>
+   <td style="text-align:left;"> 3339158 </td>
+   <td style="text-align:left;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Released Students </td>
+   <td style="text-align:left;"> 2.46 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 27.29 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 3777 </td>
+   <td style="text-align:left;"> 3338834 </td>
+   <td style="text-align:left;"> 324 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Enrolled Students </td>
+   <td style="text-align:left;"> 622.96 </td>
+   <td style="text-align:left;"> 497 </td>
+   <td style="text-align:left;"> 511.04 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 5850 </td>
+   <td style="text-align:left;"> 3339158 </td>
+   <td style="text-align:left;"> 0 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><a href="#fig-SchoolCount">Figure&nbsp;5</a> shows the number of schools per year reporting absences. Between 2008 and 2018, the number of reporting schools moved from a minimum of 1,545 in 2008 to a maximum of 1,659 in 2016. There are 1,365 schools in the data set that reported absenteeism for all years between 2008 and 2018. Although I use the entire sample in the regression analysis, I provide evidence that our results are robust to only focusing on the set of schools that never drop the panel.</p>
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of schools reporting absences per year</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>absent <span class="sc">|&gt;</span>  <span class="fu">filter</span>(DayType <span class="sc">==</span> <span class="st">"NormalDay"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">Schools =</span> <span class="fu">length</span>(<span class="fu">unique</span>(id))) <span class="sc">|&gt;</span>  </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2007</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as_factor</span>(year)) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y=</span> Schools, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">size =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y=</span> Schools), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">"Year"</span>) <span class="sc">+</span>   <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-SchoolCount" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-SchoolCount-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Number of reporting schools</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-SchoolLevelDensity">Figure&nbsp;6</a> portrays the density function of school absences. As expected, the distribution of absences resembles a gamma probability density function with most of the density between zero and one hundred units.</p>
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Create the plot</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> absent <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="sc">|&gt;</span>  <span class="fu">filter</span>(DayType <span class="sc">==</span> <span class="st">"NormalDay"</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(absent <span class="sc">&lt;</span> <span class="fu">quantile</span>(absent, <span class="fl">0.99</span>, <span class="at">na.rm =</span> T)) <span class="sc">|&gt;</span> <span class="fu">group_by</span>(date) <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">absent =</span> <span class="fu">mean</span>(absent, <span class="at">na.rm =</span> T))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the ggplot</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_halfeye</span>(<span class="fu">aes</span>(<span class="at">x =</span> absent), <span class="at">height =</span> .<span class="dv">6</span>,  <span class="at">justification =</span> <span class="sc">-</span>.<span class="dv">3</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">.width =</span> <span class="dv">0</span>, <span class="at">point_colour =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="st">"#141f52"</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> absent, <span class="at">y =</span> <span class="dv">0</span>), <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> .<span class="dv">2</span>, <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">height =</span> <span class="fl">0.1</span>), <span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> absent), <span class="at">width =</span> .<span class="dv">25</span>, </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill =</span> <span class="st">"transparent"</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">"Absent Students"</span>) <span class="sc">+</span> <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-SchoolLevelDensity" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-SchoolLevelDensity-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6: Density distribution of School Absences</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-TimeSeriesAbsences">Figure&nbsp;7</a> plots the time series of school absences. Each bar represents a day between 2006 and 2018. The breaks in the time series refer to the summer and winter breaks. Overall, it is reassuring to see no extreme changes in average school absences across our sample period. Note that drastic jumps in the number of absent students often coincide with weather events. For instance, the significant increase in 2014 refers to the 2014 nor’easter and in 2012 to intense snowfall.</p>
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data for the plot</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> absent <span class="sc">|&gt;</span>  <span class="fu">filter</span>(DayType <span class="sc">==</span> <span class="st">"NormalDay"</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(absent <span class="sc">&lt;</span> <span class="fu">quantile</span>(absent, <span class="fl">0.99</span>, <span class="at">na.rm =</span> T)) <span class="sc">|&gt;</span> <span class="fu">group_by</span>(date, year) <span class="sc">|&gt;</span>  <span class="fu">summarise</span>(<span class="at">absent =</span> <span class="fu">mean</span>(absent)) <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RollMean =</span> <span class="fu">rollmean</span>(absent, <span class="at">k =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="cn">NA</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot it</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> absent, <span class="at">fill =</span> <span class="fu">as_factor</span>(year)), <span class="at">size =</span> <span class="fl">0.05</span>, <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mean Absences"</span>, <span class="at">x =</span> <span class="st">"Date"</span>) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span> <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-TimeSeriesAbsences" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-TimeSeriesAbsences-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7: Time Series of Daily School Absences</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In <a href="#fig-MonthlyTS">Figure&nbsp;8</a>, we portray the average value of school absences across months of the year. The first thing to notice is a significant increase in absences for the month before the summer holidays. Additionally, absences appear to be higher during the winter months of December to February because of weather conditions and seasonal influenza. Regarding variation within weeks (<strong>?@fig-WeeklyTS</strong>). There are more increased absences on Fridays and Mondays and lower throughout the rest of the week.</p>
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Monthly Variation</span><span class="st">`</span> <span class="ot">=</span> absent <span class="sc">|&gt;</span>  dplyr<span class="sc">::</span><span class="fu">filter</span>(DayType <span class="sc">==</span> <span class="st">"NormalDay"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">filter</span>(absent <span class="sc">&lt;</span> <span class="fu">quantile</span>(absent, <span class="fl">0.99</span>, <span class="at">na.rm =</span> T)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(date, <span class="at">label =</span> T)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">group_by</span>(<span class="at">ts =</span> month) <span class="sc">|&gt;</span>  <span class="fu">summarise</span>(<span class="at">absent =</span> <span class="fu">mean</span>(absent, <span class="at">na.rm =</span> T)) ,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Weekday Variation</span><span class="st">`</span> <span class="ot">=</span> absent <span class="sc">|&gt;</span>  dplyr<span class="sc">::</span><span class="fu">filter</span>(DayType <span class="sc">==</span> <span class="st">"NormalDay"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">filter</span>(absent <span class="sc">&lt;</span> <span class="fu">quantile</span>(absent, <span class="fl">0.99</span>, <span class="at">na.rm =</span> T)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">weekday =</span> <span class="fu">substr</span>(weekday, <span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">group_by</span>(<span class="at">ts =</span> weekday) <span class="sc">|&gt;</span>  <span class="fu">summarise</span>(<span class="at">absent =</span> <span class="fu">mean</span>(absent, <span class="at">na.rm =</span> T))) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbindlist</span>(., <span class="at">idcol =</span> <span class="st">"window"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the time series</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> absent, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#141f52"</span>) <span class="sc">+</span> </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> absent, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Mean Absences"</span>, <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span> <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>window, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-MonthlyTS" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-MonthlyTS-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8: Monthly Variation in School Absences</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Throughout the study, we aggregate the school-level data into neighborhood averages for three main reasons. First, aggregating data reduces the noise from school-specific miss-recordings and human error. Second, it is easier to match socio-demographic data from the American Community Survey. And third, it decreases the computational burden of our empirical strategy.</p>
+<p><a href="#tbl-DescAbsentNta">Table&nbsp;2</a> contains descriptive statistics on school absences at the neighborhood level. The NTA data contains 379,120 observations across 0 neighbourhoods. On average, there are 491 absences per day, equivalent to around 8.90% of enrolled students. The absences have a median of 354 and a standard deviation of 573. Concerning released students, 9 (0.16%) students are released from school on an average day.</p>
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the data set</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">left_join</span>(absent <span class="sc">|&gt;</span> <span class="fu">filter</span>(DayType <span class="sc">==</span> <span class="st">"NormalDay"</span>), location) <span class="sc">|&gt;</span>  <span class="fu">group_by</span>(nta, date) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(enrolled, absent, released), sum, <span class="at">na.rm =</span> T)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sumtable</span>(<span class="fu">select</span>(<span class="fu">ungroup</span>(tab) ,absent, released, enrolled), </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">fixed.digits =</span> T, </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">summ =</span> <span class="fu">c</span>(<span class="st">"mean(x)"</span>, <span class="st">"median(x)"</span>, <span class="st">"sd(x)"</span>, <span class="st">"min(x)"</span>, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"max(x)"</span>, <span class="st">"notNA(x)"</span>,<span class="st">"countNA(x)"</span>), </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">summ.names =</span> <span class="fu">c</span>(<span class="st">"Mean"</span>, <span class="st">"Median"</span>, <span class="st">"SD"</span>, <span class="st">"Min"</span>, <span class="st">"Max"</span>, <span class="st">"N"</span>, <span class="st">"NAs"</span>), </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Absent Students"</span>, <span class="st">"Released Students"</span>, <span class="st">"Enrolled Students"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-DescAbsentNta" class="anchored">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Table&nbsp;2:  Descriptive Statistics on School Absences at the neighborhood level </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:left;"> Mean </th>
+   <th style="text-align:left;"> Median </th>
+   <th style="text-align:left;"> SD </th>
+   <th style="text-align:left;"> Min </th>
+   <th style="text-align:left;"> Max </th>
+   <th style="text-align:left;"> N </th>
+   <th style="text-align:left;"> NAs </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Absent Students </td>
+   <td style="text-align:left;"> 491.29 </td>
+   <td style="text-align:left;"> 354 </td>
+   <td style="text-align:left;"> 572.72 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 22819 </td>
+   <td style="text-align:left;"> 379120 </td>
+   <td style="text-align:left;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Released Students </td>
+   <td style="text-align:left;"> 8.84 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 75.01 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 3801 </td>
+   <td style="text-align:left;"> 379120 </td>
+   <td style="text-align:left;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Enrolled Students </td>
+   <td style="text-align:left;"> 5521.89 </td>
+   <td style="text-align:left;"> 4746 </td>
+   <td style="text-align:left;"> 3697.11 </td>
+   <td style="text-align:left;"> 229 </td>
+   <td style="text-align:left;"> 67963 </td>
+   <td style="text-align:left;"> 379120 </td>
+   <td style="text-align:left;"> 0 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The next set of figures contains different descriptive statistics of school absences at the neighborhood level. First, <a href="#fig-NtaDensity">Figure&nbsp;9</a> has the density function of the log of absent daily students per neighborhood. Next, the map in <a href="#fig-EnrollmentMap">Figure&nbsp;10</a> includes the average number of students enrolled per NTA. <a href="#fig-AbsencesMap">Figure&nbsp;11</a> refers to the average share of annual absences, i.e., absences/enrollment.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Density</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">School Enrollment</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Share of Absences.</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>AbsentNta <span class="ot">=</span> <span class="fu">left_join</span>(absent <span class="sc">|&gt;</span>  </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">filter</span>(DayType <span class="sc">==</span> <span class="st">"NormalDay"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">filter</span>(absent <span class="sc">&lt;</span> <span class="fu">quantile</span>(absent, <span class="fl">0.99</span>, <span class="at">na.rm =</span> T)), location) <span class="sc">|&gt;</span>  </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(nta, ntacode,date) <span class="sc">|&gt;</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(enrolled, absent, released), sum, <span class="at">na.rm =</span> T) <span class="sc">|&gt;</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(absent <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the time series</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(AbsentNta) <span class="sc">+</span> </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_halfeye</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(absent)), <span class="at">height =</span> .<span class="dv">6</span>,  <span class="at">justification =</span> <span class="sc">-</span>.<span class="dv">3</span>, <span class="at">.width =</span> <span class="dv">0</span>, </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">point_colour =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="st">"#141f52"</span>) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(absent), <span class="at">y =</span> <span class="dv">0</span>), <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> .<span class="dv">2</span>, </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">height =</span> <span class="fl">0.1</span>), <span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span> </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(absent)), <span class="at">width =</span> .<span class="dv">25</span>, <span class="at">fill =</span> <span class="st">"transparent"</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">"Log of Absent Students"</span>)  <span class="sc">+</span> <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-NtaDensity" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-NtaDensity-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;9: Density plot of school absences at the NTA level</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot </span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>map <span class="ot">=</span> AbsentNta <span class="sc">|&gt;</span> <span class="fu">group_by</span>(ntacode) <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Avg. Enrolled Students</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(enrolled, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(NtaShp, .)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the map series</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_style</span>(<span class="st">"classic"</span>); <span class="fu">tm_graticules</span>(<span class="at">labels.inside.frame =</span> T, <span class="at">labels.show =</span> F) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(map) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"Avg. Enrolled Students"</span>, <span class="at">style =</span> <span class="st">"quantile"</span>, <span class="at">n =</span> <span class="dv">10</span>,  </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdBu"</span>, <span class="at">colorNA =</span> <span class="st">"white"</span>, <span class="at">textNA =</span> <span class="st">"No Data"</span>)  <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"rose"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>), <span class="at">text.size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-EnrollmentMap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-EnrollmentMap-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;10: School enrollment per NTA</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>map <span class="ot">=</span> AbsentNta <span class="sc">|&gt;</span> <span class="fu">group_by</span>(ntacode) <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Share of Absences</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(absent, <span class="at">na.rm =</span> T)<span class="sc">/</span><span class="fu">mean</span>(enrolled, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(NtaShp, .) <span class="sc">|&gt;</span>  </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Share of Absences</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Share of Absences</span><span class="st">`</span><span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the map series</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_style</span>(<span class="st">"classic"</span>); <span class="fu">tm_graticules</span>(<span class="at">labels.inside.frame =</span> T, <span class="at">labels.show =</span> F) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(map) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"Share of Absences"</span>, <span class="at">style =</span> <span class="st">"quantile"</span>, <span class="at">n =</span> <span class="dv">10</span>,  </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdBu"</span>, <span class="at">colorNA =</span> <span class="st">"white"</span>, <span class="at">textNA =</span> <span class="st">"No Data"</span>)  <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">lwd =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"rose"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>), <span class="at">text.size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-AbsencesMap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AbsencesMap-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;11: Share of absenteeism per NTA</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="fa-smog-air-quality-index" class="level1">
+<h1><i class="fa-solid fa-smog" aria-label="smog"></i> Air Quality Index</h1>
+<div class="cell">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>aqif <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"02_GenData/02_aqi/AqiForecast.rds"</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>aqi <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"02_GenData/02_aqi/RealAqi.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><a href="#tbl-DescAqi">Table&nbsp;3</a> contains descriptive statistics on the AQI and its forecast. The average and maximum forecast is slightly smaller (50.39) than the AQI (54.36). The average AQI is 54.36, slightly above the EPA threshold between good and moderate air quality.</p>
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data set for the summary table</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">left_join</span>(<span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>, date <span class="sc">&gt;</span> <span class="st">"2008-12-31"</span>), aqi)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary table</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sumtable</span>(<span class="fu">select</span>(<span class="fu">ungroup</span>(tab) ,aqi, RealAqi), </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">fixed.digits =</span> T, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">summ =</span> <span class="fu">c</span>(<span class="st">"mean(x)"</span>, <span class="st">"median(x)"</span>, <span class="st">"sd(x)"</span>, <span class="st">"min(x)"</span>, </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"max(x)"</span>, <span class="st">"notNA(x)"</span>,<span class="st">"countNA(x)"</span>), </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">summ.names =</span> <span class="fu">c</span>(<span class="st">"Mean"</span>, <span class="st">"Median"</span>, <span class="st">"SD"</span>, <span class="st">"Min"</span>, <span class="st">"Max"</span>, <span class="st">"N"</span>, <span class="st">"NAs"</span>), </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"AQI Forecast"</span>, <span class="st">"AQI Real"</span>), <span class="at">out =</span> <span class="st">"kable"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">1</span>), <span class="at">italic =</span> T, <span class="at">color =</span> <span class="st">"DarkBlue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-DescAqi" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<caption>Table&nbsp;3:  Descriptive Statistics on the air quality index </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:left;"> Mean </th>
+   <th style="text-align:left;"> Median </th>
+   <th style="text-align:left;"> SD </th>
+   <th style="text-align:left;"> Min </th>
+   <th style="text-align:left;"> Max </th>
+   <th style="text-align:left;"> N </th>
+   <th style="text-align:left;"> NAs </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> AQI Forecast </td>
+   <td style="text-align:left;"> 50.39 </td>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 18.78 </td>
+   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 151 </td>
+   <td style="text-align:left;"> 3565 </td>
+   <td style="text-align:left;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> AQI Real </td>
+   <td style="text-align:left;"> 54.36 </td>
+   <td style="text-align:left;"> 51 </td>
+   <td style="text-align:left;"> 21.21 </td>
+   <td style="text-align:left;"> 16 </td>
+   <td style="text-align:left;"> 208 </td>
+   <td style="text-align:left;"> 3565 </td>
+   <td style="text-align:left;"> 0 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><a href="#fig-AqiForecastTs">Figure&nbsp;12</a> shows the average daily value of the forecast. Although there is no clear evidence of a long-term trend, seasonality does appear quite relevant for the time series. Summer (and to a lesser degree winter) forecasts are consistently higher than for the other seasons. Furthermore, the probability of forecasts higher than 100 units is also higher during the summer. For instance, out of 131 alerts, one hundred and five occurred during the summer, fourteen in the spring, eight in Autumn, and only four in the winter.</p>
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### Construct the data for the plot </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> hydroTSM<span class="sc">::</span><span class="fu">time2season</span>(date, <span class="at">out.fmt =</span> <span class="st">"seasons"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> <span class="fu">str_to_title</span>(season)) </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">#### Plot the time series</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span>aqi, <span class="at">fill =</span> season), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">100</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Air Quality Index (Forecast)"</span>, <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Spring"</span> <span class="ot">=</span> <span class="st">"#F97A1F"</span>, <span class="st">"Summer"</span> <span class="ot">=</span> <span class="st">"#C91D42"</span>, </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Winter"</span> <span class="ot">=</span> <span class="st">"#475ED1"</span>, <span class="st">"Autumm"</span>  <span class="ot">=</span> <span class="st">"#B3B3B3"</span>)) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>))  <span class="sc">+</span> <span class="fu">grids</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-AqiForecastTs" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiForecastTs-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;12: Mean daily value of the AQI forecast between 2008 and 2018</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-AqiForecastMonthly">Figure&nbsp;13</a> contains the average monthly, daily, and yearly value of forecast. Predicted values are significantly higher during the summer months of June to August and the Winter Months of December to January. While higher summer values are in line with higher ozone formation during the hotter months of the year because of the interaction of solar radiation with ozone precursors, higher winter measures relate to the lower efficiency of internal combustion engines at cold temperatures and the use of fossil fuels for residential heating. Even though the AQI value seems higher between 2008 and 2011 and lower after that, it is not straightforward to notice any long-term trend. Regarding weekday variation, there are slightly higher average values at the start of the week (Monday to Wednesday) and lower from Thursday to Sunday.</p>
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">list</span>(<span class="at">Yearly =</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">substr</span>(<span class="fu">year</span>(date),<span class="dv">3</span>,<span class="dv">4</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">frame =</span> year) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">aqi =</span> <span class="fu">mean</span>(aqi, <span class="at">na.rm =</span> T)), </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monthly =</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(date, <span class="at">label =</span> T)) <span class="sc">|&gt;</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">frame =</span> month) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">aqi =</span> <span class="fu">mean</span>(aqi, <span class="at">na.rm =</span> T)), </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Weekly =</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weekday =</span> <span class="fu">weekdays</span>(date, <span class="at">abbreviate =</span> T)) <span class="sc">|&gt;</span> </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">frame =</span> weekday) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">aqi =</span> <span class="fu">mean</span>(aqi, <span class="at">na.rm =</span> T))) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbindlist</span>(., <span class="at">idcol =</span> <span class="st">"window"</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the deviation from the mean</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> plot <span class="sc">|&gt;</span>  <span class="fu">group_by</span>(window) <span class="sc">|&gt;</span> </span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">change =</span> ((aqi <span class="sc">-</span><span class="fu">mean</span>(aqi))<span class="sc">/</span><span class="fu">mean</span>(aqi))<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the time series </span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> </span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> aqi, <span class="at">x =</span> frame, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">fill =</span> <span class="st">"#141f52"</span>, <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span> </span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> aqi, <span class="at">x =</span> frame, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Air Quality Index"</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>window, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>()<span class="sc">%+replace%</span> </span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>), </span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)) <span class="sc">+</span> <span class="fu">grids</span>(<span class="st">"y"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-AqiForecastMonthly" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiForecastMonthly-1.png" class="img-fluid figure-img" width="864"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;13: Mean monthly value of the AQI forecast</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-AqiForecastDensity">Figure&nbsp;14</a> contains the density function of the AQI forecast. The forecasts appear normally distributed between zero and slightly before one hundred units. However, as we approach one hundred units, there is some clear bunching around the alert threshold, suggesting that the model used by the NYSDEC may work slightly differently when the forecast is in the neighborhood of the alert. In the empirical strategy, we exploit this bunching to identify the effects of the alert on school absences.</p>
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the time series </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aqif) <span class="sc">+</span>  </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_halfeye</span>(<span class="fu">aes</span>(<span class="at">x =</span> aqi), <span class="at">height =</span> .<span class="dv">6</span>,  </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">justification =</span> <span class="sc">-</span>.<span class="dv">3</span>,<span class="at">.width =</span> <span class="dv">0</span>, <span class="at">point_colour =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="st">"#141f52"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> aqi, <span class="at">y =</span> <span class="dv">0</span>), <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> .<span class="dv">2</span>, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">height =</span> <span class="fl">0.1</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> aqi), <span class="at">width =</span> .<span class="dv">15</span>, <span class="at">fill =</span> <span class="st">"transparent"</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.8</span>)) <span class="sc">+</span> <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>), </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">grids</span>(<span class="st">"y"</span>) <span class="sc">+</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"average AQI forecast"</span>, <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-AqiForecastDensity" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiForecastDensity-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;14: Distribution of the AQI forecast</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-AqiDifferenceTs">Figure&nbsp;15</a> contains the time series (left panel) and density distribution (right panel) of average mean daily differences between the predicted and actual AQI. With a maximum difference of 56 and a minimum of -92 AQI units there appear to be relevant differences between both time series. These differences aggregate to an average between both variables of -3.9 with a standard deviation of 15.17 units.</p>
+<div>
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### Data for plotting daily differences between the AQI and the forecast ####</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> hydroTSM<span class="sc">::</span><span class="fu">time2season</span>(date, <span class="at">out.fmt =</span> <span class="st">"seasons"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> <span class="fu">str_to_title</span>(season)) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., aqi) <span class="sc">|&gt;</span> </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> aqi<span class="sc">-</span>RealAqi)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="do">#### Time series of differences</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span>diff, <span class="at">fill =</span> season), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Differences between the AQI and its forecast"</span>, <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Spring"</span> <span class="ot">=</span> <span class="st">"#F97A1F"</span>, <span class="st">"Summer"</span> <span class="ot">=</span> <span class="st">"#C91D42"</span>, </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Winter"</span> <span class="ot">=</span> <span class="st">"#475ED1"</span>, <span class="st">"Autumn"</span>  <span class="ot">=</span> <span class="st">"#B3B3B3"</span>)) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> </span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>), </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">grids</span>(<span class="st">"y"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="do">#### Plot the density distribution of differences ####</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span>  </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_halfeye</span>(<span class="fu">aes</span>(<span class="at">x =</span> diff), <span class="at">height =</span> .<span class="dv">6</span>,<span class="at">justification =</span> <span class="sc">-</span>.<span class="dv">3</span>,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">.width =</span> <span class="dv">0</span>, <span class="at">point_colour =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="st">"#141F52"</span>) <span class="sc">+</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> diff, <span class="at">y =</span> <span class="dv">0</span>), <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> .<span class="dv">1</span>, </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">height =</span> <span class="fl">0.1</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> diff), <span class="at">width =</span> .<span class="dv">15</span>, <span class="at">fill =</span> <span class="st">"transparent"</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>   <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.8</span>)) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Difference between the AQI and its forecast"</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> </span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>), <span class="at">plot.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-AqiDifferenceTs" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-AqiDifferenceTs-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiDifferenceTs-1.png" class="img-fluid figure-img" data-ref-parent="fig-AqiDifferenceTs" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) Time Series</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-AqiDifferenceTs-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiDifferenceTs-2.png" class="img-fluid figure-img" data-ref-parent="fig-AqiDifferenceTs" width="672"></p>
+<p></p><figcaption class="figure-caption">(b) Density</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;15: Mean daily difference of the AQI and its forecast between 2008 and 2018</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p><a href="#fig-AqiDiffMonthly">Figure&nbsp;16</a> portrays the average yearly, monthly, and weekday value of the AQI measure and its forecasts. The ability of the NYSDEC to predict the AQI increased between 2008 and 2017. With a mean difference in 2008 of close to four units and for 2018 of less than 0.5. It is interesting to see that the difference is lower during the summer months of June to August and higher at the start of the year between January and April. Regarding weekday differences, although the value of the AQI is consistently higher than its forecast, I cannot distinguish any pattern in the difference betweeen both time series.</p>
+<div>
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### Yearly Differences ####</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., aqi) <span class="sc">|&gt;</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">frame =</span> year) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">AQI Forecast</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(aqi, <span class="at">na.rm =</span> T), <span class="st">`</span><span class="at">AQI Measure</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(RealAqi, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(., var, value, <span class="sc">-</span>frame)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">#### Plot it ####</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">x =</span> frame, <span class="at">group =</span> var, <span class="at">linetype =</span> var)) <span class="sc">+</span> </span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">x =</span> frame, <span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> var)) <span class="sc">+</span> </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#141F52"</span>, <span class="st">"#c91d42"</span>)) <span class="sc">+</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">pretty_breaks</span>()) <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_economist</span>()<span class="sc">%+replace%</span> </span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="do">#### Monthly time series ####</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(date, <span class="at">label =</span> T)) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., aqi) <span class="sc">|&gt;</span> </span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">frame =</span> month) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">AQI Forecast</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(aqi, <span class="at">na.rm =</span> T), <span class="st">`</span><span class="at">AQI Measure</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(RealAqi, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(., var, value, <span class="sc">-</span>frame)</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="do">#### Plot it ####</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">x =</span> frame, <span class="at">group =</span> var, <span class="at">linetype =</span> var)) <span class="sc">+</span> </span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">x =</span> frame, <span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> var)) <span class="sc">+</span> </span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#141F52"</span>, <span class="st">"#c91d42"</span>)) <span class="sc">+</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_economist</span>()<span class="sc">%+replace%</span> </span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>)</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="do">#### Weekday differences ####</span></span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weekday =</span> <span class="fu">weekdays</span>(date)) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., aqi) <span class="sc">|&gt;</span> </span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">frame =</span> weekday) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">AQI Forecast</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(aqi, <span class="at">na.rm =</span> T), <span class="st">`</span><span class="at">AQI Measure</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(RealAqi, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(., var, value, <span class="sc">-</span>frame) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">frame =</span> <span class="fu">as_factor</span>(frame)) <span class="sc">|&gt;</span> </span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">frame =</span> <span class="fu">fct_relevel</span>(frame, <span class="fu">c</span>(<span class="st">"Sunday"</span>, <span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, </span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, <span class="st">"Friday"</span>, </span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"Saturday"</span>)))</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a><span class="do">#### Plot it ####</span></span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">x =</span> frame, <span class="at">group =</span> var, <span class="at">linetype =</span> var)) <span class="sc">+</span> </span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">x =</span> frame, <span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> var)) <span class="sc">+</span></span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#141F52"</span>, <span class="st">"#c91d42"</span>)) <span class="sc">+</span></span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_economist</span>()<span class="sc">%+replace%</span> </span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grids</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-AqiDiffMonthly" class="cell fig-cap-location-top quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-AqiDiffMonthly-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiDiffMonthly-1.png" class="img-fluid figure-img" data-ref-parent="fig-AqiDiffMonthly" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) Monthly</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-AqiDiffMonthly-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiDiffMonthly-2.png" class="img-fluid figure-img" data-ref-parent="fig-AqiDiffMonthly" width="672"></p>
+<p></p><figcaption class="figure-caption">(b) Weekly</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-AqiDiffMonthly-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiDiffMonthly-3.png" class="img-fluid figure-img" data-ref-parent="fig-AqiDiffMonthly" width="672"></p>
+<p></p><figcaption class="figure-caption">(c) Yearly</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;16: Mean difference in the AQI and its forecast</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p><a href="#fig-AqiDensityRealForecast">Figure&nbsp;17</a> contains the density distributions of the real and forecasted AQIs. Two things stand out. First, the AQI forecast has more density around its median and a smaller tail; second, there is a clear difference in the bunching of the forecast around 100 units.</p>
+<div class="cell fig-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">filter</span>(aqif, date <span class="sc">&lt;</span> <span class="st">"2018-12-31"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weekday =</span> <span class="fu">weekdays</span>(date)) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., aqi) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, <span class="st">`</span><span class="at">AQI Forecast</span><span class="st">`</span> <span class="ot">=</span> aqi, <span class="st">`</span><span class="at">AQI Measure</span><span class="st">`</span> <span class="ot">=</span> RealAqi) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(., var, value, <span class="sc">-</span>date)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the time series </span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot) <span class="sc">+</span>  ggdist<span class="sc">::</span><span class="fu">stat_halfeye</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">fill =</span> var), <span class="at">height =</span> .<span class="dv">6</span>,  </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">justification =</span> <span class="sc">-</span>.<span class="dv">3</span>,<span class="at">.width =</span> <span class="dv">0</span>, <span class="at">point_colour =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">color =</span> var), <span class="at">width =</span> .<span class="dv">25</span>, <span class="at">fill =</span> <span class="st">"transparent"</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.8</span>))  <span class="sc">+</span> </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#141F52"</span>, <span class="st">"#c91d42"</span>)) <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#141F52"</span>, <span class="st">"#c91d42"</span>)) <span class="sc">+</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> </span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="fu">grids</span>(<span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-AqiDensityRealForecast" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_descriptives_files/figure-html/fig-AqiDensityRealForecast-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;17: Density functions of the real and forecasted AQI values</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

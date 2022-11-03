@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.237">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Luis Sarmiento, Nicole Waegner, and Aleksandar Zaklan">
+
+<title>Air Quality Alerts and School Absenteeism in New York City -  Results</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Air Quality Alerts and School Absenteeism in New York City</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./01_about.html" aria-current="page">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/gsaabogado"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/gsaabogado"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://luissarmiento.com/">
+ <span class="menu-text">Personal Site</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><iconify-icon inline="" icon="fluent-mdl2:poll-results"></iconify-icon> Results</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Sections</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_about.html" class="sidebar-item-text sidebar-link"><iconify-icon inline="" icon="carbon:table-of-contents"></iconify-icon> About</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_data.html" class="sidebar-item-text sidebar-link"><iconify-icon inline="" icon="bxs:data"></iconify-icon> Data Sets</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_descriptives.html" class="sidebar-item-text sidebar-link"><i class="fa-solid fa-ranking-star" aria-label="ranking-star"></i> Descriptives</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_methods.html" class="sidebar-item-text sidebar-link"><iconify-icon inline="" icon="simple-icons:thealgorithms"></iconify-icon> Methodology</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_regressions.html" class="sidebar-item-text sidebar-link active"><iconify-icon inline="" icon="fluent-mdl2:poll-results"></iconify-icon> Results</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#iconify-carbon-chart-line-data-ordinary-least-squares-ols" id="toc-iconify-carbon-chart-line-data-ordinary-least-squares-ols" class="nav-link active" data-scroll-target="#iconify-carbon-chart-line-data-ordinary-least-squares-ols"><iconify-icon inline="" icon="carbon:chart-line-data"></iconify-icon> Ordinary Least Squares (OLS)</a></li>
+  <li><a href="#iconify-game-icons-violin-instrumental-variables" id="toc-iconify-game-icons-violin-instrumental-variables" class="nav-link" data-scroll-target="#iconify-game-icons-violin-instrumental-variables"><iconify-icon inline="" icon="game-icons:violin"></iconify-icon> Instrumental Variables</a></li>
+  <li><a href="#iconify-game-icons-falling-rocks-regression-discontinuity" id="toc-iconify-game-icons-falling-rocks-regression-discontinuity" class="nav-link" data-scroll-target="#iconify-game-icons-falling-rocks-regression-discontinuity"><iconify-icon inline="" icon="game-icons:falling-rocks"></iconify-icon> Regression Discontinuity</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><iconify-icon inline="" icon="fluent-mdl2:poll-results"></iconify-icon> Results</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Luis Sarmiento, Nicole Waegner, and Aleksandar Zaklan </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="iconify-carbon-chart-line-data-ordinary-least-squares-ols" class="level1">
+<h1><iconify-icon inline="" icon="carbon:chart-line-data"></iconify-icon> Ordinary Least Squares (OLS)</h1>
+<p>First, I estimate the effect of AQAs on school absences with a simple ordinary least squares model of absences on neighborhood <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span> as a function of a treatment indicator equal to one if there is an alert. Equation <a href="#eq-ols">Equation&nbsp;1</a> shows the econometric specification of the OLS estimator.</p>
+<p><span id="eq-ols"><span class="math display">\[
+Absent_{it} = \beta Treat_{t} + f(Temp_t, Rain_t) + AQI_t  + \Omega_t + \lambda_i + \epsilon_{it}
+\tag{1}\]</span></span></p>
+<p>In it, <span class="math inline">\(Absent_{it}\)</span> is a panel-vector of absences at time <span class="math inline">\(t\)</span> across all neighborhoods in New York City. <span class="math inline">\(Treat_{t}\)</span> is an indicator variable equal to one if the New York State Department of Environmental Conservation emits an alert at <span class="math inline">\(t\)</span>. <span class="math inline">\(\beta\)</span> is the point estimate of interest capturing the relationship between the alert dummy and school absenteeism. I account for the biasing effects of weather covariates by explicitly controlling for temperature and precipitation. Mainly, I remain agnostic on the relationship between weather and school absences by specifying <span class="math inline">\(k-1\)</span> quintile indicator variables for temperature and rain. Next, I consider the effect of pollution exposure on school absences by accounting for the actual value of the air quality index at <span class="math inline">\(t\)</span> (<span class="math inline">\(AQI_t\)</span>). I incorporate seasonality into the empirical model through time-dependent fixed effects (<span class="math inline">\(\Omega_t\)</span>). Specifically, I include year, month, and weekday fixed effects alongside an indicator variable of day types controlling for exogenous weather or administrative shocks to school absences. Finally <span class="math inline">\(\lambda_i\)</span> are neighborhood fixed effects and <span class="math inline">\(epsilon_{it}\)</span> the error term clustered at the neighborhood-by-week level to account for the possibility of inter-temporal correlation within neighborhoods and school weeks.</p>
+<p><a href="#tbl-OlsLevels">Table&nbsp;1</a> contains the results of estimating the <a href="#eq-ols">Equation&nbsp;1</a> in levels across three different specifications. (1) controls for weather and air pollution at <span class="math inline">\(t\)</span> alongside neighborhood fixed effects and an indicator variable for day-types controlling for unobservable shocks to school absences like hurricanes or general examinations. (2) further includes weekday, month, and year fixed effects to account for seasonality. Finally, (3) is a more restrictive design capturing the effect of the alerts on school absences from within neighborhood-month variation in absenteeism by adding the interaction of neighborhood, year, and month fixed effects. Furthermore (3) also assumes different weekday patterns across neighborhood by including neighborhood-by-weekday fixed effects.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Main results</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Log results</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the results</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/MainOls.rds"</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Include the set of fixed effects and controls</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fe <span class="ot">=</span> <span class="fu">rbind</span>(<span class="st">`</span><span class="at">Air Quality index</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)), </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Weather Controls</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Neighborhood FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>), </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Type of Day FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Weekday FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Month FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Year FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Year-Month-Neighborhood FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">2</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">1</span>)), </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Weekday-Neighborhood FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">2</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(.) <span class="sc">%&gt;%</span> <span class="fu">setNames</span>(., <span class="fu">names</span>(tab))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the data with the control variables</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">rbind</span>(tab, fe)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regression table</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(tab, <span class="at">align =</span> <span class="st">"c"</span>, <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"Fitted-Statistics"</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">pack_rows</span>(<span class="st">"Controls"</span>, <span class="dv">6</span>, <span class="dv">14</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS estimator of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T) <span class="sc">%&gt;%</span> <span class="fu">scroll_box</span>(<span class="at">height =</span> <span class="st">"380px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-OlsLevels" class="anchored">
+
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:380px; "><table class=" lightable-classic table table-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table&nbsp;1:  Effect of the alert on school absences (OLS) </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">   </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> 1 </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> 2 </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> 3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Estimate </td>
+   <td style="text-align:center;"> 124.97 *** </td>
+   <td style="text-align:center;"> 82.40 *** </td>
+   <td style="text-align:center;"> 80.93 *** </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (9.58) </td>
+   <td style="text-align:center;"> (8.48) </td>
+   <td style="text-align:center;"> (7.42) </td>
+  </tr>
+  <tr grouplength="3"><td colspan="4" style="border-bottom: 0;"><strong>Fitted-Statistics</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> N.obs </td>
+   <td style="text-align:center;"> 355144 </td>
+   <td style="text-align:center;"> 355144 </td>
+   <td style="text-align:center;"> 355144 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> R2 </td>
+   <td style="text-align:center;"> 0.62 </td>
+   <td style="text-align:center;"> 0.67 </td>
+   <td style="text-align:center;"> 0.72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> BIC </td>
+   <td style="text-align:center;"> 4961 </td>
+   <td style="text-align:center;"> 4917 </td>
+   <td style="text-align:center;"> 5115 </td>
+  </tr>
+  <tr grouplength="9"><td colspan="4" style="border-bottom: 0;"><strong>Controls</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Air Quality index </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weather Controls </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Neighborhood FEs </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Type of Day FEs </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weekday FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Month FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Year FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Year-Month-Neighborhood FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weekday-Neighborhood FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS estimator of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1</td></tr></tfoot>
+</table></div>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the results</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/LogOls.rds"</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Include the set of fixed effects and controls</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>fe <span class="ot">=</span> <span class="fu">rbind</span>(<span class="st">`</span><span class="at">Weather Controls</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Neighborhood FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>), </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Type of Day FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Weekday FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Month FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Year FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">AQI</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">2</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(.) <span class="sc">%&gt;%</span> <span class="fu">setNames</span>(., <span class="fu">names</span>(tab))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the data with the control variables</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">rbind</span>(tab, fe)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regression table</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(tab, <span class="at">align =</span> <span class="st">"c"</span>, <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"Fitted-Statistics"</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">pack_rows</span>(<span class="st">"Controls"</span>, <span class="dv">6</span>, <span class="dv">12</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS (log) estimator of the log of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)  <span class="sc">%&gt;%</span> <span class="fu">scroll_box</span>(<span class="at">height =</span> <span class="st">"380px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-OlsLog" class="anchored">
+
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:380px; "><table class=" lightable-classic table table-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table&nbsp;2:  Effect of the alert on school absences (Log OLS) </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">   </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> 1 </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> 2 </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> 3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Estimate </td>
+   <td style="text-align:center;"> 17.6872 *** </td>
+   <td style="text-align:center;"> 12.6736 *** </td>
+   <td style="text-align:center;"> 12.6285 *** </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (1.1698) </td>
+   <td style="text-align:center;"> (0.9713) </td>
+   <td style="text-align:center;"> (0.8527) </td>
+  </tr>
+  <tr grouplength="3"><td colspan="4" style="border-bottom: 0;"><strong>Fitted-Statistics</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> N.obs </td>
+   <td style="text-align:center;"> 355144 </td>
+   <td style="text-align:center;"> 355144 </td>
+   <td style="text-align:center;"> 355144 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> R2 </td>
+   <td style="text-align:center;"> 0.8188 </td>
+   <td style="text-align:center;"> 0.8549 </td>
+   <td style="text-align:center;"> 0.8914 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> BIC </td>
+   <td style="text-align:center;"> 354 </td>
+   <td style="text-align:center;"> 275 </td>
+   <td style="text-align:center;"> 437 </td>
+  </tr>
+  <tr grouplength="7"><td colspan="4" style="border-bottom: 0;"><strong>Controls</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weather Controls </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Neighborhood FEs </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Type of Day FEs </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weekday FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Month FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Year FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> AQI </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS (log) estimator of the log of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1</td></tr></tfoot>
+</table></div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Across all specifications, the OLS results suggest that AQAs increase school absences by 112.9 in the most parsimonious model and 62.9 in the full model with high-dimensional fixed effects. According to the Bayes Information Criteria (BIC), the second column without high-dimensional fixed effects is the prefered specification, implying 64.9 additional missing students per NYC neighborhood on days with AQAs. In <a href="#tbl-OlsLog">Table&nbsp;2</a> I provide elasticities by estimating the OLS with the log of school absences as dependent variable. Results imply that the raise in school absences translates to percentage increase between 11.8% and 16.3%.</p>
+<p>Next, I perform different robustness exercises to check the stability of point estimates. In <a href="#fig-OlsWeatherRobust">Figure&nbsp;1</a>, I estimate the effect of changing the specification of weather controls across six different models. a) Is the preferred specification with quintile indicator variables of rain and temperature. b) excludes all weather controls from the estimation. c)Changes the quintile indicator variables to decile indicator variables. d) Only controls linearly for temperature and precipitation. e) adds to <em>d</em> a linear specification of relative humidity, wind speed, and atmospheric pressure. Finally, f) includes the quintile indicator variables of temperature and precipitation alongside linear controls for relative humidity, wind speed, and atmospheric pressure. It is reassuring to see that across specifications, the effect of the AQAs on school absences remains positive and significant. The estimates go from 5.68% to 13.83% in the fourth and third specifications. On the one hand, using decile indicators (3rd design) may decrease point estimates by significantly decreasing the available variance we need to identify the effect. On the other, controlling linearly for temperature and precipitation (4th design) may not account for nonlinearities in the weather-absences relationship.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Weather Robustness</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">AQI Robustness</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Cluster SEs Robustness</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="fig-OlsWeatherRobust" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/OlsRobustWeather.rds"</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the specification </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">notes =</span> <span class="fu">c</span>(<span class="st">"b) No Weather Controls"</span>, <span class="st">"a) Prefered Spec"</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"c) Decile indicators"</span>, <span class="st">"d) Linear Temp and Rain"</span>, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"e) Linear weather controls"</span>, </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"f) Preferd plus linear controls"</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the confidence intervals</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">up =</span> estimate <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.64</span>, </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">down =</span> estimate <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">ci =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(estimate,<span class="dv">2</span>), <span class="st">" ("</span>, <span class="fu">round</span>(up, <span class="dv">2</span>),<span class="st">"-"</span>, <span class="fu">round</span>(down, <span class="dv">2</span>), <span class="st">")"</span>))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the limits of the plot</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>max <span class="ot">=</span> <span class="fu">filter</span>(data, up <span class="sc">==</span> <span class="fu">max</span>(up))<span class="sc">$</span>up; min <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>maxy <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>spec)) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the estimates</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data) <span class="sc">+</span> </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>), </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xmax =</span> up, <span class="at">xmin =</span> down),  <span class="at">width =</span> <span class="fl">0.25</span>)  <span class="sc">+</span> </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>))) <span class="sc">+</span> </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">0</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">1</span>, .<span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"cm"</span>)) <span class="sc">+</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">2.75</span>, <span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>), <span class="at">label =</span> ci), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span>  </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="st">"Estimate (90% CI)"</span>, <span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">2.75</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>)  <span class="sc">+</span> </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">1.2</span>, <span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>), <span class="at">label =</span> <span class="fu">round</span>(r2,<span class="dv">2</span>)), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span>  </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="st">"R.Squared"</span>, <span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">1.2</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>)  <span class="sc">+</span> </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(min, max), <span class="at">clip =</span> <span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-OlsWeatherRobust" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05_regressions_files/figure-html/fig-OlsWeatherRobust-1.png" class="img-fluid figure-img" data-ref-parent="fig-OlsWeatherRobust" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) Weather Robustness</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Effect of the alert on school absences (Log Model)</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="fig-OlsAqiRobust" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/OlsRobustAqi.rds"</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the specification </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">notes =</span> <span class="fu">c</span>(<span class="st">"b) No Aqi"</span>, <span class="st">"a) Prefered Specification"</span>, </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"c) Quadratic AQI"</span>, <span class="st">"d) Quintile AQI"</span>, <span class="st">"e) Decile AQI"</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the confidence intervals</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">up =</span> estimate <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.64</span>, </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">down =</span> estimate <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">ci =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(estimate,<span class="dv">2</span>), <span class="st">" ("</span>, <span class="fu">round</span>(up, <span class="dv">2</span>),<span class="st">"-"</span>, <span class="fu">round</span>(down, <span class="dv">2</span>), <span class="st">")"</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the limits of the plot</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>max <span class="ot">=</span> <span class="fu">filter</span>(data, up <span class="sc">==</span> <span class="fu">max</span>(up))<span class="sc">$</span>up; min <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>maxy <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>spec)) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the estimates</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data) <span class="sc">+</span> </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>), </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xmax =</span> up, <span class="at">xmin =</span> down),  <span class="at">width =</span> <span class="fl">0.25</span>)  <span class="sc">+</span> </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>))) <span class="sc">+</span> </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">0</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">1</span>, .<span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"cm"</span>)) <span class="sc">+</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">2.75</span>, <span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>), <span class="at">label =</span> ci), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span>  </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="st">"Estimate (90% CI)"</span>, <span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">2.75</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>)  <span class="sc">+</span> </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">1.2</span>, <span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>), <span class="at">label =</span> <span class="fu">round</span>(r2,<span class="dv">2</span>)), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span>  </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="st">"R.Squared"</span>, <span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">1.2</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>)  <span class="sc">+</span> </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(min, max), <span class="at">clip =</span> <span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-OlsAqiRobust" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05_regressions_files/figure-html/fig-OlsAqiRobust-1.png" class="img-fluid figure-img" data-ref-parent="fig-OlsAqiRobust" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) AQI Robustness</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Effect of the alert on school absences (Log Model)</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<div id="fig-OlsAqiCluster" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/OlsRobustCluster.rds"</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the specification </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">notes =</span> <span class="fu">c</span>(<span class="st">"Prefered Spec"</span>, <span class="st">"Hood-Month-Year"</span>, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Hood-Year"</span>, <span class="st">"Hood"</span>))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the confidence intervals</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">up =</span> estimate <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.64</span>, </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">down =</span> estimate <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">ci =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(estimate,<span class="dv">2</span>), <span class="st">" ("</span>, <span class="fu">round</span>(up, <span class="dv">2</span>),<span class="st">"-"</span>, <span class="fu">round</span>(down, <span class="dv">2</span>), <span class="st">")"</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the limits of the plot</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>max <span class="ot">=</span> <span class="fu">filter</span>(data, up <span class="sc">==</span> <span class="fu">max</span>(up))<span class="sc">$</span>up; min <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>maxy <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>spec)) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the estimates</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data) <span class="sc">+</span> </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>), </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xmax =</span> up, <span class="at">xmin =</span> down),  <span class="at">width =</span> <span class="fl">0.25</span>)  <span class="sc">+</span> </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>))) <span class="sc">+</span> </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">0</span>), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>, .<span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"cm"</span>)) <span class="sc">+</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">2.75</span>, <span class="at">y =</span> <span class="fu">str_wrap</span>(notes, <span class="at">width =</span> <span class="dv">17</span>), <span class="at">label =</span> ci), </span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span> </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="st">"Estimate (90% CI)"</span>, <span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="fl">2.75</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>)  <span class="sc">+</span> </span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(min, max), <span class="at">clip =</span> <span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-OlsAqiCluster" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05_regressions_files/figure-html/fig-OlsAqiCluster-1.png" class="img-fluid figure-img" data-ref-parent="fig-OlsAqiCluster" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) AQI Robustness</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Effect of the alert on school absences (Different Clustering of SEs)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>In fig-OlsAqiRobust, I estimate the effect of changing how I control students’ exposure to air pollution. a) is the preferred model where I linearly control for the AQI. b) excludes the AQI from the preferred specification. c) includes a quadratic representation of the AQI. d) controls for exposure to air pollution with k-1 quintile indicator variables of the AQI. Finally, e) changes the quintile for decile indicator variables of exposure. Across all specifications, there are no significant changes in the effect of AQAs on school absences, reducing concerns regarding the biasing impact of actual pollution exposure on my point estimates. Finally <a href="#fig-OlsAqiCluster">Figure&nbsp;3</a> contains the confidence intervals of four different clustering specifications. Results show that the qualitative conclussions of the study are not sensitive to different clustering assumptions.</p>
+<p>A relevant policy question is if the effect of the AQAs is heterogeneous across sub-populations. For instance, are the alert’s effect on school absences different across city boroughs, races, or social classes? And if so, what are the likely mechanisms behind this heterogeneity? <a href="#fig-OlsBoro">Figure&nbsp;4</a> estimates the difference in the effect of AQAs concerning <em>The Bronx</em>. Results show that AQAs increase school absences by 8.2 additional kids in Manhattan regarding the Bronx. For Staten Island and Brooklyn, there is no evidence of statistical differences, while for Queens, it appears that the effect is slightly smaller.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Boro Spec</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Income Quintiles Spec</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Athma Hospitalizations Spec</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="fig-OlsBoro" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/BoroOls.rds"</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">est =</span> <span class="fu">ifelse</span>(boro <span class="sc">!=</span> <span class="st">"The Bronx"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>              estimate <span class="sc">+</span> <span class="fu">filter</span>(data, boro <span class="sc">==</span> <span class="st">"The Bronx"</span>)<span class="sc">$</span>estimate, estimate)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">boro =</span> <span class="fu">as.factor</span>(boro)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Num =</span> <span class="fu">as.numeric</span>(boro))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the confidence intervals</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">up =</span> est <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.64</span>, </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">down =</span> est <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">ci =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(estimate,<span class="dv">2</span>), <span class="st">" ("</span>, <span class="fu">round</span>(up, <span class="dv">2</span>),<span class="st">"-"</span>, <span class="fu">round</span>(down, <span class="dv">2</span>), <span class="st">")"</span>))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the limits of the plot</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>max <span class="ot">=</span> <span class="fu">filter</span>(data, up <span class="sc">==</span> <span class="fu">max</span>(up))<span class="sc">$</span>up; min <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>maxy <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>boro)) <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the estimates</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(data, boro <span class="sc">!=</span> <span class="st">"The Bronx"</span>)) <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(boro, est), <span class="at">x =</span> est)) <span class="sc">+</span> </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(boro, est), </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xmin =</span> est <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xmax =</span> est <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.645</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">width =</span> <span class="dv">0</span>, <span class="at">lwd =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">filter</span>(data, boro <span class="sc">==</span> <span class="st">"The Bronx"</span>)<span class="sc">$</span>estimate), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="dv">4</span>, <span class="at">y =</span> <span class="fu">str_wrap</span>(boro, <span class="at">width =</span> <span class="dv">17</span>), <span class="at">label =</span> ci), </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span><span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span>  </span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="st">"Estimate (90% CI)"</span>, <span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="dv">4</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>) <span class="sc">+</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">13</span>, <span class="at">y =</span> maxy, <span class="at">xend =</span> <span class="fl">14.5</span>, <span class="at">yend =</span> maxy),</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>                  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>))) <span class="sc">+</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>   <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="fu">str_wrap</span>(<span class="st">"Effect of AQAs on absences for the Bronx"</span>, <span class="dv">25</span>), <span class="at">x =</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>              <span class="fl">18.5</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>, .<span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"cm"</span>)) <span class="sc">+</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(min, max), <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-OlsBoro" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05_regressions_files/figure-html/fig-OlsBoro-1.png" class="img-fluid figure-img" data-ref-parent="fig-OlsBoro" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) AQI Robustness</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Effect of the alert on school absences across city boroughs(Log Model)</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="fig-OlsIncome" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/IncomeOls.rds"</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">est =</span> <span class="fu">ifelse</span>(quintile <span class="sc">!=</span> <span class="st">"1"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>              estimate <span class="sc">+</span> <span class="fu">filter</span>(data, quintile <span class="sc">==</span> <span class="st">"1"</span>)<span class="sc">$</span>estimate, estimate)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">quintile =</span> <span class="fu">as.factor</span>(quintile)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Num =</span> <span class="fu">as.numeric</span>(quintile))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the confidence intervals</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">up =</span> est <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.64</span>, </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">down =</span> est <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">ci =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(estimate,<span class="dv">2</span>), <span class="st">" ("</span>, <span class="fu">round</span>(up, <span class="dv">2</span>),<span class="st">"-"</span>, <span class="fu">round</span>(down, <span class="dv">2</span>), <span class="st">")"</span>))</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the limits of the plot</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>max <span class="ot">=</span> <span class="fu">filter</span>(data, up <span class="sc">==</span> <span class="fu">max</span>(up))<span class="sc">$</span>up; min <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>maxy <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>quintile)) <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the estimates</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(data, quintile <span class="sc">!=</span> <span class="st">"1"</span>)) <span class="sc">+</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> quintile, <span class="at">x =</span> est)) <span class="sc">+</span> </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">y =</span> quintile, </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xmin =</span> est <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xmax =</span> est <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.645</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">width =</span> <span class="dv">0</span>, <span class="at">lwd =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">filter</span>(data, quintile <span class="sc">==</span> <span class="st">"1"</span>)<span class="sc">$</span>estimate), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="dv">4</span>, <span class="at">y =</span> <span class="fu">str_wrap</span>(quintile, <span class="at">width =</span> <span class="dv">17</span>), <span class="at">label =</span> ci), </span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span><span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>)) <span class="sc">+</span>  </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="st">"Estimate (90% CI)"</span>, <span class="at">x =</span> max <span class="sc">+</span> max<span class="sc">/</span><span class="dv">4</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>) <span class="sc">+</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">13</span>, <span class="at">y =</span> maxy, <span class="at">xend =</span> <span class="fl">14.5</span>, <span class="at">yend =</span> maxy),</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>                  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>))) <span class="sc">+</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>   <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="fu">str_wrap</span>(<span class="st">"Effect of AQAs on absences for the lowest quintile"</span>, <span class="dv">25</span>), <span class="at">x =</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>              <span class="fl">18.5</span>, <span class="at">y =</span> maxy , <span class="at">hjust =</span> <span class="st">"0"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">%+replace%</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>, .<span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"cm"</span>)) <span class="sc">+</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(min, max), <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-OlsIncome" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05_regressions_files/figure-html/fig-OlsIncome-1.png" class="img-fluid figure-img" data-ref-parent="fig-OlsIncome" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) AQI Robustness</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Effect of the alert on school absences across income quintiles (Log Model)</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<div id="fig-OlsAsthma" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/AsthmaHospOls.rds"</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the confidence intervals</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">ci =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(estimate,<span class="dv">2</span>), <span class="st">" ("</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">round</span>(estimate <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, <span class="dv">2</span>),<span class="st">"-"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">round</span>(estimate <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, <span class="dv">2</span>), <span class="st">")"</span>))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the data for the plot</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">mutate</span>(data, <span class="at">est =</span> <span class="fu">ifelse</span>(quintile <span class="sc">!=</span> <span class="st">"1"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>              estimate <span class="sc">+</span> <span class="fu">filter</span>(data, quintile <span class="sc">==</span> <span class="st">"1"</span>)<span class="sc">$</span>estimate, estimate)) <span class="sc">|&gt;</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">quintile =</span> <span class="fu">as.factor</span>(quintile)) <span class="sc">|&gt;</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Num =</span> <span class="fu">as.numeric</span>(quintile))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the estimates</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(data, quintile <span class="sc">!=</span> <span class="st">"1"</span>)) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Num, <span class="at">x =</span> est)) <span class="sc">+</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Num<span class="fl">-0.1</span>, <span class="at">ymax =</span> Num <span class="sc">+</span> <span class="fl">0.1</span>, <span class="at">xmin =</span> est <span class="sc">-</span> std.error<span class="sc">*</span><span class="fl">1.645</span>, </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xmax =</span> est <span class="sc">+</span> std.error<span class="sc">*</span><span class="fl">1.645</span>), <span class="at">r =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">'npc'</span>), </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">filter</span>(data, quintile <span class="sc">==</span> <span class="st">"1"</span>)<span class="sc">$</span>estimate)) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">"% increase in absences"</span>) <span class="sc">+</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">filter</span>(data, quintile <span class="sc">==</span> <span class="st">"1"</span>)<span class="sc">$</span>estimate, </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="fl">4.5</span>, <span class="at">yend =</span> <span class="fl">4.5</span>, </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xend =</span> <span class="fu">filter</span>(data, quintile <span class="sc">==</span> <span class="st">"1"</span>)<span class="sc">$</span>estimate <span class="sc">+</span> <span class="fl">1.5</span>),</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)), <span class="at">col =</span> <span class="st">"brown"</span>) <span class="sc">+</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>   <span class="fu">annotate</span>(<span class="st">"text"</span>,  <span class="at">label =</span> <span class="fu">str_wrap</span>(<span class="st">"Effect of AQAs on </span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="st">                                      absences for the lowest </span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="st">                                      income quintile"</span>, <span class="dv">25</span>), </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="fu">filter</span>(data, quintile <span class="sc">==</span> <span class="st">"1"</span>)<span class="sc">$</span>estimate <span class="sc">+</span> <span class="dv">3</span>, </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="fl">4.5</span> , <span class="at">hjust =</span> <span class="st">"0"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-OlsAsthma" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05_regressions_files/figure-html/fig-OlsAsthma-1.png" class="img-fluid figure-img" data-ref-parent="fig-OlsAsthma" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) AQI Robustness</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6: Effect of the alert on school absences across quintiles of asthma hospitalizations (Log Model)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><a href="#fig-OlsIncome">Figure&nbsp;5</a> explores if this difference in point estimates between Manhattan, The Bronx, and Queens could relate to income. For this, I divide the sample by income quintile and estimate the effect of the AQAs concerning the lowest quintile. Coefficients imply a nonlinear relationship between the alert and income. Although the estimate is smaller for the third and fourth quintiles, at the fifth quintile, the relationship reverses, suggesting the AQAs increase absences significantly more for wealthy vis-a-vis less wealthy individuals.</p>
+</section>
+<section id="iconify-game-icons-violin-instrumental-variables" class="level1">
+<h1><iconify-icon inline="" icon="game-icons:violin"></iconify-icon> Instrumental Variables</h1>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Main results</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the results</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/02_iv/MainIv.rds"</span>))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Include the set of fixed effects and controls</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>fe <span class="ot">=</span> <span class="fu">rbind</span>(<span class="st">`</span><span class="at">Air Quality index</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)), </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Weather Controls</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>)),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Neighborhood FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>), </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Type of Day FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">3</span>),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Weekday FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Month FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Year FEs</span><span class="st">`</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">1</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">2</span>)), </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Year-Month-Neighborhood FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">2</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">1</span>)), </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Weekday-Neighborhood FEs</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">""</span>, <span class="dv">2</span>), <span class="fu">rep</span>(<span class="st">"Yes"</span>, <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(.) <span class="sc">%&gt;%</span> <span class="fu">setNames</span>(., <span class="fu">names</span>(tab))</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the data with the control variables</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">rbind</span>(tab, fe)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regression table</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(tab, <span class="at">align =</span> <span class="st">"c"</span>, <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"Fitted-Statistics"</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">pack_rows</span>(<span class="st">"Controls"</span>, <span class="dv">6</span>, <span class="dv">14</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS estimator of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T) <span class="sc">%&gt;%</span> <span class="fu">scroll_box</span>(<span class="at">height =</span> <span class="st">"380px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-MainIv" class="anchored">
+
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:380px; "><table class=" lightable-classic table table-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table&nbsp;3:  Effect of the alert on school absences (IV) </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">   </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> (1) </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> (2) </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> (3) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Estimate </td>
+   <td style="text-align:center;"> 0.21 *** </td>
+   <td style="text-align:center;"> 0.12 *** </td>
+   <td style="text-align:center;"> 0.13 *** </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.01) </td>
+   <td style="text-align:center;"> (0.01) </td>
+   <td style="text-align:center;"> (0.01) </td>
+  </tr>
+  <tr grouplength="3"><td colspan="4" style="border-bottom: 0;"><strong>Fitted-Statistics</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> N.obs </td>
+   <td style="text-align:center;"> 113932 </td>
+   <td style="text-align:center;"> 64810 </td>
+   <td style="text-align:center;"> 25427 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Bandwidth </td>
+   <td style="text-align:center;"> 0.80 </td>
+   <td style="text-align:center;"> 0.82 </td>
+   <td style="text-align:center;"> 0.83 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> B.C. Bandwidth </td>
+   <td style="text-align:center;"> 129266.89 </td>
+   <td style="text-align:center;"> 71085.35 </td>
+   <td style="text-align:center;"> 56480.48 </td>
+  </tr>
+  <tr grouplength="9"><td colspan="4" style="border-bottom: 0;"><strong>Controls</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Air Quality index </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weather Controls </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Neighborhood FEs </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Type of Day FEs </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weekday FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Month FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Year FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Year-Month-Neighborhood FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Weekday-Neighborhood FEs </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS estimator of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1</td></tr></tfoot>
+</table></div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="iconify-game-icons-falling-rocks-regression-discontinuity" class="level1">
+<h1><iconify-icon inline="" icon="game-icons:falling-rocks"></iconify-icon> Regression Discontinuity</h1>
+<p><a href="#eq-rd">Equation&nbsp;2</a> RD specifies the functional form of the preferred RD model.</p>
+<p><span id="eq-rd"><span class="math display">\[
+Absent_{nt}  =  \beta D_{t}(AQI_{t} \geq 101) + \tilde{\mu}^- f(AQI_t)+ \tilde{\mu}^+ f(AQI{_t}\times D_{nt}) +  W'_{nt} \Delta + \Omega_{t} + \epsilon_{t}
+\tag{2}\]</span></span></p>
+<p>In it, <span class="math inline">\(Absent_{nt}\)</span> is the log of absent students at neighborhood <span class="math inline">\(n\)</span> on day <span class="math inline">\(t\)</span>, <span class="math inline">\(AQI_{t}\)</span> is the AQI forecast at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(D_{t}\)</span> the treatment indicator equal to one when the AQI is higher than one hundred units. <span class="math inline">\(f(AQI_{t}\times D_{nt})\)</span> is a linear fit before (<span class="math inline">\(\tilde{\mu}_{-}\)</span>) and after (<span class="math inline">\(\tilde{\mu}_{+}\)</span>) the discontinuity; I use a linear fit because it performs better and has more accurate boundary properties than higher-order polynomials <span class="citation" data-cites="Gelman2019">@Gelman2019</span>. <span class="math inline">\(W'_{nt}\)</span> and <span class="math inline">\(\Omega_{t}\)</span> are matrices of weather controls and time fixed-effects. The estimate of interest, <span class="math inline">\(\beta\)</span>, captures the LATE of the alert on school absences around the emission threshold. The bandwidth around the discontinuity comes from the data-driven plug-in rules based on mean squared error expansions proposed by <span class="citation" data-cites="Calonico2015optimal">@Calonico2015optimal</span>.</p>
+<p><a href="#tbl-RdLog">Table&nbsp;4</a> includes the results of the regression discontinuity design (in logs) across four different specifications. (1) estimates the effect of AQAs on school absences free of any control variables. (2) adds to the raw specification year, month, day of the week, and school period fixed effects. (3) further includes linear controls of temperature, rain, relative humidity, wind speed, and atmospheric pressure. (4) adds linear controls for the measured value of the AQI at time <span class="math inline">\(t\)</span>. To simplify the interpretation of coefficients, I transform the value of <span class="math inline">\(\beta\)</span> to <span class="math inline">\([exp(\beta) -1]\)</span> and interpret it as the percentage increase in school absences because of the air quality health advisory.</p>
+<p>Results show an increase from between 7.72% and 17.08% in school absences because the air quality health advisory. The change in point estimates occurs because the inclusion of different covariates changes the optimal bandwidth of the RDD and thus the interpretation of point estimates. For instance, while the interpretation in the first column (raw RD) is the effect of the alerts within ten AQIs from the alert, the interpretation in the last column (full specification) is the effect of the alerts within sixteen AQIs from the alert conditional on seasonality, weather, and air pollution.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Log results</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div>
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the results</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/NtaBase.rds"</span>))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regression table</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(tab, <span class="at">align =</span> <span class="st">"c"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"Fitted-Statistics"</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"Effects of air quality health advisories on school absences in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., an coefficient of two is equivalent to a two percent increase in absences. Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Levels results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-RdLog" class="cell tbl-cap-location-top tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;4: Effect of the alert on school absences</p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-RdLog-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-RdLog" style="flex-basis: 100.0%;justify-content: center;">
+<div id="tbl-RdLog-1" data-ref-parent="tbl-RdLog" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>(a) RDD in Logs </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> (1) </th>
+   <th style="text-align:center;"> (2) </th>
+   <th style="text-align:center;"> (3) </th>
+   <th style="text-align:center;"> (4) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Estimate </td>
+   <td style="text-align:center;"> 9.29 ** </td>
+   <td style="text-align:center;"> 7.72 ** </td>
+   <td style="text-align:center;"> 14.37 *** </td>
+   <td style="text-align:center;"> 17.08 *** </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (4.60) </td>
+   <td style="text-align:center;"> (3.85) </td>
+   <td style="text-align:center;"> (3.50) </td>
+   <td style="text-align:center;"> (3.49) </td>
+  </tr>
+  <tr grouplength="3"><td colspan="5" style="border-bottom: 0;"><strong>Fitted-Statistics</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> N.obs </td>
+   <td style="text-align:center;"> 8416 </td>
+   <td style="text-align:center;"> 10492 </td>
+   <td style="text-align:center;"> 10868 </td>
+   <td style="text-align:center;"> 10868 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Bandwidth </td>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> 13 </td>
+   <td style="text-align:center;"> 16 </td>
+   <td style="text-align:center;"> 16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> B.C. Bandwidth </td>
+   <td style="text-align:center;"> 16 </td>
+   <td style="text-align:center;"> 20 </td>
+   <td style="text-align:center;"> 23 </td>
+   <td style="text-align:center;"> 23 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> Effects of air quality health advisories on school absences in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., an coefficient of two is equivalent to a two percent increase in absences. Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1</td></tr></tfoot>
+</table>
+
+</div>
+<p><strong>?(caption)</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div>
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the results</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path of the R-studio project</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"AQAs_SchoolAbsences_NYC"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(file, <span class="st">"/02_GenData/06_RegResults/01_rdd/NtaLevelsBase.rds"</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the regression table</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(tab, <span class="at">align =</span> <span class="st">"c"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"Fitted-Statistics"</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"Effects of air quality health advisories on school absences in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., an coefficient of two is equivalent to a two percent increase in absences. Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-RdLevels" class="cell tbl-cap-location-top tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;5: Effect of the alert on school absences (In levels)</p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-RdLevels-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-RdLevels" style="flex-basis: 100.0%;justify-content: center;">
+<div id="tbl-RdLevels-1" data-ref-parent="tbl-RdLevels" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>(a) RDD in Logs </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> (1) </th>
+   <th style="text-align:center;"> (2) </th>
+   <th style="text-align:center;"> (3) </th>
+   <th style="text-align:center;"> (4) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Estimate </td>
+   <td style="text-align:center;"> 55.45 *** </td>
+   <td style="text-align:center;"> 85.17 *** </td>
+   <td style="text-align:center;"> 88.95 *** </td>
+   <td style="text-align:center;"> 104.94 *** </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (18.74) </td>
+   <td style="text-align:center;"> (16.95) </td>
+   <td style="text-align:center;"> (15.55) </td>
+   <td style="text-align:center;"> (15.32) </td>
+  </tr>
+  <tr grouplength="3"><td colspan="5" style="border-bottom: 0;"><strong>Fitted-Statistics</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> N.obs </td>
+   <td style="text-align:center;"> 8416 </td>
+   <td style="text-align:center;"> 9550 </td>
+   <td style="text-align:center;"> 10868 </td>
+   <td style="text-align:center;"> 10868 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> Bandwidth </td>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> 14 </td>
+   <td style="text-align:center;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> B.C. Bandwidth </td>
+   <td style="text-align:center;"> 15 </td>
+   <td style="text-align:center;"> 18 </td>
+   <td style="text-align:center;"> 21 </td>
+   <td style="text-align:center;"> 21 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> Effects of air quality health advisories on school absences in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., an coefficient of two is equivalent to a two percent increase in absences. Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1</td></tr></tfoot>
+</table>
+
+</div>
+<p><strong>?(caption)</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
