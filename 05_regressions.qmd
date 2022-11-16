@@ -1,17 +1,18 @@
 ---
 title: " {{< iconify fluent-mdl2 poll-results >}} Results"
-author: "Luis Sarmiento, Nicole Waegner, and Aleksandar Zaklan"
+author: "Anna Abatayo, Luis Sarmiento, Soheil Shayegh"
 format: 
   html: 
     toc: true
     warning: false
     code-fold: true
     code-summary: "Show the Code"
+    fontsize: "16px"
 ---
 
 # {{< iconify carbon chart-line-data >}} Ordinary Least Squares (OLS)
 
-First, I estimate the effect of AQAs on school absences with a simple ordinary least squares model of absences on neighborhood $i$ at time $t$ as a function of a treatment indicator equal to one if there is an alert. Equation @eq-ols shows the econometric specification of the OLS estimator.
+We estimate the effect of AQAs on school absences with a simple ordinary least squares model of absences on neighborhood $i$ at time $t$ as a function of a treatment indicator equal to one if there is an alert.@eq-ols shows the econometric specification of the OLS estimator.
 
 
 $$
@@ -23,372 +24,508 @@ In it, $Absent_{it}$ is a panel-vector of absences at time $t$ across all neighb
 
 @tbl-OlsLevels contains the results of estimating the @eq-ols in levels across three different specifications. (1) controls for weather and air pollution at $t$ alongside neighborhood fixed effects and an indicator variable for day-types controlling for unobservable shocks to school absences like hurricanes or general examinations. (2) further includes weekday, month, and year fixed effects to account for seasonality. Finally, (3) is a more restrictive design capturing the effect of the alerts on school absences from within neighborhood-month variation in absenteeism by adding the interaction of neighborhood, year, and month fixed effects. Furthermore (3) also assumes different weekday patterns across neighborhood by including neighborhood-by-weekday fixed effects. 
 
-
-::: panel-tabset
-## Main results
 ```{r}
 #| label: tbl-OlsLevels
 #| tbl-cap: Effect of the alert on school absences (OLS)
 #| tbl-cap-location: top
+
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
+
 # Load the results
-tab = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/MainOls.rds"))
-# Include the set of fixed effects and controls
-fe = rbind(`Air Quality index` = c(rep("Yes", 3)), 
-           `Weather Controls` = c(rep("Yes", 3)),
-           `Neighborhood FEs` = rep("Yes", 3), 
-           `Type of Day FEs` = rep("Yes", 3),
-           `Weekday FEs` = c(rep("", 1), rep("Yes", 2)), 
-           `Month FEs`  = c(rep("", 1), rep("Yes", 2)), 
-           `Year FEs`  = c(rep("", 1), rep("Yes", 2)), 
-           `Year-Month-Neighborhood FEs` = c(rep("", 2), rep("Yes", 1)), 
-           `Weekday-Neighborhood FEs` = c(rep("", 2), rep("Yes", 1))) %>%
-  as.data.frame(.) %>% setNames(., names(tab))
-# Add the data with the control variables
-tab = rbind(tab, fe)
-# Create the regression table
-kbl(tab, align = "c", digits = 2) %>%
-  kable_classic() %>% kable_styling(bootstrap_option = c("hover")) %>%
-  pack_rows("Fitted-Statistics", 3, 5) %>% pack_rows("Controls", 6, 14) %>% 
-  footnote(general = "Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS estimator of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", general_title = "Notes:", footnote_as_chunk = T) %>% scroll_box(height = "380px")
+tab = list(`OLS` = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/MainOls.rds")),
+           `OLS (Log)` = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/LogOls.rds")))
+
+# bind the list elements 
+tab = reduce(tab,cbind)
+
+# Add the commas to numeric elements
+tab["N.obs",] = comma(as.numeric(tab["N.obs",]))
+tab["BIC",] = comma(as.numeric(tab["BIC",]))
+
+# Make the table
+kbl(tab, align = "lcccccc", digits = 2, booktabs = T) %>%
+  kable_classic_2(bootstrap_option = c("hover"), full_width = F) %>% 
+  pack_rows("Fitted-Statistics", 3, 5) %>%
+  add_header_above(c(" " = 1, "OLS" = 3, "OLS (Log)" = 3))
+
+
 ```
-## Log results
-```{r}
-#| label: tbl-OlsLog
-#| tbl-cap: Effect of the alert on school absences (Log OLS)
-#| tbl-cap-location: top
-# Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
-# Load the results
-tab = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/LogOls.rds"))
-# Include the set of fixed effects and controls
-fe = rbind(`Weather Controls` = c(rep("Yes", 3)),
-           `Neighborhood FEs` = rep("Yes", 3), 
-           `Type of Day FEs` = rep("Yes", 3),
-           `Weekday FEs` = c(rep("", 1), rep("Yes", 2)), 
-           `Month FEs`  = c(rep("", 1), rep("Yes", 2)), 
-           `Year FEs`  = c(rep("", 1), rep("Yes", 2)), 
-           `AQI` = c(rep("", 2), rep("Yes", 1))) %>%
-  as.data.frame(.) %>% setNames(., names(tab))
-# Add the data with the control variables
-tab = rbind(tab, fe)
-# Create the regression table
-kbl(tab, align = "c", digits = 2) %>%
-  kable_classic() %>% kable_styling(bootstrap_option = c("hover")) %>%
-  pack_rows("Fitted-Statistics", 3, 5) %>% pack_rows("Controls", 6, 12) %>% 
-  footnote(general = "Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS (log) estimator of the log of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", general_title = "Notes:", footnote_as_chunk = T)  %>% scroll_box(height = "380px")
-```
-:::
+<p style="font-size: 12px"> *Notes: Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS and Log-OLS estimator of daily school absences per neighborhood as a function of an indicator variable equal to one in days with air quality health advisories. We present results across three specifications. (1) controls for the realized air quality index at $t$, quintile indicator variables of temperature and precipitation, neighborhood fixed effects, and indicators of abnormal events. (2) adds weekday, month, and year fixed-effects to account for seasonality. (3) is a more restrictive design assuming neighborhood-specific seasonal trends with year-by-month-by-nta and weekday-by-nta fixed effects. Interpret the OLS estimates as the effect in absences because of the advisory and the Log-OLS coefficients as the percentage increase in absences ($\beta$ = (exp(\beta)-1)\times 100). Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1* </p>
 
-Across all specifications, the OLS results suggest that AQAs increase school absences by 112.9 in the most parsimonious model and 62.9 in the full model with high-dimensional fixed effects. According to the Bayes Information Criteria (BIC), the second column without high-dimensional fixed effects is the prefered specification, implying 64.9 additional missing students per NYC neighborhood on days with AQAs. In @tbl-OlsLog I provide elasticities by estimating the OLS with the log of school absences as dependent variable. Results imply that the raise in school absences translates to percentage increase between 11.8% and 16.3%.
 
-Next, I perform different robustness exercises to check the stability of point estimates. In @fig-OlsWeatherRobust, I estimate the effect of changing the specification of weather controls across six different models. a) Is the preferred specification with quintile indicator variables of rain and temperature. b) excludes all weather controls from the estimation. c)Changes the quintile indicator variables to decile indicator variables. d) Only controls linearly for temperature and precipitation. e) adds to *d* a linear specification of relative humidity, wind speed, and atmospheric pressure. Finally, f) includes the quintile indicator variables of temperature and precipitation alongside linear controls for relative humidity, wind speed, and atmospheric pressure. It is reassuring to see that across specifications, the effect of the AQAs on school absences remains positive and significant. The estimates go from 5.68% to 13.83% in the fourth and third specifications. On the one hand, using decile indicators (3rd design) may decrease point estimates by significantly decreasing the available variance we need to identify the effect. On the other, controlling linearly for temperature and precipitation (4th design) may not account for nonlinearities in the weather-absences relationship.  
+Across all specifications, the OLS results suggest that AQAs increase school absences by 112.9 in the most parsimonious model and 62.9 in the full model with high-dimensional fixed effects. According to the Bayes Information Criteria (BIC), the second column without high-dimensional fixed effects is the prefered specification. It implies 64.9 additional missing students per NYC neighborhood on days with AQAs. The OLS-Log model provides elasticities by estimating the effect on the log of school absences as dependent variable. Results imply that the raise in school absences translates to percentage increase between 9.41% and 19.57%.
 
-::: panel-tabset
-## Weather Robustness
+We perform different robustness exercises to check the stability of point estimates. @fig-OlsWeatherRobust shows the effect of changing the specification of weather controls across six different models. 2) Is the preferred specification with quintile indicator variables of rain and temperature. 1) excludes all weather controls from the estimation. 3)Changes the quintile indicator variables to decile indicator variables. 4) Only controls linearly for temperature and precipitation. 5) adds to *d* a linear specification of relative humidity, wind speed, and atmospheric pressure. And f) includes the quintile indicator variables of temperature and precipitation alongside linear controls for relative humidity, wind speed, and atmospheric pressure. 
+
 ```{r}
 #| label: fig-OlsWeatherRobust
 #| fig-cap: Effect of the alert on school absences (Log Model)
-#| fig-subcap: Weather Robustness
 #| fig-cap-location: top
-#| fig-align: center
-#| fig-format: png
+#| fig-width: 10
+#| fig-height: 4
+#| echo: false
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
+
 # Load the data
 data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/OlsRobustWeather.rds"))
+
 # Add the specification 
-data = mutate(data, notes = c("b) No Weather Controls", "a) Prefered Spec", 
-                              "c) Decile indicators", "d) Linear Temp and Rain", 
-                              "e) Linear weather controls", 
-                              "f) Preferd plus linear controls"))
+data = mutate(data, notes = c("No Weather Controls", 
+                              "Quintile Indicators of Tmp. and Rain", 
+                              "Decile indicators of Tmp. and Rain", 
+                              "Linear Temperature and Rain", 
+                              "Linear temp., rain, and additional controls", 
+                              "Quintile Indicators plust linear controls")) |>
+  mutate(data, notes = str_wrap(notes, 30))
+
 # Add the confidence intervals
-data = mutate(data, up = estimate + std.error*1.64, 
+data = mutate(data, up = estimate + std.error*1.645, 
               down = estimate - std.error*1.645, 
               ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+
 # Add the limits of the plot
 max = filter(data, up == max(up))$up; min = 0
 maxy = length(unique(data$spec)) + 1
+
+data = mutate(data, spec = as.character(spec))
+
 # Plot the estimates
 ggplot(data) + 
-  geom_errorbar(aes(y = str_wrap(notes, width = 17), 
-                    xmax = up, xmin = down),  width = 0.25)  + 
-  geom_point(aes(x = estimate, y = str_wrap(notes, width = 17))) + 
+  geom_errorbar(aes(y = spec, xmax = up, xmin = down),  width = 0.25, 
+                position = position_dodge(width = 1))  + 
+  geom_point(aes(x = estimate, y = spec),position = position_dodge(width = 1)) + 
   geom_vline(aes(xintercept = 0), color = "red") +
-  labs(x = "", y = "") + 
-  theme_economist() %+replace% theme(plot.margin = margin(1, 7, 1, .5, unit = "cm")) +
-  geom_text(aes(x = max + max/2.75, y = str_wrap(notes, width = 17), label = ci), position = position_dodge(width = 0.5)) +  
-  annotate("text", label = "Estimate (90% CI)", x = max + max/2.75, y = maxy , hjust = "0")  + 
-  geom_text(aes(x = max + max/1.2, y = str_wrap(notes, width = 17), label = round(r2,2)), position = position_dodge(width = 0.5)) +  
-  annotate("text", label = "R.Squared", x = max + max/1.2, y = maxy , hjust = "0")  + 
-  coord_cartesian(xlim = c(min, max), clip = "off")
+  
+  labs(x = "", y = "") + coord_cartesian(xlim = c(0, max), ylim = c(1, 6), clip = "off")  + 
+  
+  annotate("text", label = "Estimate (90% CI)", x = 19, y = maxy) +
+  annotate("text", label = data$ci, x = 19, y = data$spec, size = 3) +
+  
+  annotate("text", label = "Weather Specification" , x = -11, y = maxy) +
+  annotate("text", label = str_wrap(data$notes, 35) , x = -11, y = data$spec, size = 3) +
+  
+  annotate("text", label = "N.Obs" , x = -5, y = maxy) +
+  annotate("text", label = comma(data$n) , x = -5, y = data$spec, size = 3) +
+  
+  annotate("text", label = "R.Squared" , x = 24, y = maxy) +
+  annotate("text", label = comma(data$r2) , x = 24, y = data$spec, size = 3) +
+
+  
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 7, 1, 8, unit = "cm"), plot.background = element_blank()) +
+  grids("y")
+
 
 
 ```
-## AQI Robustness
+
+The effect of the AQAs on school absences remains positive and significant across specifications. The estimates go from 5.68% to 13.83% in the fourth and third specifications. On the one hand, using decile indicators (3rd design) may decrease point estimates by significantly reducing the available variance we need to identify the effect. On the other, controlling linearly for temperature and precipitation (4th design) may not account for nonlinearities in the weather-absences relationship. 
+
+
+@fig-OlsAqiRobust shows effect of controlling for students' exposure to the realized AQI in different ways. 1) excludes the AQI from the preferred specification. 2) controls linearly for the AQI and is our prefered specification. 3) includes a quadratic representation of the AQI. 4) controls for exposure with k-1 quintile indicator variables of the AQI. And 5) changes the quintile for decile indicator variables of exposure. Across all specifications, there are no significant changes in the effect of AQAs on school absences. 
+
+
 ```{r}
 #| label: fig-OlsAqiRobust
-#| fig-cap: Effect of the alert on school absences (Log Model)
-#| fig-subcap: AQI Robustness
+#| fig-cap: Effect of the alert on school absences (AQI Robustness)
 #| fig-cap-location: top
-#| fig-align: center
-#| fig-format: png
+#| fig-width: 10
+#| fig-height: 4
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
+
 # Load the data
 data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/OlsRobustAqi.rds"))
+
 # Add the specification 
-data = mutate(data, notes = c("b) No Aqi", "a) Prefered Specification", 
-                              "c) Quadratic AQI", "d) Quintile AQI", "e) Decile AQI"))
+data = mutate(data, notes = c("No Air quality index", "Linear AQI", 
+                              "Quadratic AQI", "Quintile AQI", "Decile AQI"))
 # Add the confidence intervals
 data = mutate(data, up = estimate + std.error*1.64, 
               down = estimate - std.error*1.645, 
               ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+
 # Add the limits of the plot
 max = filter(data, up == max(up))$up; min = 0
 maxy = length(unique(data$spec)) + 1
+
+data = mutate(data, spec = as.character(spec))
 # Plot the estimates
 ggplot(data) + 
-  geom_errorbar(aes(y = str_wrap(notes, width = 17), 
-                    xmax = up, xmin = down),  width = 0.25)  + 
-  geom_point(aes(x = estimate, y = str_wrap(notes, width = 17))) + 
+  geom_errorbar(aes(y = spec, xmax = up, xmin = down),width = 0.25)  + 
+  geom_point(aes(x = estimate, y = spec)) + 
   geom_vline(aes(xintercept = 0), color = "red") +
-  labs(x = "", y = "") + 
-  theme_economist() %+replace% theme(plot.margin = margin(1, 7, 1, .5, unit = "cm")) +
-  geom_text(aes(x = max + max/2.75, y = str_wrap(notes, width = 17), label = ci), position = position_dodge(width = 0.5)) +  
-  annotate("text", label = "Estimate (90% CI)", x = max + max/2.75, y = maxy , hjust = "0")  + 
-  geom_text(aes(x = max + max/1.2, y = str_wrap(notes, width = 17), label = round(r2,2)), position = position_dodge(width = 0.5)) +  
-  annotate("text", label = "R.Squared", x = max + max/1.2, y = maxy , hjust = "0")  + 
-  coord_cartesian(xlim = c(min, max), clip = "off")
+  
+  labs(x = "", y = "") + coord_cartesian(xlim = c(0, max), ylim = c(1, 5), clip = "off")  + 
+  
+  annotate("text", label = "Estimate (90% CI)", x = 19, y = maxy) +
+  annotate("text", label = data$ci, x = 19, y = data$spec, size = 3) +
+  
+  annotate("text", label = "FEs Specification" , x = -10, y = maxy) +
+  annotate("text", label = str_wrap(data$notes, 20) , x = -10, y = data$spec, size = 3) +
+  
+  annotate("text", label = "N.Obs" , x = -5, y = maxy) +
+  annotate("text", label = comma(data$n) , x = -5, y = data$spec, size = 3) +
+  
+  annotate("text", label = "R.Squared" , x = 23, y = maxy) +
+  annotate("text", label = round(data$r2, 2) , x = 23, y = data$spec, size = 3) +
+
+  
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 7, 1, 8, unit = "cm"), plot.background = element_blank()) +
+  grids("y")
 
 
 ```
-## Cluster SEs Robustness
+
+
+@fig-OlsAqiCluster contains the confidence intervals of four different clustering specifications. 1) is the preferred specification with standard errors clustered at the nta-by-week level, 2) clusters at the nta-by-month, 3) at the nta-by-yer, and 4) at the neighborhood levels. Results show that the qualitative conclusions of the study are not sensitive to different clustering assumptions.
+
 ```{r}
 #| label: fig-OlsAqiCluster
 #| fig-cap: Effect of the alert on school absences (Different Clustering of SEs)
-#| fig-subcap: AQI Robustness
 #| fig-cap-location: top
-#| fig-align: center
-#| fig-format: png
+#| fig-width: 10
+#| fig-height: 4
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
+
 # Load the data
 data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/OlsRobustCluster.rds"))
+
 # Add the specification 
-data = mutate(data, notes = c("Prefered Spec", "Hood-Month-Year", 
-                              "Hood-Year", "Hood"))
+data = mutate(data, notes = c("Prefered Specification", "Nta-by-Month-by-Year", 
+                              "Nta-by-Year", "Neighborhood"))
 # Add the confidence intervals
 data = mutate(data, up = estimate + std.error*1.64, 
               down = estimate - std.error*1.645, 
               ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+
 # Add the limits of the plot
 max = filter(data, up == max(up))$up; min = 0
 maxy = length(unique(data$spec)) + 1
+data = mutate(data, spec = as.character(spec))
+
 # Plot the estimates
 ggplot(data) + 
-  geom_errorbar(aes(y = str_wrap(notes, width = 17), 
-                    xmax = up, xmin = down),  width = 0.25)  + 
-  geom_point(aes(x = estimate, y = str_wrap(notes, width = 17))) + 
+  geom_errorbar(aes(y = spec, xmax = up, xmin = down),width = 0.25)  + 
+  geom_point(aes(x = estimate, y = spec)) + 
   geom_vline(aes(xintercept = 0), color = "red") +
-  labs(x = "", y = "") + 
-  theme_economist() %+replace% theme(plot.margin = margin(1, 5, 1, .5, unit = "cm")) +
   
-  geom_text(aes(x = max + max/2.75, y = str_wrap(notes, width = 17), label = ci), 
-            position = position_dodge(width = 0.5)) + 
+  labs(x = "", y = "") + coord_cartesian(xlim = c(0, max), ylim = c(1, 4), clip = "off")  + 
   
-  annotate("text", label = "Estimate (90% CI)", x = max + max/2.75, y = maxy , hjust = "0")  + 
-  coord_cartesian(xlim = c(min, max), clip = "off")
+  annotate("text", label = "Estimate (90% CI)", x = 13, y = maxy) +
+  annotate("text", label = data$ci, x = 13, y = data$spec, size = 3) +
+  
+  annotate("text", label = "SE Clustering" , x = -7, y = maxy) +
+  annotate("text", label = str_wrap(data$notes, 20) , x = -7, y = data$spec, size = 3) +
+  
+  annotate("text", label = "N.Obs" , x = -3, y = maxy) +
+  annotate("text", label = comma(data$n) , x = -3, y = data$spec, size = 3) +
+  
+  annotate("text", label = "R.Squared" , x = 17, y = maxy) +
+  annotate("text", label = round(data$r2, 2) , x = 17, y = data$spec, size = 3) +
+
+  
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 7, 1, 8, unit = "cm"), plot.background = element_blank()) +
+  grids("y")
 
 
 ```
-:::
 
-In fig-OlsAqiRobust, I estimate the effect of changing how I control students' exposure to air pollution. a) is the preferred model where I linearly control for the AQI. b) excludes the AQI from the preferred specification. c) includes a quadratic representation of the AQI. d) controls for exposure to air pollution with k-1 quintile indicator variables of the AQI. Finally, e) changes the quintile for decile indicator variables of exposure. Across all specifications, there are no significant changes in the effect of AQAs on school absences, reducing concerns regarding the biasing impact of actual pollution exposure on my point estimates. Finally @fig-OlsAqiCluster contains the confidence intervals of four different clustering specifications. Results show that the qualitative conclussions of the study are not sensitive to different clustering assumptions.
-  
-A relevant policy question is if the effect of the AQAs is heterogeneous across sub-populations. For instance, are the alert's effect on school absences different across city boroughs, races, or social classes? And if so, what are the likely mechanisms behind this heterogeneity? @fig-OlsBoro estimates the difference in the effect of AQAs concerning *The Bronx*. Results show that AQAs increase school absences by 8.2 additional kids in Manhattan regarding the Bronx. For Staten Island and Brooklyn, there is no evidence of statistical differences, while for Queens, it appears that the effect is slightly smaller.
 
-::: panel-tabset
-## Boro Spec
+A relevant policy question is if the effect of the AQAs is heterogeneous across sub-populations. For instance, are the alert's effect on school absences different across city boroughs, races, or social classes? And if so, what are the likely mechanisms behind this heterogeneity? @fig-OlsBoro estimates the difference in the effect of AQAs concerning *The Bronx*. Results show that AQAs increase school absences by 6.3% fewer kids in Staten Island. The estimate decreases for Queens and Brookyn and becomes indeistingishable from zero for Manhattan.
+
 ```{r}
 #| label: fig-OlsBoro
 #| fig-cap: Effect of the alert on school absences across city boroughs(Log Model)
-#| fig-subcap: AQI Robustness
 #| fig-cap-location: top
-#| fig-align: center
-#| fig-format: png
+#| fig-width: 7
+#| fig-height: 3.5
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
+
 # Load the data
 data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/BoroOls.rds"))
-# Construct the data for the plot
-data = mutate(data, est = ifelse(boro != "The Bronx",
-              estimate + filter(data, boro == "The Bronx")$estimate, estimate)) |> 
-  mutate(boro = as.factor(boro)) |> 
-  mutate(Num = as.numeric(boro))
+
+# Compute the change w.r.t. The Bronx ####
+data = mutate(data, ref = filter(data, term == "treated")$estimate)
+
+data = filter(data, term != "treated")
+
 # Add the confidence intervals
-data = mutate(data, up = est + std.error*1.64, 
-              down = est - std.error*1.645, 
+data = mutate(data, up = estimate + std.error*1.64, 
+              down = estimate - std.error*1.645, 
               ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+
 # Add the limits of the plot
-max = filter(data, up == max(up))$up; min = 0
-maxy = length(unique(data$boro)) -0.5
+max = filter(data, up == max(up))$up; min = filter(data, down == min(down))$down
+maxy = length(unique(data$boro)) +1
 
 # Plot the estimates
-ggplot(filter(data, boro != "The Bronx")) +
+ggplot(data) +
   
-  geom_point(aes(y = reorder(boro, est), x = est)) + 
+  geom_point(aes(y = reorder(boro, estimate), x = estimate)) + 
   
-  geom_errorbar(aes(y = reorder(boro, est), 
-                 xmin = est - std.error*1.645, 
-                 xmax = est + std.error*1.645), alpha = 0.5, width = 0, lwd = 5) +
+  geom_errorbar(aes(y = reorder(boro, estimate), 
+                    xmin = estimate - std.error*1.645, 
+                    xmax = estimate + std.error*1.645), width = 0.2) +
   
-  geom_vline(aes(xintercept = filter(data, boro == "The Bronx")$estimate), color = "red") +
+  geom_vline(aes(xintercept = 0), color = "red") +
   
-  geom_text(aes(x = max + max/4, y = str_wrap(boro, width = 17), label = ci), 
-            position =position_dodge(width = 0.5)) +  
+  coord_cartesian(xlim = c(min, max), clip = "off") + labs(x = "", y = "") +
   
-  annotate("text", label = "Estimate (90% CI)", x = max + max/4, y = maxy , hjust = "0") +
+  annotate("text", label = "Estimate (90% CI)", x = max + max*7, y = maxy) +
+  annotate("text", label = data$ci, x = max + max*7, y = data$boro, size = 3) +
   
-  geom_segment(aes(x = 13, y = maxy, xend = 14.5, yend = maxy),
-                  arrow = arrow(length = unit(0.2, "cm"))) +
+  annotate("text", label = str_wrap(paste("Reference Effect for The Bronx:", round(data$ref,2)), 20), 
+           x = min, y = 5, size = 4) +
   
-   annotate("text", label = str_wrap("Effect of AQAs on absences for the Bronx", 25), x =
-              18.5, y = maxy , hjust = "0", size = 2.5) +
-  
-  theme_economist() %+replace% theme(plot.margin = margin(1, 5, 1, .5, unit = "cm")) +
-  
-  coord_cartesian(xlim = c(min, max), clip = "off") + labs(x = "", y = "")
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 5, 1, 0, unit = "cm"), plot.background = element_blank(), 
+        axis.text.y = element_text(hjust = 0.05)) +
+  grids("y")
+
+
 
 ```
-## Income Quintiles Spec
+
+@fig-OlsIncome explores if this difference in point estimates between boroughs could relate to income. For this, I divide the sample by income quintiles and estimate the effect of the AQAs concerning the lowest quintile. Air quality alerts increase school absences the most for persons living in the less wealthy neighborhoods of the city. On days with air quality alerts, school absences in poor neighborhoods increase by 83.37%. This estimate decreases by 20.5% when looking at the second quintile and by more than 50% in Q3, Q4, and Q5. 
+
 ```{r}
 #| label: fig-OlsIncome
 #| fig-cap: Effect of the alert on school absences across income quintiles (Log Model)
-#| fig-subcap: AQI Robustness
 #| fig-cap-location: top
-#| fig-align: center
-#| fig-format: png
+#| fig-width: 7
+#| fig-height: 3.5
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
+
 # Load the data
 data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/IncomeOls.rds"))
-# Construct the data for the plot
-data = mutate(data, est = ifelse(quintile != "1",
-              estimate + filter(data, quintile == "1")$estimate, estimate)) |> 
-  mutate(quintile = as.factor(quintile)) |> 
-  mutate(Num = as.numeric(quintile))
+
+# Compute the change w.r.t. to Q1 ####
+data = mutate(data, ref = filter(data, term == "treated")$estimate)
+data = filter(data, term != "treated")
+
 # Add the confidence intervals
-data = mutate(data, up = est + std.error*1.64, 
-              down = est - std.error*1.645, 
+data = mutate(data, up = estimate + std.error*1.64, 
+              down = estimate - std.error*1.645, 
               ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+data = mutate(data, quintile = paste0("Q", quintile))
+
 # Add the limits of the plot
-max = filter(data, up == max(up))$up; min = 0
-maxy = length(unique(data$quintile)) -0.5
+max = filter(data, up == max(up))$up
+min = filter(data, down == min(down))$down
+maxy = length(unique(data$quintile)) +1
+
 # Plot the estimates
-ggplot(filter(data, quintile != "1")) +
+ggplot(data) +
   
-   geom_point(aes(y = quintile, x = est)) + 
+  geom_point(aes(y = quintile, x = estimate)) + 
   
   geom_errorbar(aes(y = quintile, 
-                 xmin = est - std.error*1.645, 
-                 xmax = est + std.error*1.645), alpha = 0.5, width = 0, lwd = 5) +
+                    xmin = estimate - std.error*1.645, 
+                    xmax = estimate + std.error*1.645), width = 0.2) +
   
-  geom_vline(aes(xintercept = filter(data, quintile == "1")$estimate), color = "red") +
+  coord_cartesian(xlim = c(min, max), clip = "off") + labs(x = "", y = "") +
   
-  geom_text(aes(x = max + max/4, y = str_wrap(quintile, width = 17), label = ci), 
-            position =position_dodge(width = 0.5)) +  
+  annotate("text", label = "Estimate (90% CI)", x = max - max , y = maxy) +
+  annotate("text", label = data$ci, x = max - max, y = data$quintile, size = 3) +
   
-  annotate("text", label = "Estimate (90% CI)", x = max + max/4, y = maxy , hjust = "0") +
+  annotate("text", label = str_wrap(paste("Reference Effect for Q1:", round(data$ref,2)), 20), 
+           x = min, y = 5, size = 4) +
   
-  geom_segment(aes(x = 13, y = maxy, xend = 14.5, yend = maxy),
-                  arrow = arrow(length = unit(0.2, "cm"))) +
-  
-   annotate("text", label = str_wrap("Effect of AQAs on absences for the lowest quintile", 25), x =
-              18.5, y = maxy , hjust = "0", size = 2.5) +
-  
-  theme_economist() %+replace% theme(plot.margin = margin(1, 5, 1, .5, unit = "cm")) +
-  
-  coord_cartesian(xlim = c(min, max), clip = "off") + labs(x = "", y = "")
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 5, 1, 0, unit = "cm"), plot.background = element_blank(), 
+        axis.text.y = element_text(hjust = 0.05)) +
+  grids("y")
 ```
-## Athma Hospitalizations Spec
+
+@fig-OlsAsthma shows the difference in point estimates across neighborhoods in different quintiles regarding the share asthma ER admissions. The idea is that city areas more sensitive to air pollution would try to adapt to the alert more than other regions. Interpret all estimates concerning the first quintile (neighborhoods with the lowest asthma E.R. admissions). Air quality alerts increase absences in the healthiest neighborhoods by 1.52%. Although this effect is not statistically different from zero at Q2, we do see a smaller impact when looking at Q3 and Q4. In line with more sensitive groups adapting to the alert, we do find that the impact is a whooping 58.3% higher in neighborhoods at the upper part of the E.R. admissions distribution.
+
 ```{r}
 #| label: fig-OlsAsthma
 #| fig-cap: Effect of the alert on school absences across quintiles of asthma hospitalizations (Log Model)
-#| fig-subcap: AQI Robustness
 #| fig-cap-location: top
-#| fig-align: center
-#| fig-format: png
+#| fig-width: 7
+#| fig-height: 3.5
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
 # Load the data
-data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/AsthmaHospOls.rds"))
-# Add the confidence intervals
-data = mutate(data, ci = paste0(round(estimate,2), " (", 
-                                round(estimate + std.error*1.645, 2),"-",
-                                round(estimate - std.error*1.645, 2), ")"))
-# Construct the data for the plot
-data = mutate(data, est = ifelse(quintile != "1",
-              estimate + filter(data, quintile == "1")$estimate, estimate)) |> 
-  mutate(quintile = as.factor(quintile)) |> 
-  mutate(Num = as.numeric(quintile))
-# Plot the estimates
-ggplot(filter(data, quintile != "1")) +
-  geom_point(aes(y = Num, x = est)) + 
-  geom_rect(aes(ymin = Num-0.1, ymax = Num + 0.1, xmin = est - std.error*1.645, 
-                 xmax = est + std.error*1.645), r = unit(0.5, 'npc'), 
-             alpha = 0.5) +
-  geom_vline(aes(xintercept = filter(data, quintile == "1")$estimate)) +
-  theme_economist() + labs(y = "", x = "% increase in absences") +
-  geom_segment(aes(x = filter(data, quintile == "1")$estimate, 
-                   y = 4.5, yend = 4.5, 
-                   xend = filter(data, quintile == "1")$estimate + 1.5),
-                  arrow = arrow(length = unit(0.2, "cm")), col = "brown") +
-   annotate("text",  label = str_wrap("Effect of AQAs on 
-                                      absences for the lowest 
-                                      income quintile", 25), 
-            x = filter(data, quintile == "1")$estimate + 3, 
-            y = 4.5 , hjust = "0", size = 2.5) 
-```
-:::  
+data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/AsthmaErOls.rds"))
 
-@fig-OlsIncome explores if this difference in point estimates between Manhattan, The Bronx, and Queens could relate to income. For this, I divide the sample by income quintile and estimate the effect of the AQAs concerning the lowest quintile. Coefficients imply a nonlinear relationship between the alert and income. Although the estimate is smaller for the third and fourth quintiles, at the fifth quintile, the relationship reverses, suggesting the AQAs increase absences significantly more for wealthy vis-a-vis less wealthy individuals.
+# Compute the change w.r.t. to Q3 ####
+data = mutate(data, ref = filter(data, term == "treated")$estimate)
+data = filter(data, term != "treated")
+
+# Add the confidence intervals
+data = mutate(data, up = estimate + std.error*1.64, 
+              down = estimate - std.error*1.645, 
+              ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+
+# Change the Quintile to a character vector
+data = mutate(data, quintile = paste0("Q", quintile))
+
+# Add the limits of the plot
+max = filter(data, up == max(up))$up
+min = filter(data, down == min(down))$down
+maxy = length(unique(data$quintile)) +1
+
+# Plot the estimates
+ggplot(data) +
+  
+  geom_point(aes(y = quintile, x = estimate)) + 
+  
+  geom_errorbar(aes(y = quintile, 
+                    xmin = estimate - std.error*1.645, 
+                    xmax = estimate + std.error*1.645), width = 0.2) +
+  
+  geom_vline(aes(xintercept = 0), color = "red") +
+  
+  coord_cartesian(xlim = c(min, max), clip = "off") + labs(x = "", y = "") +
+  
+  annotate("text", label = "Estimate (90% CI)", x = max + max/3, y = maxy) +
+  annotate("text", label = data$ci, x = max + max/3, y = data$quintile, size = 3) +
+  
+  annotate("text", label = str_wrap(paste("Reference Effect for Q1:", round(data$ref,2)), 20), 
+           x = 0, y = 5, size = 4) +
+  
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 5, 1, 0, unit = "cm"), plot.background = element_blank(), 
+        axis.text.y = element_text(hjust = 0.05)) +
+  grids("y")
+```
+
+
 
 # {{< iconify game-icons violin >}} Instrumental Variables 
-::: panel-tabset
+There are several potential issues with using OLS to estimate the relationship between the alerts and absenteeism. Unobservables that correlate with air pollution and absences may drive our coefficients if we fail to account for them with our fixed effects and weather controls. For instance, more traffic may increase the likelihood of missing schools and AQAs. In this section, we account for omitted variable bias by using the difference between the real and predicted AQI as an instrument for the alert. 
 
-## Main results
+The first stage of the IV specification is a Probit model on the probability of alerts. The second stage is the previously estimated OLS with the fitted value of the first stage as the causal variable. This strategy differs from a standard IV approach since the first stage is nonlinear and estimated via MLE instead of OLS. However, the intuition remains similar.
+
+We use the difference between the real and observed AQI to instrument the emission of an AQA. @fig-Instrument shows the difference between the real and predicted AQI on alert and non-alert days. As the picture shows, the spread of the difference on days with an alert is higher than on days without (SD 26.8 vs. 14.6), meaning that the NYSDEC prediction algorithm has a higher bias in the neighborhood around the health advisory. 
+
 ```{r}
-#| label: tbl-MainIv
-#| tbl-cap: Effect of the alert on school absences (IV)
-#| tbl-cap-location: top
+#| label: fig-Instrument
+#| fig-cap: Distribution of the difference between the alert and its forecast on days with and without an air quality alert
+#| fig-cap-location: top
+#| fig-height: 4.5
+#| fig-width: 7
+#| 
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
-# Load the results
-tab = read_rds(paste0(file, "/02_GenData/06_RegResults/02_iv/MainIv.rds"))
+file = gsub("website", "", getwd())
+aqif = read_rds(paste0(file, "/02_GenData/02_aqi/AqiForecast.rds"))
+aqi = read_rds(paste0(file, "/02_GenData/02_aqi/RealAqi.rds"))
+#### Data for plotting daily differences between the AQI and the forecast ####
+plot = filter(aqif, date < "2018-12-31")  %>% left_join(., aqi) |> 
+  mutate(diff = RealAqi - aqi) |> 
+  mutate(alert = ifelse(alert == 0, "No AQA", "AQA"))
 
-# Include the set of fixed effects and controls
-fe = rbind(`Air Quality index` = c(rep("Yes", 3)), 
-           `Weather Controls` = c(rep("Yes", 3)),
-           `Neighborhood FEs` = rep("Yes", 3), 
-           `Type of Day FEs` = rep("Yes", 3),
-           `Weekday FEs` = c(rep("", 1), rep("Yes", 2)), 
-           `Month FEs`  = c(rep("", 1), rep("Yes", 2)), 
-           `Year FEs`  = c(rep("", 1), rep("Yes", 2)), 
-           `Year-Month-Neighborhood FEs` = c(rep("", 2), rep("Yes", 1)), 
-           `Weekday-Neighborhood FEs` = c(rep("", 2), rep("Yes", 1))) %>%
-  as.data.frame(.) %>% setNames(., names(tab))
-# Add the data with the control variables
-tab = rbind(tab, fe)
-# Create the regression table
-kbl(tab, align = "c", digits = 2) %>%
-  kable_classic() %>% kable_styling(bootstrap_option = c("hover")) %>%
-  pack_rows("Fitted-Statistics", 3, 5) %>% pack_rows("Controls", 6, 14) %>% 
-  footnote(general = "Effects of air quality health advisories on school absences in New York City. Point estimates come from an OLS estimator of daily school absences per neighborhood as a fucntion of an indicator variable equal to one in days with air quality health advisories. Interpret point estimates as the effect in absences because of the advisory. Standard errors clustered at the neighborhood-by-week level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", general_title = "Notes:", footnote_as_chunk = T) %>% scroll_box(height = "380px")
+# Plot the difference between days with alerts and no alerts
+ggplot(plot) +
+   geom_boxplot(aes(x = diff, color = alert, group = alert, y = alert), 
+                width = .50, fill = "transparent", outlier.shape = NA) +
+  
+  labs(x = "", y = "") +
+  scale_fill_manual(values = c("#141F52", "#c91d42")) +
+  scale_color_manual(values = c("#141F52", "#c91d42")) +
+  
+  theme_economist() %+replace% 
+  theme(legend.title = element_blank(), plot.background = element_blank(),
+        axis.title.x = element_text(vjust = -2)) + grids("y")
+
+
 ```
 
-::: 
+The primary IV assumption is that, after netting out the fixed effects and conditioning on meteorological conditions, the error in the forecast can only affect school absences through its influence on the probability the NYSDEC emits an alert. Unfortunately, we have no knowledge of the model used by the NYSDEC to predict the alerts and thus we are unable to test if the forecast error only affects absences through the alert (we need to know this algorithm). 
+
+We interpret point estimates as the local Average Treatment Effect (LATE) on the set of compliers, i.e., days with variation in the forecast error and a monotonic relationship between the error and the alert. @eq-FirstStage presents the first stage of the IV strategy. In it, $\mu_t$ is the error in the forecast ($AQI_t - AQI^f_t$) and $Pr[AQI^f_t > 100]$ the probability of an air quality alert. Although we use the same set of controls as in the OLS, we estimate the first stage with a Probit estimator.
+
+$$
+Pr[AQI^f_t > 100] = \beta AQI_t + \mu_t + f(Temp_t, Rain_t) + \Omega_t + \lambda_i + \epsilon_{it} \quad \forall \quad \mu_t = AQI_t-AQI^f_t    
+$${#eq-FirstStage}
+
+
+First-stage regressions confirm that the difference between the real and forecast of the AQI are a good predictor of the alert. One unit increase in the absolute difference between the AQI and its forecast decreases the probability of an alert. @fig-FirstStageEst shows the point estimates from the first-stage probit model of the alert as a function of the IV and the air quality index. While both are highly significant, they remain opposite in sign. The IV decreases the probability of an alert and the AQI increases it. 
+
+
+```{r}
+#| label: fig-FirstStageEst
+#| fig-cap: First-stage estimates on the effecct of the air quality index and the difference with its forecast on the probablity of an AQA
+#| fig-cap-location: top
+#| fig-height: 3.5
+#| fig-width: 7
+
+# Set the path of the R-studio project
+file = gsub("website", "", getwd())
+
+# Load the results
+data = read_rds(paste0(file, "/02_GenData/06_RegResults/02_iv/FirstStageIV.rds"))
+
+# Change the name of the causal variables
+data = mutate(data, term = ifelse(term == "iv", 
+                                  str_wrap("A) Difference between the AQI and its forecast", 25), 
+                                  str_wrap("B) Air quality index", 25)))
+
+# Add parenthesis to the specification 
+data = mutate(data, spec = paste0("(", spec, ")"))
+
+# Plot the estimates
+ggplot(data) +
+  
+  geom_point(aes(y = spec, x = estimate)) + 
+  
+  geom_vline(aes(xintercept = 0), color = "black", linetype = "dashed") +
+  
+  geom_errorbar(aes(y = spec, 
+                    xmin = estimate - std.error*1.97, 
+                    xmax = estimate + std.error*1.97), width = 0.2) +
+  facet_wrap(~term, scales = "free") +
+  
+  theme_economist() %+replace% 
+  theme(plot.background = element_blank(), axis.title.y = element_text(vjust = 2.5, angle = 90),
+        axis.title.x = element_text(vjust = -2.5), strip.text = element_text(hjust = 0), 
+        axis.line.y = element_line()) +
+  grids("y") + labs(x = "Point Estimate and 95% CI", y = "Specification") +
+  scale_x_continuous(breaks = pretty_breaks())
+
+```
+
+
+```{r}
+#| label: tbl-MainIV
+#| tbl-cap: Effect of the alert on school absences (2SLS)
+#| tbl-cap-location: top
+
+# Set the path of the R-studio project
+file = gsub("website", "", getwd())
+
+# Load the results
+tab = list(`IV` = read_rds(paste0(file, "/02_GenData/06_RegResults/02_iv/LevelsIV.rds")), 
+           `IV-Log` = read_rds(paste0(file, "/02_GenData/06_RegResults/02_iv/MainIV.rds")))
+
+# bind the list elements 
+tab = reduce(tab,cbind)
+
+# Add the commas to numeric elements
+tab["BIC",] = comma(as.numeric(tab["BIC",]))
+
+# Make the table
+kbl(tab, align = "lcccccc", digits = 2, booktabs = T) %>%
+  kable_classic_2(bootstrap_option = c("hover"), full_width = F) %>% 
+  pack_rows("Fitted-Statistics", 3, 6) %>%
+  add_header_above(c(" " = 1, "IV" = 3, "IV (Log Absences)" = 3))
+
+
+```
+<p style="font-size: 12px"> *Notes: Effects of air quality health advisories on school absences in New York City. Point estimates come from an IV estimator of daily school absences per neighborhood as a function of the fitted values of an indicator variable equal to one in days with air quality health advisories. The first stage if the IV strategy estimates the probability of the alert with the difference between the real and predicted air quality index. We present results across three specifications. (1) controls for the realized air quality index at $t$, quintile indicator variables of temperature and precipitation, neighborhood fixed effects, and indicators of abnormal events. (2) adds weekday, month, and year fixed-effects to account for seasonality. (3) is a more restrictive design assuming neighborhood-specific seasonal trends with year-by-month-by-nta and weekday-by-nta fixed effects. Interpret the OLS estimates as the effect in absences because of the advisory and the Log-OLS coefficients as the percentage increase in absences ($\beta$ = (exp(\beta)-1)\times 100). Standard errors clustered at the neighborhood level to account for possible inter-temporal correlations within cities and weeks of the year. Significance Codes: ***: 0.01, **: 0.05, *: 0.1* </p>
+
+
+
 # {{< iconify game-icons falling-rocks >}} Regression Discontinuity
 @eq-rd RD specifies the functional form of the preferred RD model.
 
@@ -402,7 +539,7 @@ In it, $Absent_{nt}$ is the log of absent students at neighborhood $n$ on day $t
 
 Results show an increase from between 7.72% and 17.08% in school absences because the air quality health advisory. The change in point estimates occurs because the inclusion of different covariates changes the optimal bandwidth of the RDD and thus the interpretation of point estimates. For instance, while the interpretation in the first column (raw RD) is the effect of the alerts within ten AQIs from the alert, the interpretation in the last column (full specification) is the effect of the alerts within sixteen AQIs from the alert conditional on seasonality, weather, and air pollution.
 
-::: panel-tabset
+
 ## Log results
 ```{r}
 #| label: tbl-RdLog
@@ -411,7 +548,7 @@ Results show an increase from between 7.72% and 17.08% in school absences becaus
 #| tbl-cap-location: top
 # Load the results
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
 tab = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/NtaBase.rds"))
 # Create the regression table
 kbl(tab, align = "c") %>%
@@ -427,7 +564,7 @@ kbl(tab, align = "c") %>%
 #| tbl-cap-location: top
 # Load the results
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
 tab = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/NtaLevelsBase.rds"))
 # Create the regression table
 kbl(tab, align = "c") %>%
@@ -435,4 +572,149 @@ kbl(tab, align = "c") %>%
   pack_rows("Fitted-Statistics", 3, 5) %>%
   footnote(general = "Effects of air quality health advisories on school absences in New York City. Point estimates come from a regression discontinuity design. The score is equal to the distance between the forecasted air quality index and 101 units (the threshold for the emission of health advisories). The dependent variable is the log value of school absences at the neighborhood level. Interpret point estimates as the percentage increase in absences because of the advisory, e.g., an coefficient of two is equivalent to a two percent increase in absences. Cluster robsut standard errors in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", general_title = "Notes:", footnote_as_chunk = T)
 ```
+:::
+
+# Appendix
+## OLS Splits
+::: panel-tabset
+
+#### borough
+```{r}
+#| label: fig-OlsBoroSplit
+#| fig-cap: Effect of the alert on school absences across city boroughs(Log Model)
+#| fig-cap-location: top
+#| fig-width: 7
+#| fig-height: 3.5
+# Set the path of the R-studio project
+file = gsub("website", "", getwd())
+
+# Load the data
+data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/BoroOlsSplit.rds"))
+
+# Add the confidence intervals
+data = mutate(data, up = estimate + std.error*1.64, 
+              down = estimate - std.error*1.645, 
+              ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+
+# Add the limits of the plot
+max = filter(data, up == max(up))$up; min = filter(data, down == min(down))$down
+maxy = length(unique(data$boro)) +1
+
+# Plot the estimates
+ggplot(data) +
+  
+  geom_point(aes(y = reorder(boro, estimate), x = estimate)) + 
+  
+  geom_errorbar(aes(y = reorder(boro, estimate), 
+                    xmin = estimate - std.error*1.645, 
+                    xmax = estimate + std.error*1.645), width = 0.2) +
+  
+  geom_vline(aes(xintercept = 0), color = "red") +
+  
+  coord_cartesian(xlim = c(min, max), clip = "off") + labs(x = "", y = "") +
+  
+  annotate("text", label = "Estimate (90% CI)", x = max + max/2.75, y = maxy) +
+  annotate("text", label = data$ci, x = max + max/2.75, y = data$boro, size = 3) +
+  
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 5, 1, 0, unit = "cm"), plot.background = element_blank(), 
+        axis.text.y = element_text(hjust = 0.05)) +
+  grids("y")
+
+
+
+```
+#### Income
+```{r}
+#| label: fig-OlsIncomeSplit
+#| fig-cap: Effect of the alert on school absences across income quintiles (Log Model)
+#| fig-cap-location: top
+#| fig-width: 7
+#| fig-height: 3.5
+# Set the path of the R-studio project
+file = gsub("website", "", getwd())
+
+# Load the data
+data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/IncomeOlsSplit.rds"))
+
+# Add the confidence intervals
+data = mutate(data, up = estimate + std.error*1.64, 
+              down = estimate - std.error*1.645, 
+              ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+
+# Add the limits of the plot
+max = filter(data, up == max(up))$up; min = filter(data, down == min(down))$down
+maxy = length(unique(data$quintile)) +1
+data = mutate(data, quintile = paste0("Q", quintile))
+# Plot the estimates
+ggplot(data) +
+  
+  geom_point(aes(y = quintile, x = estimate)) + 
+  
+  geom_errorbar(aes(y = quintile, 
+                    xmin = estimate - std.error*1.645, 
+                    xmax = estimate + std.error*1.645), width = 0.2) +
+  
+  geom_vline(aes(xintercept = 0), color = "red") +
+  
+  coord_cartesian(xlim = c(min, max), clip = "off") + labs(x = "", y = "") +
+  
+  annotate("text", label = "Estimate (90% CI)", x = max + max/2.75, y = maxy) +
+  annotate("text", label = data$ci, x = max + max/2.75, y = data$quintile, size = 3) +
+  
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 5, 1, 0, unit = "cm"), plot.background = element_blank(), 
+        axis.text.y = element_text(hjust = 0.05)) +
+  grids("y")
+
+
+
+```
+#### Asthma
+```{r}
+#| label: fig-OlsAsthmaSplit
+#| fig-cap: Effect of the alert on school absences across asthma quintiles (Log Model)
+#| fig-cap-location: top
+#| fig-width: 7
+#| fig-height: 3.5
+# Set the path of the R-studio project
+file = gsub("website", "", getwd())
+
+# Load the data
+data = read_rds(paste0(file, "/02_GenData/06_RegResults/01_rdd/AsthmaErOlsSplit.rds"))
+
+# Add the confidence intervals
+data = mutate(data, up = estimate + std.error*1.64, 
+              down = estimate - std.error*1.645, 
+              ci = paste0(round(estimate,2), " (", round(up, 2),"-", round(down, 2), ")"))
+
+# Add the limits of the plot
+max = filter(data, up == max(up))$up; min = filter(data, down == min(down))$down
+maxy = length(unique(data$quintile)) +1
+data = mutate(data, quintile = paste0("Q", quintile))
+# Plot the estimates
+ggplot(data) +
+  
+  geom_point(aes(y = quintile, x = estimate)) + 
+  
+  geom_errorbar(aes(y = quintile, 
+                    xmin = estimate - std.error*1.645, 
+                    xmax = estimate + std.error*1.645), width = 0.2) +
+  
+  geom_vline(aes(xintercept = 0), color = "red") +
+  
+  coord_cartesian(xlim = c(min, max), clip = "off") + labs(x = "", y = "") +
+  
+  annotate("text", label = "Estimate (90% CI)", x = max + max/2.75, y = maxy) +
+  annotate("text", label = data$ci, x = max + max/2.75, y = data$quintile, size = 3) +
+  
+  theme_economist() %+replace% 
+  theme(plot.margin = margin(1, 5, 1, 0, unit = "cm"), plot.background = element_blank(), 
+        axis.text.y = element_text(hjust = 0.05)) +
+  grids("y")
+
+
+
+```
+
 :::

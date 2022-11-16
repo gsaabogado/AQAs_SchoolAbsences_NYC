@@ -16,23 +16,23 @@ format:
 #| warning: false
 #| eco: false
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
+file = gsub("website", "", getwd())
 # Load the economic covariates at the Nta level
-econ = read_rds(paste0(file, "02_GenData/03_dem/econ.rds"))
-dem = read_rds(paste0(file, "02_GenData/03_dem/dem.rds"))
-asthma = read_rds(paste0(file, "02_GenData/03_dem/AsthmaHosp.rds"))
+econ = read_rds(paste0(file, "/02_GenData/03_dem/econ.rds"))
+dem = read_rds(paste0(file, "/02_GenData/03_dem/dem.rds"))
+asthma = read_rds(paste0(file, "/02_GenData/03_dem/AsthmaHosp.rds"))
 # Load the location of all schools
-location = read_rds(paste0(file, "02_GenData/01_schools/location.rds"))
+location = read_rds(paste0(file, "/02_GenData/01_schools/location.rds"))
 # Load the data set on absenteeism
-absent = read_rds(paste0(file, "02_GenData/RawAbsences.rds")) |> ungroup()
+absent = read_rds(paste0(file, "/02_GenData/RawAbsences.rds")) |> ungroup()
 
 NtaAbsent = left_join(absent |> dplyr::filter(DayType == "NormalDay"), location) |>  group_by(nta, date) |> 
   summarise_at(vars(enrolled, absent, released), sum, na.rm = T)
 
 # Load the shapefile of city boroughs
-BoroShp = st_read(paste0(file, "01_RawData/04_shp/02_bgh"), quiet = T)%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
+BoroShp = st_read(paste0(file, "/01_RawData/04_shp/02_bgh"), quiet = T)%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
 # Load the shapefile on city neighborhoods
-NtaShp = st_read(paste0(file, "01_RawData/04_shp/03_ngh"), quiet = T)%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
+NtaShp = st_read(paste0(file, "/01_RawData/04_shp/03_ngh"), quiet = T)%>% st_transform(., crs = 4326) %>% st_simplify(., preserveTopology = T)
 ```
 
 @fig-SchoolsMap in the first tab shows the location of all schools by type. Schools spread around the city, with significant clusters in South Bronx, North Manhattan, and Brooklyn. Staten Island and Queen's distance between schools is larger than for the Bronx or Manhattan. The data set contains `r comma(nrow(filter(location, SchoolType == "Elementary")))` elementary schools, `r comma(nrow(filter(location, SchoolType == "High school")))` high schools, `r comma(nrow(filter(location, SchoolType == "Junior High")))` junior high schools, `r comma(nrow(filter(location, SchoolType == "K-8")))` kindergarten to eighth-grade schools (K8), `r comma(nrow(filter(location, SchoolType == "Secondary School")))` secondaries, `r comma(nrow(filter(location, SchoolType == "K-12 all grades")))` kindergarten to twelfth-grade schools (K12), `r comma(nrow(filter(location, SchoolType == "Ungraded")))` early childhood, and two ungraded. @fig-IncomeMap portrays the median neighborhood income in 2016 (according to the American Community Survey). The city's wealthier areas are in Manhattan, Staten Island, and West Brooklyn, with more impoverished regions in South Bronx and East Brooklyn. @fig-WhiteShare portrays the share of white persons in each neighborhood. The strong correlation between income and the share of whites is evident, with higher percentages of white persons in Manhattan and Staten Island and lower shares in the Bronx, Queens, and Brooklyn. @fig-AsthmaMap contains the share of children's hospitalization per 10,000 across all city areas. Again, there is a strong relationship between asthma hospitalizations and income, with higher hospitalization rates in the Bronx and North-Central Brooklyn and lower in Staten Island and Manhattan.
@@ -346,9 +346,9 @@ tmap_style("classic"); tm_graticules(labels.inside.frame = T, labels.show = F) +
 
 ```{r}
 # Set the path of the R-studio project
-file = gsub("AQAs_SchoolAbsences_NYC", "", getwd())
-aqif = read_rds(paste0(file, "02_GenData/02_aqi/AqiForecast.rds"))
-aqi = read_rds(paste0(file, "02_GenData/02_aqi/RealAqi.rds"))
+file = gsub("website", "", getwd())
+aqif = read_rds(paste0(file, "/02_GenData/02_aqi/AqiForecast.rds"))
+aqi = read_rds(paste0(file, "/02_GenData/02_aqi/RealAqi.rds"))
 ```
 
 @tbl-DescAqi contains descriptive statistics on the AQI and its forecast. The average and maximum forecast is slightly smaller (50.39) than the AQI (54.36). The average AQI is 54.36, slightly above the EPA threshold between good and moderate air quality.
